@@ -1,3 +1,6 @@
+## Sample1、2对比
+两者思想一样，只是写法不同
+
 ## Thanks
 - [haibuzou](https://github.com/haibuzou/MVPSample/tree/master)
 - [hss01248](https://github.com/hss01248/PageStateManager)
