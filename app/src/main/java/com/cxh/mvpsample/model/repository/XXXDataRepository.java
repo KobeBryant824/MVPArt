@@ -1,54 +1,105 @@
 package com.cxh.mvpsample.model.repository;
 
+import android.util.Log;
+
 import com.cxh.mvpsample.model.OnRequestListener;
-import com.cxh.mvpsample.model.service.RequestService;
 import com.cxh.mvpsample.model.entity.WelcomeEntity;
-import com.cxh.mvpsample.util.RetrofitUtil;
+import com.cxh.mvpsample.model.service.RequestService;
+import com.cxh.mvpsample.util.RetrofitUtils;
 import com.socks.library.KLog;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * 具体页面的数据请求
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
 public class XXXDataRepository implements RequestBiz {
+    public CompositeDisposable subscriptions;
+
+    public XXXDataRepository() {
+         subscriptions = new CompositeDisposable();
+    }
 
     @Override
     public void requestForData(final OnRequestListener listener) {
 
         //这里采用的是Java的动态代理模式
-        RequestService requestSerives = RetrofitUtil.getInstance().getRetrofit().create(RequestService.class);
+        RequestService requestSerives = RetrofitUtils.getInstance().create(RequestService.class);
 
-        Observable<WelcomeEntity> observable = requestSerives.getByRxjava();
-        observable.subscribeOn(Schedulers.io())
+        Disposable subscribe = requestSerives.getFlowableByRxjava()
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<WelcomeEntity>() {
-
+                .subscribe(new Consumer<WelcomeEntity>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
+                    public void accept(@NonNull WelcomeEntity welcomeEntity) throws Exception {
+                        listener.onSuccess(welcomeEntity);
                     }
-
+                }, new Consumer<Throwable>() {
                     @Override
-                    public void onNext(WelcomeEntity value) {
-                        listener.onSuccess(value);
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                        KLog.e();
                     }
-
+                }, new Action() {
                     @Override
-                    public void onError(Throwable e) {
-                        KLog.e(e);
-                    }
-
-                    @Override
-                    public void onComplete() {
-
+                    public void run() throws Exception {
+                        KLog.e();
                     }
                 });
+
+        Disposable subscribe1 = Flowable.interval(1, TimeUnit.SECONDS)
+                .doOnCancel(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        Log.e("hh", "Unsubscribing subscription from onCreate()");
+                    }
+                })
+                .subscribe(new Consumer<Long>() {
+
+                    @Override
+                    public void accept(@NonNull Long aLong) throws Exception {
+                        Log.e("hh", "Started in onCreate(), running until onDestroy(): " + aLong);
+                    }
+                });
+
+        subscriptions.add(subscribe);
+
+        subscriptions.add(subscribe1);
+
+//        requestSerives.getDataByRxjava()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<WelcomeEntity>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(WelcomeEntity welcomeEntity) {
+//                        listener.onSuccess(welcomeEntity);
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
 
     }
 

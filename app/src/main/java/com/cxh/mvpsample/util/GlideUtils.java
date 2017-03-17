@@ -2,12 +2,15 @@ package com.cxh.mvpsample.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.widget.ImageView;
 
+import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
+import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
@@ -15,10 +18,12 @@ import com.bumptech.glide.request.animation.ViewPropertyAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.SimpleTarget;
 
+import java.io.File;
+
 /**
  * Created by Hai (haigod7@gmail.com) on 2017/3/10 10:40.
  */
-public class GlideUtil {
+public class GlideUtils {
     /**
      * Glide特点
      * 使用简单
@@ -31,6 +36,29 @@ public class GlideUtil {
      * 这里默认支持Context，Glide支持Context,Activity,Fragment，FragmentActivity,
      * 同时将Activity/Fragment作为with()参数的好处是：图片加载会和Activity/Fragment的生命周期保持一致
      */
+
+    //特殊uri用此方法加载，并改造合适参数，网络图片均用其他方法
+    public static void loadImgAny(Object obj, ImageView iv) {
+        Context context = iv.getContext();
+        RequestManager manager = Glide.with(context);
+        DrawableTypeRequest drawableTypeRequest = null;
+
+        if (obj instanceof String) {
+            drawableTypeRequest = manager.load((String) obj);
+        } else if (obj instanceof Integer) {
+            drawableTypeRequest = manager.load((Integer) obj);
+        } else if (obj instanceof Uri) {
+            drawableTypeRequest = manager.load((Uri) obj);
+        } else if (obj instanceof File) {
+            drawableTypeRequest = manager.load((File) obj);
+        }
+        if (drawableTypeRequest == null) return;
+
+        drawableTypeRequest.centerCrop()
+                .dontAnimate()
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .into(iv);
+    }
 
     //默认加载
     public static void loadImageView(Context context, String path, ImageView imageView) {
@@ -50,14 +78,14 @@ public class GlideUtil {
         });
     }
 
-    //加载指定大小,ps:Glide可以自动计算出任意情况下的ImageView大小
-    public static void loadImageViewSize(Context context, String path, int width, int height, ImageView imageView) {
-        Glide.with(context).load(path).override(width, height).into(imageView);
-    }
-
     //设置加载中以及加载失败图片
     public static void loadImageViewLoding(Context context, String path, ImageView imageView, int lodingImage, int errorImageView) {
         Glide.with(context).load(path).placeholder(lodingImage).error(errorImageView).into(imageView);
+    }
+
+    //加载指定大小,ps:Glide可以自动计算出任意情况下的ImageView大小
+    public static void loadImageViewSize(Context context, String path, int width, int height, ImageView imageView) {
+        Glide.with(context).load(path).override(width, height).into(imageView);
     }
 
     //设置加载中以及加载失败图片并且指定大小

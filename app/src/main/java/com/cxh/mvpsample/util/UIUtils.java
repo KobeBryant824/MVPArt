@@ -11,7 +11,7 @@ import android.view.View;
 import com.cxh.mvpsample.MApplication;
 
 
-public class UIUtil {
+public class UIUtils {
 
 	public static Context getContext() {
 		return MApplication.getContext();

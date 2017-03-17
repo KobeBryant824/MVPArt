@@ -15,15 +15,15 @@ import okhttp3.logging.HttpLoggingInterceptor;
  * 全局统一使用的OkHttpClient工具，okhttp版本：okhttp3
  * Created by Hai (haigod7@gmail.com) on 2017/3/13 14:21.
  */
-public class OkHttpUtil {
+public class OkHttpUtils {
     public static final long DEFAULT_READ_TIMEOUT_MILLIS = 15 * 1000;
     public static final long DEFAULT_WRITE_TIMEOUT_MILLIS = 20 * 1000;
     public static final long DEFAULT_CONNECT_TIMEOUT_MILLIS = 20 * 1000;
     private static final long HTTP_RESPONSE_DISK_CACHE_MAX_SIZE = 10 * 1024 * 1024;
-    private static volatile OkHttpUtil sInstance;
+    private static volatile OkHttpUtils sInstance;
     private OkHttpClient mOkHttpClient;
 
-    private OkHttpUtil() {
+    private OkHttpUtils() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
@@ -44,11 +44,11 @@ public class OkHttpUtil {
                 .build();
     }
 
-    public static OkHttpUtil getInstance() {
+    public static OkHttpUtils getInstance() {
         if (sInstance == null) {
-            synchronized (OkHttpUtil.class) {
+            synchronized (OkHttpUtils.class) {
                 if (sInstance == null) {
-                    sInstance = new OkHttpUtil();
+                    sInstance = new OkHttpUtils();
                 }
             }
         }

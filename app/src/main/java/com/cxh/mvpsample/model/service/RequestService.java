@@ -4,6 +4,7 @@ import com.cxh.mvpsample.model.entity.WelcomeEntity;
 
 import java.util.Map;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.FieldMap;
@@ -35,5 +36,9 @@ public interface RequestService {
 
     //post请求结合rxjava
     @POST("version/detail")
-    Observable<WelcomeEntity> getByRxjava();
+    Observable<WelcomeEntity> getDataByRxjava();
+
+    //post请求结合rxjava
+    @POST("version/detail")
+    Flowable<WelcomeEntity> getFlowableByRxjava();
 }

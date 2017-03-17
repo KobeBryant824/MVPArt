@@ -1,19 +1,20 @@
 package com.cxh.mvpsample.base;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.cxh.mvpsample.MApplication;
 import com.hss01248.pagestate.PageManager;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
+ * 所有用到RxJava2都必须继承此BaseActivity
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
-public abstract class BaseActivity extends AppCompatActivity {
-    public PageManager mPageStateManager;
+public abstract class BaseActivity extends RxAppCompatActivity {
+    protected PageManager mPageStateManager;
     private Unbinder mUnbinder;
 
     @Override

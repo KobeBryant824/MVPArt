@@ -32,8 +32,9 @@ public class XXXActivity extends BaseActivity implements XXXContract.View {
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.start();
+        mPresenter.subscribe();
     }
+
 
     @Override
     public int getLayoutID() {
@@ -73,7 +74,12 @@ public class XXXActivity extends BaseActivity implements XXXContract.View {
     @Override
     public void RetryEvent() {
         mPageStateManager.showLoading();
-        mPresenter.start();
+        mPresenter.subscribe();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.unSubscribe();
+    }
 }

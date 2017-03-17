@@ -18,6 +18,11 @@ package com.cxh.mvpsample.base;
 
 public interface BasePresenter {
 
-    void start();
+//    void start(); 原生
+
+    void subscribe();
+
+    // 手动添加和释放，避免造成内存泄漏，当然用rxlifecycle2就可以很好解决但是只能在RxActivity中调用，通常接口请求在m层
+    void unSubscribe();
 
 }

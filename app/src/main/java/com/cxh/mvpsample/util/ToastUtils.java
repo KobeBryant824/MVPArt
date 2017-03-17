@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.cxh.mvpsample.R;
 
 
-public class ToastUtil {
+public class ToastUtils {
 
 	/** 安全的显示系统Toast  */
 	public static void showTaost(final Activity ctx, final String msg){
