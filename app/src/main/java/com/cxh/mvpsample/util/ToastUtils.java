@@ -13,7 +13,7 @@ import com.cxh.mvpsample.R;
 public class ToastUtils {
 
 	/** 安全的显示系统Toast  */
-	public static void showTaost(final Activity ctx, final String msg){
+	public static void showSafeToast(final Activity ctx, final String msg){
 		if("main".equals(Thread.currentThread().getName())){ // 判断 当前是否是在主线程
 			Toast.makeText(ctx, msg, Toast.LENGTH_SHORT).show();
 		}else{
