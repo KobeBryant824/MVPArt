@@ -1,5 +1,5 @@
 ## Sample1、2对比
-两者思想一样，只是写法不同
+两者思想一样，只是写法不同，此demo可以应用到项目中
 
 ## Thanks
 - [haibuzou](https://github.com/haibuzou/MVPSample/tree/master)

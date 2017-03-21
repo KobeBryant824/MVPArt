@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.cxh.mvpsample.MApplication;
 import com.cxh.mvpsample.R;
 import com.cxh.mvpsample.base.BaseActivity;
+import com.cxh.mvpsample.manager.ActivityManager;
 import com.cxh.mvpsample.util.ToastUtils;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -97,7 +98,7 @@ public class MainActivity extends BaseActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
-            MApplication.getContext().exitApp();
+            ActivityManager.getInstance().appExit();
             return;
         }
 

@@ -2,7 +2,7 @@ package com.cxh.mvpsample.base;
 
 import android.os.Bundle;
 
-import com.cxh.mvpsample.MApplication;
+import com.cxh.mvpsample.manager.ActivityManager;
 import com.hss01248.pagestate.PageManager;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -21,8 +21,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutID());
-        MApplication.getContext().addPage(this);
         mUnbinder = ButterKnife.bind(this);
+        ActivityManager.getInstance().pushOneActivity(this);
 
         PageManager.initInApp(getApplicationContext());
         mPageStateManager = PageManager.init(this, true, new Runnable() {
@@ -38,6 +38,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+        ActivityManager.getInstance().popOneActivity(this);
     }
 
     public abstract int getLayoutID();

@@ -42,8 +42,6 @@ public class MApplication extends Application implements Thread.UncaughtExceptio
      */
     private static Looper mMainLooper;
 
-    private List<Activity> mActivityList = new LinkedList<>();
-
     @BindString(R.string.app_name)
     String mAppName;
 
@@ -107,25 +105,6 @@ public class MApplication extends Application implements Thread.UncaughtExceptio
      */
     public static Looper getMainThreadLooper() {
         return mMainLooper;
-    }
-
-    public void addPage(Activity activity) {
-        mActivityList.add(activity);
-    }
-
-    /**
-     * 退出app，清理没关闭的页面，杀死进程，手动释放内存
-     */
-    public void exitApp() {
-        if (mActivityList.size() == 0) return;
-
-        // 链表使用foreach 数组使用for 更快
-        for (Activity activity : mActivityList) {
-            if (activity != null && !activity.isFinishing()) {
-                activity.finish();
-            }
-        }
-        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     /**
