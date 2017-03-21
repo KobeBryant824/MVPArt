@@ -14,6 +14,7 @@ import com.cxh.mvpsample.MApplication;
 import com.cxh.mvpsample.R;
 import com.cxh.mvpsample.base.BaseActivity;
 import com.cxh.mvpsample.util.ToastUtils;
+import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import java.util.concurrent.TimeUnit;
@@ -67,18 +68,20 @@ public class MainActivity extends BaseActivity {
                         mPageStateManager.showContent();
                     }
                 });
+
+        RxView.clicks(mvpBtn)
+                .throttleFirst(2000, TimeUnit.MICROSECONDS)
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(@NonNull Object o) throws Exception {
+                        startActivity(new Intent(MainActivity.this, XXXActivity.class));
+                    }
+                });
     }
 
-    @OnClick({R.id.mvp_btn, R.id.permission_btn})
+    @OnClick({R.id.permission_btn})
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.mvp_btn:
-                startActivity(new Intent(this, XXXActivity.class));
-                break;
-            case R.id.permission_btn:
-                requestPermission();
-                break;
-        }
+        requestPermission();
     }
 
     @TargetApi(Build.VERSION_CODES.M)

@@ -43,7 +43,10 @@ public class XXXPresenter implements XXXContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        mRequestBiz.subscriptions.clear();
+//        mRequestBiz.subscriptions.clear(); 等同下面
+        if (!mRequestBiz.subscriptions.isDisposed()) {
+            mRequestBiz.subscriptions.dispose();
+        }
     }
 
 }
