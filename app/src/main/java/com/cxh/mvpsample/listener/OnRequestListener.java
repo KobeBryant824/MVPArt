@@ -1,4 +1,4 @@
-package com.cxh.mvpsample.model;
+package com.cxh.mvpsample.listener;
 
 /**
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.

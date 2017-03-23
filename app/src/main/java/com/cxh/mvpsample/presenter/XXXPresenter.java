@@ -1,7 +1,7 @@
 package com.cxh.mvpsample.presenter;
 
 import com.cxh.mvpsample.contract.XXXContract;
-import com.cxh.mvpsample.model.OnRequestListener;
+import com.cxh.mvpsample.listener.OnRequestListener;
 import com.cxh.mvpsample.model.entity.WelcomeEntity;
 import com.cxh.mvpsample.model.repository.XXXDataRepository;
 

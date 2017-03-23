@@ -1,10 +1,7 @@
 package com.cxh.mvpsample;
 
-import android.app.Activity;
 import android.app.Application;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.format.DateFormat;
 
 import com.socks.library.KLog;
@@ -12,8 +9,6 @@ import com.squareup.leakcanary.LeakCanary;
 
 import java.io.PrintStream;
 import java.lang.reflect.Field;
-import java.util.LinkedList;
-import java.util.List;
 
 import butterknife.BindString;
 

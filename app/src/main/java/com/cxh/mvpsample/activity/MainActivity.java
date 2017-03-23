@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.cxh.mvpsample.MApplication;
 import com.cxh.mvpsample.R;
 import com.cxh.mvpsample.base.BaseActivity;
 import com.cxh.mvpsample.manager.ActivityManager;
@@ -58,8 +57,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void initViewsAndEvents() {
         // 解决Handler可能造成的内存泄漏，其实这段代码用handler也不会造成泄漏，hiahia~~
         Observable.timer(2, TimeUnit.SECONDS)
                 .compose(this.<Long>bindUntilEvent(ActivityEvent.DESTROY))

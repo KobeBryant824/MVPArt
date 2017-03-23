@@ -1,6 +1,10 @@
 package com.cxh.mvpsample.base;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.text.TextUtils;
+import android.view.View;
 
 import com.cxh.mvpsample.manager.ActivityManager;
 import com.hss01248.pagestate.PageManager;
@@ -20,7 +24,16 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutID());
+        Bundle extras = getIntent().getExtras();
+        if (null != extras) {
+            getBundleExtras(extras);
+        }
+        if (getLayoutID() != 0) {
+            setContentView(getLayoutID());
+        } else {
+            throw new IllegalArgumentException("You must return a right contentView layout resource Id");
+        }
+
         mUnbinder = ButterKnife.bind(this);
         ActivityManager.getInstance().pushOneActivity(this);
 
@@ -32,6 +45,42 @@ public abstract class BaseActivity extends RxAppCompatActivity {
             }
         });
         mPageStateManager.showLoading();
+
+        initViewsAndEvents();
+    }
+
+    protected void pushPageThenKill(Class<?> clazz) {
+        Intent intent = new Intent(this, clazz);
+        startActivity(intent);
+        finish();
+    }
+
+    protected void pushPageThenKill(Class<?> clazz, Bundle bundle) {
+        Intent intent = new Intent(this, clazz);
+        if (null != bundle) {
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
+        finish();
+    }
+
+    protected void pushPageForResult(Class<?> clazz, int requestCode) {
+        Intent intent = new Intent(this, clazz);
+        startActivityForResult(intent, requestCode);
+    }
+
+    protected void pushPageForResult(Class<?> clazz, int requestCode, Bundle bundle) {
+        Intent intent = new Intent(this, clazz);
+        if (null != bundle) {
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(intent, requestCode);
+    }
+
+    protected void showSnackbar(View v, String msg) {
+        if (!TextUtils.isEmpty(msg)) {
+            Snackbar.make(v, msg, Snackbar.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -41,8 +90,13 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         ActivityManager.getInstance().popOneActivity(this);
     }
 
-    public abstract int getLayoutID();
+    protected void getBundleExtras(Bundle extras) {
+    }
 
-    public abstract void RetryEvent();
+    protected abstract int getLayoutID();
+
+    protected abstract void RetryEvent();
+
+    protected abstract void initViewsAndEvents();
 
 }

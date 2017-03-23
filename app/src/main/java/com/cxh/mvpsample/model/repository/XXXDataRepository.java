@@ -2,9 +2,9 @@ package com.cxh.mvpsample.model.repository;
 
 import android.util.Log;
 
-import com.cxh.mvpsample.model.OnRequestListener;
+import com.cxh.mvpsample.listener.OnRequestListener;
 import com.cxh.mvpsample.model.entity.WelcomeEntity;
-import com.cxh.mvpsample.model.service.RequestService;
+import com.cxh.mvpsample.model.api.RequestApi;
 import com.cxh.mvpsample.util.RetrofitUtils;
 import com.socks.library.KLog;
 
@@ -35,7 +35,7 @@ public class XXXDataRepository implements RequestBiz {
     public void requestForData(final OnRequestListener listener) {
 
         //这里采用的是Java的动态代理模式
-        RequestService requestSerives = RetrofitUtils.getInstance().create(RequestService.class);
+        RequestApi requestSerives = RetrofitUtils.getInstance().create(RequestApi.class);
 
         Disposable subscribe = requestSerives.getFlowableByRxjava()
                 .subscribeOn(Schedulers.io())

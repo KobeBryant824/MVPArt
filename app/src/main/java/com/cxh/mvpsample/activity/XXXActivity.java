@@ -35,10 +35,14 @@ public class XXXActivity extends BaseActivity implements XXXContract.View {
         mPresenter.subscribe();
     }
 
-
     @Override
     public int getLayoutID() {
         return R.layout.activity_mvp;
+    }
+
+    @Override
+    protected void initViewsAndEvents() {
+
     }
 
     @Override

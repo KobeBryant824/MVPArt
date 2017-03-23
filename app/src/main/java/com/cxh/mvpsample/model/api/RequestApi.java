@@ -1,4 +1,4 @@
-package com.cxh.mvpsample.model.service;
+package com.cxh.mvpsample.model.api;
 
 import com.cxh.mvpsample.model.entity.WelcomeEntity;
 
@@ -15,10 +15,10 @@ import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 /**
- * 请求Url
+ * 请求Url，根据模块来设计api
  * Created by Hai (haigod7@gmail.com) on 2017/3/7 17:19.
  */
-public interface RequestService {
+public interface RequestApi {
 
     // post请求无参
     @POST("version/detail")
