@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * 所有用到RxJava2都必须继承此BaseFragment
+ * 所有在fragment中用到RxJava2的都必须继承此BaseFragment
  * Created by Hai (haigod7@gmail.com) on 2017/3/16 11:23.
  */
 public abstract class BaseFragment extends RxFragment {

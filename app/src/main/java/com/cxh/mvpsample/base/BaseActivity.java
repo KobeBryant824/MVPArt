@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * 所有用到RxJava2都必须继承此BaseActivity
+ * 所有在activity中用到RxJava2都必须继承此BaseActivity，ps：我用另外一种，把数据请求放到M层，让P层去控制RxJava的生命周期
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
 public abstract class BaseActivity extends RxAppCompatActivity {

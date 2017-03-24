@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.Environment;
 import android.text.format.DateFormat;
 
+import com.cxh.mvpsample.util.FileUtils;
 import com.socks.library.KLog;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -60,7 +61,7 @@ public class MApplication extends Application implements Thread.UncaughtExceptio
     public void uncaughtException(Thread thread, Throwable ex) {
 
         try {
-            PrintStream printStream = new PrintStream(Environment.getExternalStorageDirectory().getAbsolutePath() + "/error.log");
+            PrintStream printStream = new PrintStream(FileUtils.getDownloadDir() + "error.log");
 
             Class clazz = Class.forName("android.os.Build");
             Field[] fields = clazz.getDeclaredFields();

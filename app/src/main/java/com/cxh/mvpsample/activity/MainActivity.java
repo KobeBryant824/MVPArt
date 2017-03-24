@@ -151,6 +151,6 @@ public class MainActivity extends BaseActivity {
 
     @OnNeverAskAgain(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     void neverAskAgain() {
-        Toast.makeText(this, "不再询问", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "下次需要该权限请到系统设置中打开", Toast.LENGTH_SHORT).show();
     }
 }
