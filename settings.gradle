@@ -1,1 +1,1 @@
-include ':app', ':pageStateManagerLib'
+include ':app', ':pageStateManagerLib', ':swipyRefreshLayouLib'

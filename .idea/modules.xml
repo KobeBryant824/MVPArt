@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/MVPSample2.iml" filepath="$PROJECT_DIR$/MVPSample2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/pageStateManagerLib/pageStateManagerLib.iml" filepath="$PROJECT_DIR$/pageStateManagerLib/pageStateManagerLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swipyRefreshLayouLib/SwipyRefreshLayouLib.iml" filepath="$PROJECT_DIR$/swipyRefreshLayouLib/SwipyRefreshLayouLib.iml" />
     </modules>
   </component>
 </project>
