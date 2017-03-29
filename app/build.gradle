@@ -45,10 +45,10 @@ dependencies {
 
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-
     //运行时权限检查
     compile 'com.github.hotchemi:permissionsdispatcher:2.3.1'
     annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.3.1'
+
     compile 'com.github.zhaokaiqiang.klog:library:1.6.0'
     compile 'com.alibaba:fastjson:1.1.56.android'
     compile 'com.github.bumptech.glide:glide:3.7.0'
@@ -62,10 +62,6 @@ dependencies {
 
     compile 'io.reactivex.rxjava2:rxjava:2.0.7'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-
-    //防止用RxJava2时内存泄漏, 已替换成P层主动去解耦了
-    //    compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.0.1'
-    //    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.0.1'
 
     compile 'com.squareup.retrofit2:retrofit:2.0.0'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0'
