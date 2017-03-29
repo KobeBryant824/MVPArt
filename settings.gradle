@@ -1,1 +1,1 @@
-include ':app', ':pagestatemanager', ':swipyrefreshlayout', ':autolayout', ':autolayout-widget'
+include ':app', ':pagestatemanager', ':swipyrefreshlayout', ':autolayout', ':autolayoutwidget'

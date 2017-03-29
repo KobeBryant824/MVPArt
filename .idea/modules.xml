@@ -5,7 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/MVPSample2.iml" filepath="$PROJECT_DIR$/MVPSample2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/autolayout/autolayout.iml" filepath="$PROJECT_DIR$/autolayout/autolayout.iml" />
-      <module fileurl="file://$PROJECT_DIR$/autolayout-widget/autolayout-widget.iml" filepath="$PROJECT_DIR$/autolayout-widget/autolayout-widget.iml" />
+      <module fileurl="file://$PROJECT_DIR$/autolayoutwidget/autolayoutwidget.iml" filepath="$PROJECT_DIR$/autolayoutwidget/autolayoutwidget.iml" />
       <module fileurl="file://$PROJECT_DIR$/pagestatemanager/pagestatemanager.iml" filepath="$PROJECT_DIR$/pagestatemanager/pagestatemanager.iml" />
       <module fileurl="file://$PROJECT_DIR$/swipyrefreshlayout/swipyrefreshlayout.iml" filepath="$PROJECT_DIR$/swipyrefreshlayout/swipyrefreshlayout.iml" />
     </modules>

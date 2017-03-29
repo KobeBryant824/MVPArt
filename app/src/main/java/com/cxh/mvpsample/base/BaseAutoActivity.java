@@ -8,22 +8,16 @@ import android.view.View;
 
 import com.cxh.mvpsample.manager.ActivityManager;
 import com.hss01248.pagestate.PageManager;
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+import com.zhy.autolayout.AutoLayoutActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * BaseActivity 无适配，还是用dp
- * BaseAutoActivity 多分辨率适配，用px，全局通用这种，有坑就单个页面extexds BaseActivity
- */
-
-/**
- * 所有在activity中用到RxJava2都必须继承此BaseActivity（此框架未在activity请求数据）
- * ps：我用另外一种，把数据请求放到M层，让P层去控制RxJava的生命周期
+ * AutoLayoutActivity Android屏幕适配方案 https://github.com/hongyangAndroid/AndroidAutoLayout
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
-public abstract class BaseActivity extends RxAppCompatActivity {
+public abstract class BaseAutoActivity extends AutoLayoutActivity {
     protected PageManager mPageStateManager;
     private Unbinder mUnbinder;
 
