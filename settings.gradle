@@ -1,1 +1,1 @@
-include ':app', ':pageStateManagerLib', ':swipyRefreshLayouLib'
+include ':app', ':pagestatemanager', ':swipyrefreshlayout', ':autolayout', ':autolayout-widget'

@@ -15,10 +15,10 @@ import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 /**
- * 请求Url，根据模块来设计api
+ * 请求Url，根据模块来设计api,XXX根据业务模块来区别
  * Created by Hai (haigod7@gmail.com) on 2017/3/7 17:19.
  */
-public interface RequestApi {
+public interface XXXApi {
 
     // post请求无参
     @POST("version/detail")

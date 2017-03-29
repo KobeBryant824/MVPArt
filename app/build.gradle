@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 def cfg = rootProject.ext.configuration // 配置
+def libs = rootProject.ext.libraries
 
 android {
     compileSdkVersion cfg.compileSdkVersion
@@ -33,10 +34,14 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
-    compile project(':pageStateManagerLib')
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:cardview-v7:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile project(':pagestatemanager')
+    compile project(':autolayout')
+    compile project(':autolayout-widget')
+    compile project(':swipyrefreshlayout')
+
+    compile libs.support_v4
+    compile libs.appcompat_v7
+    compile libs.recyclerview_v7
 
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
@@ -44,7 +49,6 @@ dependencies {
     //运行时权限检查
     compile 'com.github.hotchemi:permissionsdispatcher:2.3.1'
     annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.3.1'
-
     compile 'com.github.zhaokaiqiang.klog:library:1.6.0'
     compile 'com.alibaba:fastjson:1.1.56.android'
     compile 'com.github.bumptech.glide:glide:3.7.0'
@@ -58,9 +62,10 @@ dependencies {
 
     compile 'io.reactivex.rxjava2:rxjava:2.0.7'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    //防止用RxJava2时内存泄漏
-    compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.0.1'
-    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.0.1'
+
+    //防止用RxJava2时内存泄漏, 已替换成P层主动去解耦了
+    //    compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.0.1'
+    //    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.0.1'
 
     compile 'com.squareup.retrofit2:retrofit:2.0.0'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0'
@@ -73,7 +78,5 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-
-
 
 }

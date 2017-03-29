@@ -3,20 +3,19 @@ package com.cxh.mvpsample.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.trello.rxlifecycle2.components.support.RxFragment;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+
 /**
- * 所有在fragment中用到RxJava2的都必须继承此BaseFragment
  * Created by Hai (haigod7@gmail.com) on 2017/3/16 11:23.
  */
-public abstract class BaseFragment extends RxFragment {
+public abstract class BaseFragment extends Fragment {
     private Unbinder mUnbinder;
 
     @Nullable
