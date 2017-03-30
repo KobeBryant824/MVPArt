@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.cxh.mvpsample.R;
 import com.cxh.mvpsample.base.BaseActivity;
+import com.cxh.mvpsample.base.BaseAutoActivity;
 import com.cxh.mvpsample.manager.ActivityManager;
 import com.cxh.mvpsample.util.ToastUtils;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -36,7 +37,7 @@ import permissions.dispatcher.RuntimePermissions;
  * 简单的页面还是用mvc（欢迎页、关于页、无数据请求、以后版本无更新页面~~）
  */
 @RuntimePermissions
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseAutoActivity {
 
     @BindString(R.string.app_name)
     String mAppName;

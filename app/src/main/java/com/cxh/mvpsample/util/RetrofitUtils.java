@@ -6,11 +6,12 @@ import retrofit2.converter.fastjson.FastJsonConverterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
+import static com.cxh.mvpsample.AppConstants.BASEURL;
+
 /**
  * Created by Hai (haigod7@gmail.com) on 2017/3/8 16:38.
  */
 public class RetrofitUtils {
-    private static final String BASEURL = "http://www.51el.net/emsap/";
     private static volatile RetrofitUtils sInstance;
     private Retrofit mRetrofit;
 

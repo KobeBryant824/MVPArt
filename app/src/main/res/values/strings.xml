@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">MVPSample</string>
 
+    <!--shortcuts-->
+    <string name="shortcut_label_add_package">MainActivity</string>
+    <string name="shortcut_label_scan_code">SecondActivity</string>
+    <string name="shortcut_label_search">SecondActivityWithAction</string>
+    <!--shortcuts end-->
+
 </resources>

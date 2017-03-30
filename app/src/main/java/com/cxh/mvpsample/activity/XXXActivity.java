@@ -1,21 +1,40 @@
 package com.cxh.mvpsample.activity;
 
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatCheckBox;
+import android.support.v7.widget.AppCompatTextView;
+import android.widget.CheckBox;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cxh.mvpsample.R;
-import com.cxh.mvpsample.base.BaseActivity;
+import com.cxh.mvpsample.base.BaseAutoActivity;
 import com.cxh.mvpsample.contract.XXXContract;
 import com.cxh.mvpsample.model.entity.WelcomeEntity;
 import com.cxh.mvpsample.presenter.XXXPresenter;
 import com.socks.library.KLog;
 
+import butterknife.BindView;
+
 
 /**
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
-public class XXXActivity extends BaseActivity implements XXXContract.View {
+public class XXXActivity extends BaseAutoActivity implements XXXContract.View {
+    private static final String ACTION_CODE = "ilovekobebryant";
     private XXXContract.Presenter mPresenter;
+
+    @BindView(R.id.first_tv)
+    TextView firstTv;
+    @BindView(R.id.second_tv)
+    AppCompatTextView secondTv;
+    @BindView(R.id.third_cb)
+    CheckBox thirdCb;
+    @BindView(R.id.four_cb)
+    AppCompatCheckBox fourCb;
+    @BindView(R.id.rootlayout)
+    RelativeLayout rootlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +62,10 @@ public class XXXActivity extends BaseActivity implements XXXContract.View {
     @Override
     protected void initViewsAndEvents() {
 
+        String action = getIntent().getAction();
+        if (action != null && action.equals(ACTION_CODE)) {
+            showSnackbar(rootlayout, "带参数的shortcuts");
+        }
     }
 
     @Override
