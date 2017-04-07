@@ -37,7 +37,6 @@ dependencies {
     compile project(':pagestatemanager')
     compile project(':autolayout')
     compile project(':autolayoutwidget')
-    compile project(':swipyrefreshlayout')
 
     compile libs.support_v4
     // 全部控件替换为AppCompt...向下兼容
@@ -53,7 +52,9 @@ dependencies {
     compile 'com.github.zhaokaiqiang.klog:library:1.6.0'
     compile 'com.alibaba:fastjson:1.1.56.android'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.6'
+    compile 'com.github.jdsjlzx:LRecyclerView:1.4.2'
+    // 与LRecyclerView不兼容
+//    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.6'
 
     compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     compile 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'

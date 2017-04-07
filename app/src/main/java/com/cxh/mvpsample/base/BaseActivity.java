@@ -3,9 +3,11 @@ package com.cxh.mvpsample.base;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.cxh.mvpsample.R;
 import com.cxh.mvpsample.manager.ActivityManager;
 import com.hss01248.pagestate.PageManager;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;

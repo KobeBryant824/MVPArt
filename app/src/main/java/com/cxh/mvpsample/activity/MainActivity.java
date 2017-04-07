@@ -2,6 +2,7 @@ package com.cxh.mvpsample.activity;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -74,7 +75,11 @@ public class MainActivity extends BaseAutoActivity {
                 .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
-                        startActivity(new Intent(MainActivity.this, XXXActivity.class));
+                        //转场动画
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            startActivity(new Intent(MainActivity.this, XXXActivity.class),
+                                    ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                        } else startActivity(new Intent(MainActivity.this, XXXActivity.class));
                     }
                 });
     }

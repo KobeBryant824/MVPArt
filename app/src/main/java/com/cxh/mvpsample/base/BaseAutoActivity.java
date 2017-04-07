@@ -1,11 +1,17 @@
 package com.cxh.mvpsample.base;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.transition.Explode;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
+import com.cxh.mvpsample.R;
 import com.cxh.mvpsample.manager.ActivityManager;
 import com.hss01248.pagestate.PageManager;
 import com.zhy.autolayout.AutoLayoutActivity;

@@ -20,8 +20,6 @@ public interface XXXContract {
     //interface View extends BaseView<T>  T可以是其他Presenter
     interface View extends BaseView<Presenter> {
 
-        void showLoading();
-
         void showContent();
 
         void showError();

@@ -45,7 +45,7 @@ public class ClearEditText extends AppCompatEditText implements View.OnFocusChan
         if (mClearDrawable == null) {
             // throw new
             // NullPointerException("You can add drawableRight attribute in XML");
-            mClearDrawable = getResources().getDrawable(R.drawable.img_cancel);
+            mClearDrawable = getResources().getDrawable(R.drawable.ic_cancel);
         }
 
         mClearDrawable.setBounds(0, 0, mClearDrawable.getIntrinsicWidth(), mClearDrawable.getIntrinsicHeight());

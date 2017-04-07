@@ -12,7 +12,6 @@
             <option value="$PROJECT_DIR$/autolayout" />
             <option value="$PROJECT_DIR$/autolayoutwidget" />
             <option value="$PROJECT_DIR$/pagestatemanager" />
-            <option value="$PROJECT_DIR$/swipyrefreshlayout" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

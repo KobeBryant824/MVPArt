@@ -1,8 +1,12 @@
 package com.cxh.mvpsample.activity;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatTextView;
+import android.transition.Explode;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -61,11 +65,20 @@ public class XXXActivity extends BaseAutoActivity implements XXXContract.View {
 
     @Override
     protected void initViewsAndEvents() {
-
+        enterTransition();
         String action = getIntent().getAction();
         if (action != null && action.equals(ACTION_CODE)) {
             showSnackbar(rootlayout, "带参数的shortcuts");
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void enterTransition() {
+        // Set the animations.爆炸效果，还有slide滑动效果、fade渐变
+        Explode explode = new Explode();
+        explode.setDuration(500);
+        explode.setInterpolator(new AccelerateDecelerateInterpolator());
+        getWindow().setEnterTransition(explode);
     }
 
     @Override
@@ -81,11 +94,6 @@ public class XXXActivity extends BaseAutoActivity implements XXXContract.View {
     @Override
     public String loadUserId() {
         return null;
-    }
-
-    @Override
-    public void showLoading() {
-        mPageStateManager.showLoading();
     }
 
     @Override
