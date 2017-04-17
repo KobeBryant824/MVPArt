@@ -47,6 +47,8 @@ public class XXXPresenter implements XXXContract.Presenter {
         if (!mRequestBiz.subscriptions.isDisposed()) {
             mRequestBiz.subscriptions.dispose();
         }
+
+        if (mView != null) mView = null;
     }
 
 }

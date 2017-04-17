@@ -1,4 +1,4 @@
-package com.cxh.mvpsample.activity;
+package com.cxh.mvpsample.view.activity;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -43,8 +43,8 @@ public class XXXActivity extends BaseAutoActivity implements XXXContract.View {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new XXXPresenter(this);
-//        mPresenter.start();
+        new XXXPresenter(this); // 给P层注入V，V又注入P，双向持有（V需要P的数据处理操作，P需要V的视图更新）
+//        mPresenter.subscribe();
     }
 
     @Override
@@ -114,7 +114,7 @@ public class XXXActivity extends BaseAutoActivity implements XXXContract.View {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         mPresenter.unSubscribe();
+        super.onDestroy();
     }
 }

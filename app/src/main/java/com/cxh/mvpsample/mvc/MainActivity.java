@@ -1,7 +1,6 @@
-package com.cxh.mvpsample.activity;
+package com.cxh.mvpsample.mvc;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,10 +11,10 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.cxh.mvpsample.R;
-import com.cxh.mvpsample.base.BaseActivity;
 import com.cxh.mvpsample.base.BaseAutoActivity;
 import com.cxh.mvpsample.manager.ActivityManager;
 import com.cxh.mvpsample.util.ToastUtils;
+import com.cxh.mvpsample.view.activity.XXXActivity;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.trello.rxlifecycle2.android.ActivityEvent;
 
@@ -36,6 +35,8 @@ import permissions.dispatcher.RuntimePermissions;
 
 /**
  * 简单的页面还是用mvc（欢迎页、关于页、无数据请求、以后版本无更新页面~~）
+ *
+ * 这个包下放mvc的activity、fragment
  */
 @RuntimePermissions
 public class MainActivity extends BaseAutoActivity {
@@ -89,10 +90,11 @@ public class MainActivity extends BaseAutoActivity {
         requestPermission();
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     private void requestPermission() {
-        //申请权限
-        MainActivityPermissionsDispatcher.agreeWithCheck(this);
+        //M 才需要申请权限
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            MainActivityPermissionsDispatcher.agreeWithCheck(this);
+        }
     }
 
     boolean doubleBackToExitPressedOnce = false;

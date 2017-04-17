@@ -4,10 +4,9 @@
 ## 一些第三方库
 - [KLog](https://github.com/ZhaoKaiQiang/KLog)
 - [PermissionsDispatcher](https://github.com/hotchemi/PermissionsDispatcher)
-- [BaseRecyclerViewAdapterHelper](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
 - [AndroidAutoLayout](https://github.com/hongyangAndroid/AndroidAutoLayout)
 - [PageStateManager](https://github.com/hss01248/PageStateManager)
-- [SwipyRefreshLayout](https://github.com/OrangeGangsters/SwipyRefreshLayout)
+- [LRecyclerView](https://github.com/jdsjlzx/LRecyclerView)
 
 
 ## Thanks

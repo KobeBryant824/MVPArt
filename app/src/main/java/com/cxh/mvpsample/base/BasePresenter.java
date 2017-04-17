@@ -22,7 +22,7 @@ public interface BasePresenter {
 
     void subscribe();
 
-    // 手动添加和释放，避免造成内存泄漏，当然用rxlifecycle2就可以很好解决但是只能在RxActivity中调用，通常接口请求在m层
+    // 注销V层引用、手动释放后台请求（当然用rxlifecycle2就可以很好解决但是只能在RxActivity中调用，通常接口请求在m层），避免造成内存泄漏，
     void unSubscribe();
 
 }

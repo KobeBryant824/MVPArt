@@ -23,7 +23,7 @@
                 android:name="design_height"
                 android:value="1280"/>
 
-        <activity android:name="com.cxh.mvpsample.activity.MainActivity">
+        <activity android:name="com.cxh.mvpsample.mvc.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -35,7 +35,6 @@
                     android:name="android.app.shortcuts"
                     android:resource="@xml/shortcuts" />
         </activity>
-        <activity android:name=".activity.XXXActivity"/>
     </application>
 
 </manifest>
