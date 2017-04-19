@@ -3,8 +3,9 @@ package com.cxh.mvpsample.model.repository;
 import android.util.Log;
 
 import com.cxh.mvpsample.listener.OnRequestListener;
-import com.cxh.mvpsample.model.entity.WelcomeEntity;
+import com.cxh.mvpsample.manager.RxDisposable;
 import com.cxh.mvpsample.model.api.XXXApi;
+import com.cxh.mvpsample.model.entity.WelcomeEntity;
 import com.cxh.mvpsample.util.RetrofitUtils;
 import com.socks.library.KLog;
 
@@ -13,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
@@ -25,11 +25,6 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
 public class XXXDataRepository implements RequestBiz {
-    public CompositeDisposable subscriptions;
-
-    public XXXDataRepository() {
-         subscriptions = new CompositeDisposable();
-    }
 
     @Override
     public void requestForData(final OnRequestListener listener) {
@@ -72,9 +67,9 @@ public class XXXDataRepository implements RequestBiz {
                     }
                 });
 
-        subscriptions.add(subscribe);
+        RxDisposable.add(subscribe);
 
-        subscriptions.add(subscribe1);
+        RxDisposable.add(subscribe1);
 
 //        requestSerives.getDataByRxjava()
 //                .subscribeOn(Schedulers.io())

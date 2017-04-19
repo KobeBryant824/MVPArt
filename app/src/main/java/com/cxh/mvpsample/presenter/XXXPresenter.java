@@ -2,6 +2,7 @@ package com.cxh.mvpsample.presenter;
 
 import com.cxh.mvpsample.contract.XXXContract;
 import com.cxh.mvpsample.listener.OnRequestListener;
+import com.cxh.mvpsample.manager.RxDisposable;
 import com.cxh.mvpsample.model.entity.WelcomeEntity;
 import com.cxh.mvpsample.model.repository.XXXDataRepository;
 
@@ -43,10 +44,7 @@ public class XXXPresenter implements XXXContract.Presenter {
 
     @Override
     public void unSubscribe() {
-//        mRequestBiz.subscriptions.clear(); 等同下面
-        if (!mRequestBiz.subscriptions.isDisposed()) {
-            mRequestBiz.subscriptions.dispose();
-        }
+        RxDisposable.clear();
 
         if (mView != null) mView = null;
     }

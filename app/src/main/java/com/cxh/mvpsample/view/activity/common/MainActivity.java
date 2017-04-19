@@ -1,4 +1,4 @@
-package com.cxh.mvpsample.mvc;
+package com.cxh.mvpsample.view.activity.common;
 
 import android.Manifest;
 import android.app.ActivityOptions;
@@ -36,7 +36,7 @@ import permissions.dispatcher.RuntimePermissions;
 /**
  * 简单的页面还是用mvc（欢迎页、关于页、无数据请求、以后版本无更新页面~~）
  *
- * 这个包下放mvc的activity、fragment
+ * 这个包下放mvc的activity
  */
 @RuntimePermissions
 public class MainActivity extends BaseAutoActivity {
