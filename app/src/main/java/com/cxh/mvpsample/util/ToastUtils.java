@@ -30,7 +30,7 @@ public class ToastUtils {
 	/** 显示自定义Toast  */
 	public static void showToast(Context context, String msg) {
 		Toast toast = new Toast(context);
-		View view = View.inflate(context, R.layout.view_toast, null);
+		View view = View.inflate(context, R.layout.toast, null);
 		TextView tv_message = (TextView) view.findViewById(R.id.tv_message);
 		tv_message.setText(msg);
 		// 设置Toast的位置
@@ -43,7 +43,7 @@ public class ToastUtils {
 
 	public static void showToast(Context context, String msg, int time) {
 		Toast toast = new Toast(context.getApplicationContext());
-		View view = View.inflate(context, R.layout.view_toast, null);
+		View view = View.inflate(context, R.layout.toast, null);
 		TextView tv_message = (TextView) view.findViewById(R.id.tv_message);
 		tv_message.setText(msg);
 		// 设置Toast的位置

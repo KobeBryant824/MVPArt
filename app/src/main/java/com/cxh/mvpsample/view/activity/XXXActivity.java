@@ -1,21 +1,13 @@
 package com.cxh.mvpsample.view.activity;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.AppCompatTextView;
-import android.transition.Explode;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.CheckBox;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cxh.mvpsample.R;
 import com.cxh.mvpsample.base.BaseAutoActivity;
 import com.cxh.mvpsample.contract.XXXContract;
-import com.cxh.mvpsample.model.entity.WelcomeEntity;
+import com.cxh.mvpsample.model.api.XXXApi;
 import com.cxh.mvpsample.presenter.XXXPresenter;
 import com.socks.library.KLog;
 
@@ -31,14 +23,6 @@ public class XXXActivity extends BaseAutoActivity implements XXXContract.View {
 
     @BindView(R.id.first_tv)
     TextView firstTv;
-    @BindView(R.id.second_tv)
-    AppCompatTextView secondTv;
-    @BindView(R.id.third_cb)
-    CheckBox thirdCb;
-    @BindView(R.id.four_cb)
-    AppCompatCheckBox fourCb;
-    @BindView(R.id.rootlayout)
-    RelativeLayout rootlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,30 +44,22 @@ public class XXXActivity extends BaseAutoActivity implements XXXContract.View {
 
     @Override
     public int getLayoutID() {
-        return R.layout.activity_mvp;
+        return R.layout.activity_xxx;
     }
 
     @Override
     protected void initViewsAndEvents() {
-        enterTransition();
+
         String action = getIntent().getAction();
         if (action != null && action.equals(ACTION_CODE)) {
-            showSnackbar(rootlayout, "带参数的shortcuts");
+            showSnackbar(firstTv, "带参数的shortcuts");
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void enterTransition() {
-        // Set the animations.爆炸效果，还有slide滑动效果、fade渐变
-        Explode explode = new Explode();
-        explode.setDuration(500);
-        explode.setInterpolator(new AccelerateDecelerateInterpolator());
-        getWindow().setEnterTransition(explode);
-    }
-
     @Override
-    public void setData(WelcomeEntity data) {
+    public void setData(XXXApi.WelcomeEntity data) {
         KLog.d(data);
+        firstTv.setText(data.toString());
     }
 
     @Override

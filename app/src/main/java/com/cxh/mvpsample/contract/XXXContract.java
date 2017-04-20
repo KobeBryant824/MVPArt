@@ -11,7 +11,7 @@ package com.cxh.mvpsample.contract;
  */
 import com.cxh.mvpsample.base.BasePresenter;
 import com.cxh.mvpsample.base.BaseView;
-import com.cxh.mvpsample.model.entity.WelcomeEntity;
+import com.cxh.mvpsample.model.api.XXXApi;
 
 /**
  * 更直观的看到View中的方法和Presenter中的方法的关联，XXX具体指定，项目里可以有多个Contract
@@ -26,7 +26,7 @@ public interface XXXContract {
 
         void showError();
 
-        void setData(WelcomeEntity data);//将网络请求得到的用户信息回调
+        void setData(XXXApi.WelcomeEntity data);//将网络请求得到的用户信息回调
 
         void showMessage(String message);
 

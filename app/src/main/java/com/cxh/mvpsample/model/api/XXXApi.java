@@ -1,44 +1,130 @@
 package com.cxh.mvpsample.model.api;
 
-import com.cxh.mvpsample.model.entity.WelcomeEntity;
-
-import java.util.Map;
-
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import retrofit2.Call;
-import retrofit2.http.FieldMap;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
-import retrofit2.http.Url;
 
 /**
- * 请求Url，根据模块来设计api,XXX根据业务模块来区别
+ * 包含请求地址和实体，参照contract设计思想：“一站式服务”
  * Created by Hai (haigod7@gmail.com) on 2017/3/7 17:19.
  */
 public interface XXXApi {
 
-    // post请求无参
-    @POST("version/detail")
-    Call<WelcomeEntity> post0();
-
     // BUG  服务器都用request来解析参数
-    @FormUrlEncoded
-    @POST("uuc/login.do")
-//    Call<String> post2(@Field("subject") String subject, @Field("password") String password);
-    Call<String> post2(@FieldMap Map<String, String> map);
-
-    // get请求
-    @GET()
-    Call<String> get(@Url String url, @Query("type") String type, @Query("postid") String postid);
-
-    //post请求结合rxjava
     @POST("version/detail")
-    Observable<WelcomeEntity> getDataByRxjava();
+    Flowable<WelcomeEntity> getWelcomeEntity();
 
-    //post请求结合rxjava
-    @POST("version/detail")
-    Flowable<WelcomeEntity> getFlowableByRxjava();
+    public class WelcomeEntity {
+
+        /**
+         * code : 1
+         * msg : 请求成功
+         * data : {"time":"2016-12-12","noUpDate":0,"name":"阳光采购","versionId":"1.2","downUrl":"http://210.51.183.101:8081/group2/M00/00/00/ygcg.apk"}
+         */
+
+        private int code;
+        private String msg;
+        private DataBean data;
+
+        @Override
+        public String toString() {
+            return "WelcomeEntity{" +
+                    "code=" + code +
+                    ", msg='" + msg + '\'' +
+                    ", data=" + data +
+                    '}';
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public void setCode(int code) {
+            this.code = code;
+        }
+
+        public String getMsg() {
+            return msg;
+        }
+
+        public void setMsg(String msg) {
+            this.msg = msg;
+        }
+
+        public DataBean getData() {
+            return data;
+        }
+
+        public void setData(DataBean data) {
+            this.data = data;
+        }
+
+        public static class DataBean {
+            /**
+             * time : 2016-12-12
+             * noUpDate : 0
+             * name : 阳光采购
+             * versionId : 1.2
+             * downUrl : http://210.51.183.101:8081/group2/M00/00/00/ygcg.apk
+             */
+
+            private String time;
+            private int noUpDate;
+            private String name;
+            private String versionId;
+            private String downUrl;
+
+            @Override
+            public String toString() {
+                return "DataBean{" +
+                        "time='" + time + '\'' +
+                        ", noUpDate=" + noUpDate +
+                        ", name='" + name + '\'' +
+                        ", versionId='" + versionId + '\'' +
+                        ", downUrl='" + downUrl + '\'' +
+                        '}';
+            }
+
+            public String getTime() {
+                return time;
+            }
+
+            public void setTime(String time) {
+                this.time = time;
+            }
+
+            public int getNoUpDate() {
+                return noUpDate;
+            }
+
+            public void setNoUpDate(int noUpDate) {
+                this.noUpDate = noUpDate;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getVersionId() {
+                return versionId;
+            }
+
+            public void setVersionId(String versionId) {
+                this.versionId = versionId;
+            }
+
+            public String getDownUrl() {
+                return downUrl;
+            }
+
+            public void setDownUrl(String downUrl) {
+                this.downUrl = downUrl;
+            }
+        }
+
+    }
+
 }

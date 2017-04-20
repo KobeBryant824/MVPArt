@@ -7,5 +7,5 @@ import com.cxh.mvpsample.listener.OnRequestListener;
  */
 public interface RequestBiz {
 
-    void requestForData(OnRequestListener listener);
+    void requestData(OnRequestListener listener);
 }

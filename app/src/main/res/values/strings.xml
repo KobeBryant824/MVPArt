@@ -10,4 +10,8 @@
     <string name="all">All</string>
     <string name="on_the_way">On the way</string>
     <string name="delivered">Delivered</string>
+    <string name="title_activity_main66">MainActivity66</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

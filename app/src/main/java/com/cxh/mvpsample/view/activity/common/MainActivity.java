@@ -2,7 +2,6 @@ package com.cxh.mvpsample.view.activity.common;
 
 import android.Manifest;
 import android.app.ActivityOptions;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
@@ -25,7 +24,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
 import permissions.dispatcher.OnPermissionDenied;
@@ -61,28 +59,23 @@ public class MainActivity extends BaseAutoActivity {
 
     @Override
     protected void initViewsAndEvents() {
+
         // 解决Handler可能造成的内存泄漏，其实这段代码用handler也不会造成泄漏，hiahia~~
         Observable.timer(2, TimeUnit.SECONDS)
                 .compose(this.<Long>bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(@NonNull Long aLong) throws Exception {
-                        mPageStateManager.showContent();
-                    }
-                });
+                // Replace or Expand lambda , alt + enter
+                .subscribe(aLong -> mPageStateManager.showContent());
 
         RxView.clicks(mvpBtn)
                 .throttleFirst(2000, TimeUnit.MICROSECONDS)
-                .subscribe(new Consumer<Object>() {
-                    @Override
-                    public void accept(@NonNull Object o) throws Exception {
-                        //转场动画
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            startActivity(new Intent(MainActivity.this, XXXActivity.class),
-                                    ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
-                        } else startActivity(new Intent(MainActivity.this, XXXActivity.class));
-                    }
+                .subscribe(o -> {
+                    //转场动画
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        startActivity(new Intent(MainActivity.this, XXXActivity.class),
+                                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                    } else startActivity(new Intent(MainActivity.this, XXXActivity.class));
                 });
+
     }
 
     @OnClick({R.id.permission_btn})
@@ -97,7 +90,7 @@ public class MainActivity extends BaseAutoActivity {
         }
     }
 
-    boolean doubleBackToExitPressedOnce = false;
+    private boolean doubleBackToExitPressedOnce = false;
 
     // 双击返回键退出
     @Override
@@ -113,12 +106,7 @@ public class MainActivity extends BaseAutoActivity {
 
         Observable.timer(2, TimeUnit.SECONDS)
                 .compose(this.<Long>bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(@NonNull Long aLong) throws Exception {
-                        doubleBackToExitPressedOnce = false;
-                    }
-                });
+                .subscribe(aLong -> doubleBackToExitPressedOnce = false);
     }
 
     @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -136,19 +124,11 @@ public class MainActivity extends BaseAutoActivity {
     void showRationale(final PermissionRequest request) {
         new AlertDialog.Builder(this)
                 .setMessage("这是申请写SD卡权限的说明....")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //再次执行请求
-                        request.proceed();
-                    }
+                .setPositiveButton("确定", (dialog, which) -> {
+                    // 再次执行请求
+                    request.proceed();
                 })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        request.cancel();
-                    }
-                })
+                .setNegativeButton("取消", (dialogInterface, i) -> request.cancel())
                 .show();
     }
 

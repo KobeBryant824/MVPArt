@@ -3,7 +3,7 @@ package com.cxh.mvpsample.presenter;
 import com.cxh.mvpsample.contract.XXXContract;
 import com.cxh.mvpsample.listener.OnRequestListener;
 import com.cxh.mvpsample.manager.RxDisposable;
-import com.cxh.mvpsample.model.entity.WelcomeEntity;
+import com.cxh.mvpsample.model.api.XXXApi;
 import com.cxh.mvpsample.model.repository.XXXDataRepository;
 
 /**
@@ -21,10 +21,11 @@ public class XXXPresenter implements XXXContract.Presenter {
 
     @Override
     public void loadData() {
-        mRequestBiz.requestForData(new OnRequestListener<WelcomeEntity>() {
+
+        mRequestBiz.requestData(new OnRequestListener<XXXApi.WelcomeEntity>() {
 
             @Override
-            public void onSuccess(final WelcomeEntity data) {
+            public void onSuccess(final XXXApi.WelcomeEntity data) {
                 mView.showContent();
                 mView.setData(data);
             }
@@ -32,7 +33,6 @@ public class XXXPresenter implements XXXContract.Presenter {
             @Override
             public void onFailed() {
                 mView.showError();
-
             }
         });
     }

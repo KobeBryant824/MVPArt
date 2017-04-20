@@ -9,7 +9,4 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="tv_style">
-        <item name="android:background">#aa00ff00</item>
-    </style>
 </resources>
