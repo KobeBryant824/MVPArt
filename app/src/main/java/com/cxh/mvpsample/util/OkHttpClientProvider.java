@@ -12,24 +12,19 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
- * 全局统一使用的OkHttpClient工具，okhttp版本：okhttp3
+ * 自定义OkHttp客户端
  * Created by Hai (haigod7@gmail.com) on 2017/3/13 14:21.
  */
-public class OkHttpUtils {
+public class OkHttpClientProvider {
     public static final long DEFAULT_READ_TIMEOUT_MILLIS = 15 * 1000;
     public static final long DEFAULT_WRITE_TIMEOUT_MILLIS = 20 * 1000;
     public static final long DEFAULT_CONNECT_TIMEOUT_MILLIS = 20 * 1000;
     private static final long HTTP_RESPONSE_DISK_CACHE_MAX_SIZE = 10 * 1024 * 1024;
-    private static volatile OkHttpUtils sInstance;
+    private static volatile OkHttpClientProvider sInstance;
     private OkHttpClient mOkHttpClient;
 
-    private OkHttpUtils() {
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                KLog.e(message);
-            }
-        });
+    private OkHttpClientProvider() {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(KLog::e);
         //包含header、body数据
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -44,11 +39,11 @@ public class OkHttpUtils {
                 .build();
     }
 
-    public static OkHttpUtils getInstance() {
+    public static OkHttpClientProvider getInstance() {
         if (sInstance == null) {
-            synchronized (OkHttpUtils.class) {
+            synchronized (OkHttpClientProvider.class) {
                 if (sInstance == null) {
-                    sInstance = new OkHttpUtils();
+                    sInstance = new OkHttpClientProvider();
                 }
             }
         }

@@ -16,9 +16,7 @@ public interface XXXApi {
     public class WelcomeEntity {
 
         /**
-         * code : 1
-         * msg : 请求成功
-         * data : {"time":"2016-12-12","noUpDate":0,"name":"阳光采购","versionId":"1.2","downUrl":"http://210.51.183.101:8081/group2/M00/00/00/ygcg.apk"}
+         * code : 1 msg : 请求成功 data : {"time":"2016-12-12","noUpDate":0,"name":"阳光采购","versionId":"1.2","downUrl":"http://210.51.183.101:8081/group2/M00/00/00/ygcg.apk"}
          */
 
         private int code;

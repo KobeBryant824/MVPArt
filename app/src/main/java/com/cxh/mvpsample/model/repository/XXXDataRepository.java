@@ -5,7 +5,7 @@ import android.util.Log;
 import com.cxh.mvpsample.listener.OnRequestListener;
 import com.cxh.mvpsample.manager.RxDisposable;
 import com.cxh.mvpsample.model.api.XXXApi;
-import com.cxh.mvpsample.util.RetrofitUtils;
+import com.cxh.mvpsample.util.RetrofitProvider;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,22 +16,19 @@ import io.reactivex.schedulers.Schedulers;
 
 
 /**
- * +
  * 具体页面的数据请求
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
-public class XXXDataRepository implements RequestBiz {
+public class XXXDataRepository implements IRequestBiz<XXXApi.WelcomeEntity> {
 
-    @Override
-    public void requestData(final OnRequestListener listener) {
+    public void requestData(final OnRequestListener<XXXApi.WelcomeEntity> listener) {
 
-        // 这里采用的是Java的动态代理模式
-        XXXApi requestSerives = RetrofitUtils.getInstance().create(XXXApi.class);
+        XXXApi xxxApi = RetrofitProvider.getInstance().create(XXXApi.class);
 
-        Disposable subscribe = requestSerives.getWelcomeEntity()
+        Disposable subscribe = xxxApi.getWelcomeEntity()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(welcomeEntity -> listener.onSuccess(welcomeEntity),
+                .subscribe(listener::onSuccess, // Java8 方法引用
                         throwable -> listener.onFailed(),
                         () -> {
                 });

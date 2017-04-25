@@ -19,10 +19,9 @@ package com.cxh.mvpsample.base;
 public interface BasePresenter {
 
 //    void start(); 原生
-
     void subscribe();
 
-    // 注销V层引用、手动释放后台请求（当然用rxlifecycle2就可以很好解决但是只能在RxActivity中调用，通常接口请求在m层），避免造成内存泄漏，
+    // 注销V层引用、手动释放后台请求，避免造成内存泄漏（当然用rxlifecycle2就可以很好解决但是只能在RxActivity中、RxFragment调用，或者m层持有context主动关联）
     void unSubscribe();
 
 }

@@ -9,16 +9,17 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 import static com.cxh.mvpsample.AppConstants.BASEURL;
 
 /**
- * Created by Hai (haigod7@gmail.com) on 2017/3/8 16:38.
+ * Retrofit构造器
+ * Created by Hai (haigod7@gmail.com) on 2017/3/8 14:07.
  */
-public class RetrofitUtils {
-    private static volatile RetrofitUtils sInstance;
+public class RetrofitProvider {
+    private static volatile RetrofitProvider sInstance;
     private Retrofit mRetrofit;
 
-    private RetrofitUtils(){
+    private RetrofitProvider(){
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(BASEURL)
-                .client(OkHttpUtils.getInstance().getOkHttpClient())
+                .client(OkHttpClientProvider.getInstance().getOkHttpClient())
                 //增加返回值为String的支持
                 .addConverterFactory(ScalarsConverterFactory.create())
                 //增加返回值为Gson的支持(以实体类返回)
@@ -29,19 +30,19 @@ public class RetrofitUtils {
                 .build();
     }
 
-    public static RetrofitUtils getInstance() {
+    public static RetrofitProvider getInstance() {
         if (sInstance == null) {
-            synchronized (RetrofitUtils.class) {
+            synchronized (RetrofitProvider.class) {
                 if (sInstance == null) {
-                    sInstance = new RetrofitUtils();
+                    sInstance = new RetrofitProvider();
                 }
             }
         }
         return sInstance;
     }
 
-    public <T> T create(Class<T> service) {
-        return mRetrofit.create(service);
+    public <T> T create(Class<T> clazz) {
+        return mRetrofit.create(clazz);
     }
 
 }

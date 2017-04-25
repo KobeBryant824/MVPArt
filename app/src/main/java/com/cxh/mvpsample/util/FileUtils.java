@@ -19,6 +19,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * 文件处理
+ * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
+ */
 public class FileUtils {
 	public static final String ROOT_DIR = MApplication.getContext().getString(R.string.app_name);
 	public static final String DOWNLOAD_DIR = "download";

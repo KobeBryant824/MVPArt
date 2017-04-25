@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
+ * BaseFragment
  * Created by Hai (haigod7@gmail.com) on 2017/3/16 11:23.
  */
 public abstract class BaseFragment extends RxFragment {

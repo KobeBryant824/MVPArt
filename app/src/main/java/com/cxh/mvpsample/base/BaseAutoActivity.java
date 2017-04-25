@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * AutoLayoutActivity Android屏幕适配方案 https://github.com/hongyangAndroid/AndroidAutoLayout
+ * 屏幕自适配方案
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
 public abstract class BaseAutoActivity extends AutoLayoutActivity {

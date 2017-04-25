@@ -1,6 +1,7 @@
 package com.cxh.mvpsample.view.activity;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -9,26 +10,34 @@ import com.cxh.mvpsample.base.BaseAutoActivity;
 import com.cxh.mvpsample.contract.XXXContract;
 import com.cxh.mvpsample.model.api.XXXApi;
 import com.cxh.mvpsample.presenter.XXXPresenter;
+import com.cxh.mvpsample.util.GlideUtils;
 import com.socks.library.KLog;
 
 import butterknife.BindView;
 
 
 /**
+ *
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
 public class XXXActivity extends BaseAutoActivity implements XXXContract.View {
     private static final String ACTION_CODE = "ilovekobebryant";
+    private String path = "http://7xi8d6.com1.z0.glb.clouddn.com/2017-04-18-17882540_190116561497334_440657494176432128_n.jpg";
     private XXXContract.Presenter mPresenter;
 
     @BindView(R.id.first_tv)
     TextView firstTv;
+
+    @BindView(R.id.showImage)
+    ImageView showImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new XXXPresenter(this); // 给P层注入V，V又注入P，双向持有（V需要P的数据处理操作，P需要V的视图更新）
 //        mPresenter.subscribe();
+
+        GlideUtils.loadImageView(this, path, showImage);
     }
 
     @Override
@@ -58,7 +67,6 @@ public class XXXActivity extends BaseAutoActivity implements XXXContract.View {
 
     @Override
     public void setData(XXXApi.WelcomeEntity data) {
-        KLog.d(data);
         firstTv.setText(data.toString());
     }
 

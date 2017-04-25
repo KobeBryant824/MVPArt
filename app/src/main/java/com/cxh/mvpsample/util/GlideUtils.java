@@ -21,6 +21,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import java.io.File;
 
 /**
+ * 图片加载
  * Created by Hai (haigod7@gmail.com) on 2017/3/10 10:40.
  */
 public class GlideUtils {
@@ -62,7 +63,7 @@ public class GlideUtils {
 
     //默认加载
     public static void loadImageView(Context context, String path, ImageView imageView) {
-        Glide.with(context).load(path).into(imageView);
+        Glide.with(context).load(path).centerCrop().crossFade().into(imageView);
     }
 
     //加载圆形图片
@@ -80,39 +81,39 @@ public class GlideUtils {
 
     //设置加载中以及加载失败图片
     public static void loadImageViewLoding(Context context, String path, ImageView imageView, int lodingImage, int errorImageView) {
-        Glide.with(context).load(path).placeholder(lodingImage).error(errorImageView).into(imageView);
+        Glide.with(context).load(path).centerCrop().placeholder(lodingImage).error(errorImageView).crossFade().into(imageView);
     }
 
     //加载指定大小,ps:Glide可以自动计算出任意情况下的ImageView大小
     public static void loadImageViewSize(Context context, String path, int width, int height, ImageView imageView) {
-        Glide.with(context).load(path).override(width, height).into(imageView);
+        Glide.with(context).load(path).centerCrop().override(width, height).crossFade().into(imageView);
     }
 
     //设置加载中以及加载失败图片并且指定大小
     public static void loadImageViewLodingSize(Context context, String path, int width, int height, ImageView imageView, int lodingImage, int errorImageView) {
-        Glide.with(context).load(path).override(width, height).placeholder(lodingImage).error(errorImageView).into(imageView);
+        Glide.with(context).load(path).centerCrop().override(width, height).placeholder(lodingImage).error(errorImageView).crossFade().into(imageView);
     }
 
     //设置缩略图支持，会先加载缩略图
     public static void loadImageViewThumbnail(Context context, String path, ImageView imageView) {
-        Glide.with(context).load(path).thumbnail(0.1f).into(imageView);
+        Glide.with(context).load(path).thumbnail(0.1f).crossFade().into(imageView);
     }
 
     //设置动态转换，api提供了比如：
-    // centerCrop() 拉伸截取中间部分显示
+    // centerCrop() 等比拉伸截取中间部分显示
     // fitCenter() 等比拉伸填满ImageView
     public static void loadImageViewCrop(Context context, String path, ImageView imageView) {
-        Glide.with(context).load(path).centerCrop().into(imageView);
+        Glide.with(context).load(path).centerCrop().crossFade().into(imageView);
     }
 
     //设置跳过内存缓存
     public static void loadImageViewSkipCache(Context context, String path, ImageView imageView) {
-        Glide.with(context).load(path).skipMemoryCache(true).into(imageView);
+        Glide.with(context).load(path).centerCrop().skipMemoryCache(true).crossFade().into(imageView);
     }
 
     //设置下载优先级
     public static void loadImageViewPriority(Context context, String path, ImageView imageView) {
-        Glide.with(context).load(path).priority(Priority.NORMAL).into(imageView);
+        Glide.with(context).load(path).centerCrop().priority(Priority.NORMAL).crossFade().into(imageView);
     }
 
     /**
@@ -125,7 +126,7 @@ public class GlideUtils {
 
     //设置缓存全尺寸、转换后的策略
     public static void loadImageViewDiskCache(Context context, String path, ImageView imageView) {
-        Glide.with(context).load(path).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
+        Glide.with(context).load(path).diskCacheStrategy(DiskCacheStrategy.ALL).crossFade().into(imageView);
     }
 
     /**
@@ -134,36 +135,36 @@ public class GlideUtils {
 
     //设置ViewPropertyAnimation.Animator加载动画
     public static void loadImageViewAnim(Context context, String path, ViewPropertyAnimation.Animator anim, ImageView imageView) {
-        Glide.with(context).load(path).animate(anim).into(imageView);
+        Glide.with(context).load(path).centerCrop().animate(anim).into(imageView);
     }
 
     //设置animationId加载动画
     public static void loadImageViewAnim(Context context, String path, int anim, ImageView imageView) {
-        Glide.with(context).load(path).animate(anim).into(imageView);
+        Glide.with(context).load(path).centerCrop().animate(anim).into(imageView);
     }
 
     //设置动态GIF加载方式，如果不是gif会回调error
     public static void loadImageViewDynamicGif(Context context, String path, ImageView imageView) {
-        Glide.with(context).load(path).asGif().into(imageView);
+        Glide.with(context).load(path).asGif().centerCrop().crossFade().into(imageView);
     }
 
     //设置静态GIF加载方式，如果不是gif会回调error
     public static void loadImageViewStaticGif(Context context, String path, ImageView imageView) {
-        Glide.with(context).load(path).asBitmap().into(imageView);
+        Glide.with(context).load(path).asBitmap().centerCrop().into(imageView);
     }
 
     //设置监听的用处 可以用于监控请求发生错误来源，以及图片来源 是内存还是磁盘
 
     //设置监听请求接口
     public static void loadImageViewListener(Context context, String path, ImageView imageView, RequestListener<String, GlideDrawable> requstlistener) {
-        Glide.with(context).load(path).listener(requstlistener).into(imageView);
+        Glide.with(context).load(path).centerCrop().listener(requstlistener).into(imageView);
     }
 
     //项目中有很多需要先下载图片然后再做一些合成的功能，比如项目中出现的图文混排
 
     //设置要加载的内容
     public static void loadImageViewContent(Context context, String path, SimpleTarget<GlideDrawable> simpleTarget) {
-        Glide.with(context).load(path).centerCrop().into(simpleTarget);
+        Glide.with(context).load(path).centerCrop().crossFade().into(simpleTarget);
     }
 
     //清理磁盘缓存

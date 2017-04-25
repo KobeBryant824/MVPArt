@@ -14,7 +14,7 @@ import com.cxh.mvpsample.base.BaseView;
 import com.cxh.mvpsample.model.api.XXXApi;
 
 /**
- * 更直观的看到View中的方法和Presenter中的方法的关联，XXX具体指定，项目里可以有多个Contract
+ * 更直观的看到View中的方法和Presenter中的方法的关联，一个页面对应一个Contract
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
 public interface XXXContract {
