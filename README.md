@@ -40,7 +40,7 @@ MVP与MVC最大的不同，其实是Activity职责的变化，由原来的C (控
 
 ## TODO ##
 
-- 解决mvp的弊端，使用MVVM
+- 解决mvp的弊端，使用[MVVM](https://github.com/KobeBryant824/MVVMSample)
 
 
 ## License
