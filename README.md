@@ -13,7 +13,7 @@
 
 
 ## MVP ##
-![screenshot_1](./images/MVP.png)
+![screenshot_1](./images/mvp.png)
 
 - View: 对应于Activity和XML，负责View的绘制以及与用户的交互。
 - Model: 实体模型（数据的获取、存储、数据状态变化）
