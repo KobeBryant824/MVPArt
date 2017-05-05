@@ -45,7 +45,6 @@ dependencies {
     compile project(':autolayoutwidget')
 
     compile libs.support_v4
-    // 全部控件替换为AppCompt...向下兼容
     compile libs.appcompat_v7
     compile libs.recyclerview_v7
 
@@ -59,9 +58,7 @@ dependencies {
     compile 'com.alibaba:fastjson:1.1.56.android'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.github.jdsjlzx:LRecyclerView:1.4.2'
-    // 与LRecyclerView不兼容
-//    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.6'
+    compile 'com.github.jdsjlzx:LRecyclerView:1.4.3'
 
     compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     compile 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'

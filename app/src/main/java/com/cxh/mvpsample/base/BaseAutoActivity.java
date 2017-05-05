@@ -24,26 +24,21 @@ public abstract class BaseAutoActivity extends AutoLayoutActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
-        if (null != extras) {
-            getBundleExtras(extras);
-        }
         if (getLayoutID() != 0) {
             setContentView(getLayoutID());
         } else {
             throw new IllegalArgumentException("You must return a right contentView layout resource Id");
         }
-
         mUnbinder = ButterKnife.bind(this);
         ActivityManager.getInstance().pushOneActivity(this);
 
+        Bundle extras = getIntent().getExtras();
+        if (null != extras) {
+            getBundleExtras(extras);
+        }
+
         PageManager.initInApp(getApplicationContext());
-        mPageStateManager = PageManager.init(this, true, new Runnable() {
-            @Override
-            public void run() {
-                RetryEvent();
-            }
-        });
+        mPageStateManager = PageManager.init(this, true, this::RetryEvent);
         mPageStateManager.showLoading();
 
         initViewsAndEvents();
@@ -83,14 +78,14 @@ public abstract class BaseAutoActivity extends AutoLayoutActivity {
         }
     }
 
+    protected void getBundleExtras(Bundle extras) {
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
         ActivityManager.getInstance().popOneActivity(this);
-    }
-
-    protected void getBundleExtras(Bundle extras) {
     }
 
     protected abstract int getLayoutID();

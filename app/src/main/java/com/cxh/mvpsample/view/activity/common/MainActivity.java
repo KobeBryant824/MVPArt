@@ -24,6 +24,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
 import permissions.dispatcher.OnPermissionDenied;
@@ -68,13 +69,7 @@ public class MainActivity extends BaseAutoActivity {
 
         RxView.clicks(mvpBtn)
                 .throttleFirst(2000, TimeUnit.MICROSECONDS)
-                .subscribe(o -> {
-                    //转场动画
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        startActivity(new Intent(MainActivity.this, XXXActivity.class),
-                                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
-                    } else startActivity(new Intent(MainActivity.this, XXXActivity.class));
-                });
+                .subscribe(o -> startActivity(new Intent(MainActivity.this, XXXActivity.class)));
 
     }
 

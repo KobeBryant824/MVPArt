@@ -21,8 +21,7 @@ import butterknife.Unbinder;
  */
 
 /**
- * 所有在activity中用到RxJava2都必须继承此BaseActivity（此框架未在activity请求数据）
- * ps：我用另外一种，把数据请求放到M层，让P层去控制RxJava的生命周期
+ * 所有在activity中用到RxJava2都必须继承此BaseActivity（数据请求在M层，让P层去控制RxJava的生命周期）
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
 public abstract class BaseActivity extends RxAppCompatActivity {
@@ -32,10 +31,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
-        if (null != extras) {
-            getBundleExtras(extras);
-        }
         if (getLayoutID() != 0) {
             setContentView(getLayoutID());
         } else {
@@ -45,13 +40,13 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         mUnbinder = ButterKnife.bind(this);
         ActivityManager.getInstance().pushOneActivity(this);
 
+        Bundle extras = getIntent().getExtras();
+        if (null != extras) {
+            getBundleExtras(extras);
+        }
+
         PageManager.initInApp(getApplicationContext());
-        mPageStateManager = PageManager.init(this, true, new Runnable() {
-            @Override
-            public void run() {
-                RetryEvent();
-            }
-        });
+        mPageStateManager = PageManager.init(this, true, this::RetryEvent);
         mPageStateManager.showLoading();
 
         initViewsAndEvents();
@@ -91,14 +86,14 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         }
     }
 
+    protected void getBundleExtras(Bundle extras) {
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
         ActivityManager.getInstance().popOneActivity(this);
-    }
-
-    protected void getBundleExtras(Bundle extras) {
     }
 
     protected abstract int getLayoutID();
