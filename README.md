@@ -9,7 +9,7 @@
     2. Controller 层完成业务逻辑后，要求Model层改变状态。
     3. Model层将新的数据发送到View层，使用户得到反馈。
 
-**缺陷:**View层和Model层是相互可知，耦合性大，像Activity或者Fragment既在Controller层，又在View层，造成工程的可扩展性可维护性非常差。
+缺陷:View层和Model层是相互可知，耦合性大，像Activity或者Fragment既在Controller层，又在View层，造成工程的可扩展性可维护性非常差。
 
 
 ## MVP ##
@@ -23,7 +23,7 @@
     2. View层与Model层不直接发生联系，都通过Presenter层进行间接通信。
     3. Model层与Presenter层，Presenter层与View层之间通过接口建立联系。
     
-**缺陷:**由于我们使用了接口的方式去连接View层和Presenter层，这样就导致了特定场景下的一些问题，当你的页面逻辑很复杂的时候，你的View层实现的接口会有很多，如果你的App中有很多个这样复杂的页面，维护接口的成本就会变的非常的大。
+缺陷:由于我们使用了接口的方式去连接View层和Presenter层，这样就导致了特定场景下的一些问题，当你的页面逻辑很复杂的时候，你的View层实现的接口会有很多，如果你的App中有很多个这样复杂的页面，维护接口的成本就会变的非常的大。
 
 
 ## 区别
