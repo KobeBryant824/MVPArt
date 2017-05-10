@@ -7,8 +7,13 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.cxh.mvpsample.manager.ActivityManager;
+import com.cxh.mvpsample.model.api.entity.Event;
 import com.hss01248.pagestate.PageManager;
 import com.zhy.autolayout.AutoLayoutActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -31,6 +36,7 @@ public abstract class BaseAutoActivity extends AutoLayoutActivity {
         }
         mUnbinder = ButterKnife.bind(this);
         ActivityManager.getInstance().pushOneActivity(this);
+        EventBus.getDefault().register(this);
 
         Bundle extras = getIntent().getExtras();
         if (null != extras) {
@@ -78,15 +84,21 @@ public abstract class BaseAutoActivity extends AutoLayoutActivity {
         }
     }
 
-    protected void getBundleExtras(Bundle extras) {
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
         ActivityManager.getInstance().popOneActivity(this);
+        EventBus.getDefault().unregister(this);
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMainEvent(String tag) {}
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMainEvent(Event event) {}
+
+    protected void getBundleExtras(Bundle extras) {}
 
     protected abstract int getLayoutID();
 

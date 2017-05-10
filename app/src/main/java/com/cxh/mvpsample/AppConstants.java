@@ -6,5 +6,7 @@ package com.cxh.mvpsample;
  */
 public class AppConstants {
     public static final String BASEURL = "http://www.51el.net/emsap/";
+    public static final String ON_SUCCESS = "onSuccess";
+    public static final String ON_FAILED = "onFailed";
 
 }

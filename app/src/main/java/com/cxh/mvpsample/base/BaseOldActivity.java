@@ -3,28 +3,31 @@ package com.cxh.mvpsample.base;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.cxh.mvpsample.R;
 import com.cxh.mvpsample.manager.ActivityManager;
+import com.cxh.mvpsample.model.api.entity.Event;
 import com.hss01248.pagestate.PageManager;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * BaseActivity 无适配，还是用dp
- * BaseAutoActivity 多分辨率适配，用px，全局通用这种，有坑就单个页面extexds BaseActivity
+ * BaseOldActivity 无适配，还是用dp
+ * BaseAutoActivity 多分辨率适配，用px，全局通用这种，有坑就单个页面extexds BaseOldActivity
  */
 
 /**
  * 所有在activity中用到RxJava2都必须继承此BaseActivity（数据请求在M层，让P层去控制RxJava的生命周期）
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
-public abstract class BaseActivity extends RxAppCompatActivity {
+public abstract class BaseOldActivity extends RxAppCompatActivity {
     protected PageManager mPageStateManager;
     private Unbinder mUnbinder;
 
@@ -39,6 +42,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
         mUnbinder = ButterKnife.bind(this);
         ActivityManager.getInstance().pushOneActivity(this);
+        EventBus.getDefault().register(this);
 
         Bundle extras = getIntent().getExtras();
         if (null != extras) {
@@ -86,15 +90,21 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         }
     }
 
-    protected void getBundleExtras(Bundle extras) {
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
         ActivityManager.getInstance().popOneActivity(this);
+        EventBus.getDefault().unregister(this);
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMainEvent(String tag) {}
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMainEvent(Event event) {}
+
+    protected void getBundleExtras(Bundle extras) {}
 
     protected abstract int getLayoutID();
 

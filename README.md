@@ -1,33 +1,33 @@
 ## MVC ##
 ![screenshot_1](./images/mvc.png)
 
-- View: 对应于Activity和XML，负责View的绘制以及与用户的交互。
+- View: 对应于 Activity 和 XML，负责 View 的绘制以及与用户的交互。
 - Controller：业务逻辑
 - Model: 实体模型（数据的获取、存储、数据状态变化）
     
-    1. View层传送指令到Controller层。
-    2. Controller 层完成业务逻辑后，要求Model层改变状态。
-    3. Model层将新的数据发送到View层，使用户得到反馈。
+    1. View 层传送指令到 Controller 层。
+    2. Controller 层完成业务逻辑后，要求 Model 层改变状态。
+    3. Model 层将新的数据发送到 View 层，使用户得到反馈。
 
-缺陷:View层和Model层是相互可知，耦合性大，像Activity或者Fragment既在Controller层，又在View层，造成工程的可扩展性可维护性非常差。
+缺陷: View 层和 Model 层是相互可知，耦合性大，像 Activity 或者 Fragment 既在 Controller 层，又在 View 层，造成工程的可扩展性可维护性非常差。
 
 
 ## MVP ##
 ![screenshot_1](./images/mvp.png)
 
-- View: 对应于Activity和XML，负责View的绘制以及与用户的交互。
+- View: 对应于 Activity 和 XML，负责 View 的绘制以及与用户的交互。
 - Model: 实体模型（数据的获取、存储、数据状态变化）
-- Presenter: 负责完成View与Model间的交互和业务逻辑。
+- Presenter: 负责完成 View 与 Model 间的交互和业务逻辑。
 
-    1. MVP模式各层之间的通信，都是双向的。
-    2. View层与Model层不直接发生联系，都通过Presenter层进行间接通信。
-    3. Model层与Presenter层，Presenter层与View层之间通过接口建立联系。
+    1. MVP 模式各层之间的通信，都是双向的。
+    2. View 层与 Model 层不直接发生联系，都通过 Presenter 层进行间接通信。
+    3. Model 层与 Presenter 层，Presenter 层与 View 层之间通过接口建立联系。
     
-缺陷:由于我们使用了接口的方式去连接View层和Presenter层，这样就导致了特定场景下的一些问题，当你的页面逻辑很复杂的时候，你的View层实现的接口会有很多，如果你的App中有很多个这样复杂的页面，维护接口的成本就会变的非常的大。
+缺陷:由于我们使用了接口的方式去连接 View 层和 Presenter 层，这样就导致了特定场景下的一些问题，当你的页面逻辑很复杂的时候，你的 View 层实现的接口会有很多，如果你的 App 中有很多个这样复杂的页面，维护接口的成本就会变的非常的大。
 
 
 ## 区别
-MVP与MVC最大的不同，其实是Activity职责的变化，由原来的C (控制层) 变成了 V(视图层)，不再管控制层的问题，只管如何去显示。控制层的角色就由我们的新人Presenter来担当，这种架构就解决了Activity过度耦合控制层和视图层的问题。
+MVP 与 MVC 最大的不同，其实是 Activity 职责的变化，由原来的 C (控制层) 变成了 V (视图层)，不再管控制层的问题，只管如何去显示。控制层的角色就由我们的新人 Presenter 来担当，这种架构就解决了 Activity 过度耦合控制层和视图层的问题。
 
 
 ## Libraries
@@ -53,7 +53,7 @@ MVP与MVC最大的不同，其实是Activity职责的变化，由原来的C (控
 
 
 ## TODO ##
-解决mvp的弊端，使用[MVVM](https://github.com/KobeBryant824/MVVMSample)
+解决 MVP 的弊端，使用 [MVVM](https://github.com/KobeBryant824/MVVMSample)
 
 
 ## License
