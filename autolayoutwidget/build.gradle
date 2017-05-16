@@ -23,10 +23,12 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':autolayout')
+
     compile libs.support_v4
     compile libs.appcompat_v7
     compile libs.design
     compile libs.cardview_v7
     compile libs.gridlayout_v7
+
+    compile 'com.zhy:autolayout:1.4.5'
 }

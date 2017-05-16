@@ -49,7 +49,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     }
 
     /**
-     * 通过viewId获取控件
+     * 通过 viewId 获取控件
      */
     public <T extends View> T getView(int viewId) {
         View view = mViews.get(viewId);
@@ -67,7 +67,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     /****以下为辅助方法*****/
 
     /**
-     * 设置TextView的值
+     * 设置 TextView的值
      */
     public BaseViewHolder setText(int viewId, String text) {
         TextView tv = getView(viewId);

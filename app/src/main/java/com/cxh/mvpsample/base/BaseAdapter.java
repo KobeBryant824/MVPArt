@@ -36,7 +36,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
         onBindItemHolder(holder, position);
     }
 
-    //局部刷新关键：带payload的这个onBindViewHolder方法必须实现
+    //局部刷新关键：带 payload 的这个 onBindViewHolder方法必须实现
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position, List<Object> payloads) {
         if (payloads.isEmpty()) {

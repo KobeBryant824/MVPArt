@@ -31,8 +31,9 @@ MVP 与 MVC 最大的不同，其实是 Activity 职责的变化，由原来的 
 
 
 ## Libraries
+- [AndroidAutoLayout](https://github.com/hongyangAndroid/AndroidAutoLayout)
+- [PageStateManager](https://github.com/hss01248/PageStateManager)
 - [ButterKnife](https://github.com/JakeWharton/butterknife)
-- [PermissionsDispatcher](https://github.com/hotchemi/PermissionsDispatcher)
 - [KLog](https://github.com/ZhaoKaiQiang/KLog)
 - [FastJson](https://github.com/alibaba/fastjson)
 - [EventBus](https://github.com/greenrobot/EventBus)
@@ -42,8 +43,7 @@ MVP 与 MVC 最大的不同，其实是 Activity 职责的变化，由原来的 
 - [RxJava2](https://github.com/ReactiveX/RxJava)
 - [Retrofit](https://github.com/square/retrofit)
 - [Leakcanary](https://github.com/square/leakcanary)
-- [AndroidAutoLayout](https://github.com/hongyangAndroid/AndroidAutoLayout)
-- [PageStateManager](https://github.com/hss01248/PageStateManager)
+- [PermissionsDispatcher](https://github.com/hotchemi/PermissionsDispatcher)
 
 
 ## Thanks

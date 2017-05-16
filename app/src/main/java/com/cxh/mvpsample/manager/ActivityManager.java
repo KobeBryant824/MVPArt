@@ -5,7 +5,7 @@ import android.app.Activity;
 import java.util.Stack;
 
 /**
- * Activity栈管理
+ * Activity 栈管理
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
 public class ActivityManager {

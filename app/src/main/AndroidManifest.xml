@@ -23,7 +23,7 @@
                 android:name="design_height"
                 android:value="1280"/>
 
-        <activity android:name=".view.activity.common.MainActivity" android:screenOrientation="portrait" >
+        <activity android:name=".ui.activity.common.MainActivity" android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -35,7 +35,7 @@
                     android:name="android.app.shortcuts"
                     android:resource="@xml/shortcuts"/>
         </activity>
-        <activity android:name=".view.activity.XXXActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.XXXActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

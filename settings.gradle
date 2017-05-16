@@ -1,1 +1,1 @@
-include ':app', ':pagestatemanager', ':autolayout', ':autolayoutwidget'
+include ':app', ':autolayoutwidget'

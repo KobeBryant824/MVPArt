@@ -1,8 +1,8 @@
 package com.cxh.mvpsample.presenter;
 
+import com.cxh.mvpsample.base.BasePresenter;
 import com.cxh.mvpsample.contract.XXXContract;
 import com.cxh.mvpsample.listener.OnRequestListener;
-import com.cxh.mvpsample.manager.RxDisposable;
 import com.cxh.mvpsample.model.api.XXXApi;
 import com.cxh.mvpsample.model.repository.XXXDataRepository;
 
@@ -10,19 +10,23 @@ import com.cxh.mvpsample.model.repository.XXXDataRepository;
  * 具体页面的数据处理
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
-public class XXXPresenter implements XXXContract.Presenter {
-    private XXXContract.View mView;
+public class XXXPresenter extends BasePresenter<XXXContract.View> implements XXXContract.Presenter {
     private XXXDataRepository mXXXDataRepository;
 
+    // 给P层注入V，V又注入P，双向持有（V需要P的数据处理操作，P需要V的视图更新）
     public XXXPresenter(XXXContract.View view) {
-        this.mView = view;
-        mView.setPresenter(this);
+        super(view);
+        view.setPresenter(this);
         mXXXDataRepository = new XXXDataRepository();
     }
 
     @Override
-    public void loadData() {
+    protected void start() {
+        loadData();
+    }
 
+    @Override
+    public void loadData() {
         mXXXDataRepository.requestData(new OnRequestListener<XXXApi.WelcomeEntity>() {
 
             @Override
@@ -38,16 +42,5 @@ public class XXXPresenter implements XXXContract.Presenter {
         });
     }
 
-    @Override
-    public void subscribe() {
-        loadData();
-    }
-
-    @Override
-    public void unSubscribe() {
-        RxDisposable.clear();
-
-        if (mView != null) mView = null;
-    }
 
 }

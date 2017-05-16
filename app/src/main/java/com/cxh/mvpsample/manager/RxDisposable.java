@@ -4,7 +4,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
- * 管理CompositeDisposable，页面一旦销毁就取消请求
+ * 管理 CompositeDisposable，页面一旦销毁就取消请求
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
 public class RxDisposable {
