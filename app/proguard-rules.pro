@@ -23,10 +23,49 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
 # 忽略警告
 -ignorewarnings
+-dontwarn
 
-# 不混淆第三方库，而第三方库有的已经混淆过了，有的使用了Java反射技术，再者第三方不都开源吗索性全不混淆
+# 不混淆实体类
+-keep class com.cxh.mvpsample.model.api.**{*;}
+
+# Glide混淆
+#-keepnames class com.mypackage.MyGlideModule
+# or more generally:
+-keep public class * implements com.bumptech.glide.module.GlideModule
+
+# for DexGuard only
+-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+
+
+# ButterKnife混淆
+# Retain generated class which implement Unbinder.
+-keep public class * implements butterknife.Unbinder { public <init>(**, android.view.View); }
+
+# Prevent obfuscation of types which use ButterKnife annotations since the simple name
+# is used to reflectively look up the generated ViewBinding.
+-keep class butterknife.*
+-keepclasseswithmembernames class * { @butterknife.* <methods>; }
+-keepclasseswithmembernames class * { @butterknife.* <fields>; }
+
+# EventBus混淆
+-keepattributes *Annotation*
+-keepclassmembers class ** {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+
+# Only required if you use AsyncExecutor
+-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
+    <init>(java.lang.Throwable);
+}
+
+# LeakCanary混淆
+-keep class com.squareup.haha.** { *; }
+-keep class com.squareup.leakcanary.** { *; }
+
 -keep class android.support.v4.**{*;}
 -keep class android.support.v7.**{*;}
 -keep class android.support.design.**{*;}
@@ -35,35 +74,8 @@
 -keep class com.zhy.autolayout.**{*;}
 -keep class com.hss01248.pagestate.**{*;}
 
--keep class butterknife.**{*;}
-
 -keep class com.socks.**{*;}
 -keep class com.alibaba.fastjson.**{*;}
--keep class org.greenrobot.eventbus.**{*;}
--keep class com.bumptech.glide.**{*;}
 -keep class com.github.**{*;}
 
--keep class com.jakewharton.rxbinding2.**{*;}
--keep class com.jakewharton.rxbinding2.support.v4.**{*;}
--keep class com.jakewharton.rxbinding2.support.v7.**{*;}
--keep class com.jakewharton.rxbinding2.support.design.**{*;}
-
--keep class io.reactivex.**{*;}
--keep class io.reactivex.android.**{*;}
-
--keep class retrofit2.**{*;}
--keep class retrofit2.converter.gson.**{*;}
--keep class retrofit2.converter.scalars.**{*;}
--keep class retrofit2.adapter.rxjava2.**{*;}
 -keep class retrofit2.converter.fastjson.**{*;}
--keep class okhttp3.logging.**{*;}
-
--keep class permissions.dispatcher.**{*;}
-
--keep class com.trello.rxlifecycle2.android.**{*;}
--keep class com.trello.rxlifecycle2.components.**{*;}
-
--keep class com.squareup.leakcanary.**{*;}
-
-
--dontwarn
