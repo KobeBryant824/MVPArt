@@ -10,7 +10,6 @@ import com.cxh.mvpsample.contract.XXXContract;
 import com.cxh.mvpsample.model.api.XXXApi;
 import com.cxh.mvpsample.presenter.XXXPresenter;
 import com.cxh.mvpsample.util.GlideUtils;
-import com.socks.library.KLog;
 
 import butterknife.BindView;
 
@@ -44,7 +43,7 @@ public class XXXActivity extends BaseActivity<XXXContract.Presenter> implements 
     @Override
     protected void initViewsAndEvents() {
 
-        GlideUtils.loadImageView(this, path, showImage);
+        GlideUtils.loadImage(path, showImage);
 
         String action = getIntent().getAction();
         if (action != null && action.equals(ACTION_CODE)) {
