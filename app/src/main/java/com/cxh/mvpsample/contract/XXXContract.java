@@ -27,6 +27,8 @@ public interface XXXContract {
 
     interface Presenter extends IPresenter {
 
+//        void login(String userName, String password); // 登录校验
+
         void loadData();
     }
 

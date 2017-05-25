@@ -10,6 +10,7 @@ import com.cxh.mvpsample.contract.XXXContract;
 import com.cxh.mvpsample.model.api.XXXApi;
 import com.cxh.mvpsample.presenter.XXXPresenter;
 import com.cxh.mvpsample.util.GlideUtils;
+import com.socks.library.KLog;
 
 import butterknife.BindView;
 
@@ -36,6 +37,7 @@ public class XXXActivity extends BaseActivity<XXXContract.Presenter> implements 
 
     @Override
     protected XXXContract.Presenter initPresenter() {
+//        mPresenter = new XXXPresenter(this); // 放到下面 void setPresenter(T presenter);
         return new XXXPresenter(this);
     }
 
@@ -59,7 +61,7 @@ public class XXXActivity extends BaseActivity<XXXContract.Presenter> implements 
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.subscribe();
+        mPresenter.subscribe(); // Activity 中的 fragment用到 presenter的 subscribe()
     }
 
     @Override

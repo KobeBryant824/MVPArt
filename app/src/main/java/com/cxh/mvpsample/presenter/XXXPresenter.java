@@ -4,20 +4,21 @@ import com.cxh.mvpsample.base.BasePresenter;
 import com.cxh.mvpsample.contract.XXXContract;
 import com.cxh.mvpsample.listener.OnRequestListener;
 import com.cxh.mvpsample.model.api.XXXApi;
-import com.cxh.mvpsample.model.repository.XXXDataRepository;
+import com.cxh.mvpsample.model.repository.XXXRepository;
 
 /**
  * 具体页面的数据处理
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
 public class XXXPresenter extends BasePresenter<XXXContract.View> implements XXXContract.Presenter {
-    private XXXDataRepository mXXXDataRepository;
+    private XXXRepository mXXXRepository;
 
-    // 给P层注入V，V又注入P，双向持有（V需要P的数据处理操作，P需要V的视图更新）
+    // 给P层注入V，V又注入P（V 需要 P的数据处理操作，P需要 V的视图更新）
+    // 双向持有在 fragment体现到用处，fragment 需要 P的数据处理
     public XXXPresenter(XXXContract.View view) {
         super(view);
         view.setPresenter(this);
-        mXXXDataRepository = new XXXDataRepository();
+        mXXXRepository = new XXXRepository();
     }
 
     @Override
@@ -27,7 +28,7 @@ public class XXXPresenter extends BasePresenter<XXXContract.View> implements XXX
 
     @Override
     public void loadData() {
-        mXXXDataRepository.requestData(new OnRequestListener<XXXApi.WelcomeEntity>() {
+        mXXXRepository.requestData(new OnRequestListener<XXXApi.WelcomeEntity>() {
 
             @Override
             public void onSuccess(final XXXApi.WelcomeEntity data) {

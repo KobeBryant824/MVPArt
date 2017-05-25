@@ -19,7 +19,7 @@ import io.reactivex.schedulers.Schedulers;
  * 具体页面的数据请求
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
-public class XXXDataRepository implements IRequestBiz<XXXApi.WelcomeEntity> {
+public class XXXRepository implements IRequestBiz<XXXApi.WelcomeEntity> {
 
     public void requestData(final OnRequestListener<XXXApi.WelcomeEntity> listener) {
 

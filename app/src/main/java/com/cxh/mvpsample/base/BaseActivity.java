@@ -3,6 +3,7 @@ package com.cxh.mvpsample.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.internal.BaselineLayout;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.util.AttributeSet;
