@@ -4,6 +4,7 @@ package com.cxh.mvpsample.contract;
 import com.cxh.mvpsample.base.IPresenter;
 import com.cxh.mvpsample.base.IView;
 import com.cxh.mvpsample.model.api.XXXApi;
+import com.cxh.mvpsample.presenter.XXXPresenter;
 
 /**
  * 更直观的看到 View中的方法和 Presenter中的方法的关联，一个页面对应一个 Contract
@@ -11,7 +12,7 @@ import com.cxh.mvpsample.model.api.XXXApi;
  */
 public interface XXXContract {
 
-    interface View extends IView<Presenter> {
+    interface View extends IView<XXXPresenter> {
 
         void showContent();
 

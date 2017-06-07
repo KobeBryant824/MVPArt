@@ -3,7 +3,6 @@ package com.cxh.mvpsample.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.internal.BaselineLayout;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -84,12 +83,15 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
 
     @Override
     protected void onDestroy() {
-        if (mPresenter != null) mPresenter.unSubscribe();
         super.onDestroy();
         mUnbinder.unbind();
-        ActivityManager.getInstance().popOneActivity(this);
+
+        if (mPresenter != null) mPresenter.unSubscribe();
+
         if (EventBus.getDefault().isRegistered(this))
             EventBus.getDefault().unregister(this);
+
+        ActivityManager.getInstance().popOneActivity(this);
     }
 
     protected void pushPageThenKill(Class<?> clazz) {

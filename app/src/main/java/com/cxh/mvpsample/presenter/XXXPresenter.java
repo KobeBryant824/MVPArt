@@ -6,6 +6,8 @@ import com.cxh.mvpsample.listener.OnRequestListener;
 import com.cxh.mvpsample.model.api.XXXApi;
 import com.cxh.mvpsample.model.repository.XXXRepository;
 
+import javax.inject.Inject;
+
 /**
  * 具体页面的数据处理
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
@@ -14,8 +16,8 @@ public class XXXPresenter extends BasePresenter<XXXContract.View> implements XXX
     private XXXRepository mXXXRepository;
 
     // 给P层注入V，V又注入P（V 需要 P的数据处理操作，P需要 V的视图更新）
-    // 双向持有在 fragment体现到用处，fragment 需要 P的数据处理
-    public XXXPresenter(XXXContract.View view) {
+    @Inject
+    XXXPresenter(XXXContract.View view) {
         super(view);
         view.setPresenter(this);
         mXXXRepository = new XXXRepository();

@@ -21,6 +21,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class XXXRepository implements IRequestBiz<XXXApi.WelcomeEntity> {
 
+    @Override
     public void requestData(final OnRequestListener<XXXApi.WelcomeEntity> listener) {
 
         XXXApi xxxApi = RetrofitProvider.getInstance().create(XXXApi.class);

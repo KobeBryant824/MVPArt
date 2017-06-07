@@ -39,6 +39,7 @@ MVP 与 MVC 最大的不同，其实是 Activity 职责的变化，由原来的 
 - [EventBus](https://github.com/greenrobot/EventBus)
 - [Glide](https://github.com/bumptech/glide)
 - [LRecyclerView](https://github.com/jdsjlzx/LRecyclerView)
+- [Dagger2](https://github.com/google/dagger)
 - [RxJava2](https://github.com/ReactiveX/RxJava)
 - [Retrofit](https://github.com/square/retrofit)
 - [RxBinding](https://github.com/JakeWharton/RxBinding)

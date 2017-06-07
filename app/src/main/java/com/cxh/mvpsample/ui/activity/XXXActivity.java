@@ -9,7 +9,11 @@ import com.cxh.mvpsample.base.BaseActivity;
 import com.cxh.mvpsample.contract.XXXContract;
 import com.cxh.mvpsample.model.api.XXXApi;
 import com.cxh.mvpsample.presenter.XXXPresenter;
+import com.cxh.mvpsample.ui.activity.component.DaggerXXXComponent;
+import com.cxh.mvpsample.ui.activity.moduel.XXXModuel;
 import com.cxh.mvpsample.util.GlideUtils;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -21,11 +25,11 @@ import butterknife.BindView;
 public class XXXActivity extends BaseActivity<XXXContract.Presenter> implements XXXContract.View {
     private static final String ACTION_CODE = "ilovekobebryant";
     private String path = "http://7xi8d6.com1.z0.glb.clouddn.com/2017-04-18-17882540_190116561497334_440657494176432128_n.jpg";
-    private XXXContract.Presenter mPresenter;
+    @Inject
+    XXXPresenter mPresenter;
 
     @BindView(R.id.first_tv)
     TextView firstTv;
-
     @BindView(R.id.showImage)
     ImageView showImage;
 
@@ -36,8 +40,8 @@ public class XXXActivity extends BaseActivity<XXXContract.Presenter> implements 
 
     @Override
     protected XXXContract.Presenter initPresenter() {
-//        mPresenter = new XXXPresenter(this); // 放到下面 void setPresenter(T presenter);
-        return new XXXPresenter(this);
+        DaggerXXXComponent.builder().xXXModuel(new XXXModuel(this)).build().inject(this);// rebuild
+        return mPresenter;
     }
 
     @Override
@@ -60,7 +64,7 @@ public class XXXActivity extends BaseActivity<XXXContract.Presenter> implements 
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.subscribe(); // Activity 中的 fragment用到 presenter的 subscribe()
+        mPresenter.subscribe();
     }
 
     @Override
@@ -88,8 +92,9 @@ public class XXXActivity extends BaseActivity<XXXContract.Presenter> implements 
         mPageStateManager.showError();
     }
 
+    // fragment 会用到presenter
     @Override
-    public void setPresenter(XXXContract.Presenter presenter) {
+    public void setPresenter(XXXPresenter presenter) {
         mPresenter = presenter;
     }
 }
