@@ -90,6 +90,6 @@ public class XXXActivity extends BaseActivity<XXXContract.Presenter> implements 
 
     @Override
     public void setPresenter(XXXContract.Presenter presenter) {
-        this.mPresenter = presenter;
+        mPresenter = presenter;
     }
 }

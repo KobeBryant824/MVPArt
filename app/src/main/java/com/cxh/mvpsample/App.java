@@ -1,7 +1,6 @@
 package com.cxh.mvpsample;
 
 import android.app.Application;
-import android.os.Environment;
 import android.text.format.DateFormat;
 
 import com.cxh.mvpsample.util.FileUtils;
@@ -16,16 +15,16 @@ import butterknife.BindString;
 /**
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
-public class MApplication extends Application implements Thread.UncaughtExceptionHandler {
+public class App extends Application implements Thread.UncaughtExceptionHandler {
     /**
      * 全局Context，原理是因为Application类是应用最先运行的，所以在我们的代码调用时，该值已经被赋值过了
      */
-    private static MApplication mAppContext;
+    private static App mAppContext;
 
     @BindString(R.string.app_name)
     String mAppName;
 
-    public static MApplication getContext() {
+    public static App getContext() {
         return mAppContext;
     }
 

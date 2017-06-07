@@ -6,7 +6,7 @@ import retrofit2.converter.fastjson.FastJsonConverterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-import static com.cxh.mvpsample.AppConstants.BASEURL;
+import static com.cxh.mvpsample.Constants.BASEURL;
 
 /**
  * Retrofit构造器

@@ -34,8 +34,8 @@ public class XXXRepository implements IRequestBiz<XXXApi.WelcomeEntity> {
                 });
 
         Disposable subscribe1 = Flowable.interval(1, TimeUnit.SECONDS)
-                .doOnCancel(() -> Log.e("hh", "Unsubscribing subscription from onCreate()"))
-                .subscribe(aLong -> Log.e("hh", "Started in onCreate(), running until onDestroy(): " + aLong));
+                .doOnCancel(() -> Log.e("hhh", "Unsubscribing subscription from onCreate()"))
+                .subscribe(aLong -> Log.e("hhh", "Started in onCreate(), running until onDestroy(): " + aLong));
 
         RxDisposable.add(subscribe);
 

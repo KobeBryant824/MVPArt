@@ -39,22 +39,37 @@ MVP 与 MVC 最大的不同，其实是 Activity 职责的变化，由原来的 
 - [EventBus](https://github.com/greenrobot/EventBus)
 - [Glide](https://github.com/bumptech/glide)
 - [LRecyclerView](https://github.com/jdsjlzx/LRecyclerView)
-- [RxBinding](https://github.com/JakeWharton/RxBinding)
 - [RxJava2](https://github.com/ReactiveX/RxJava)
 - [Retrofit](https://github.com/square/retrofit)
+- [RxBinding](https://github.com/JakeWharton/RxBinding)
+- [RxLifecycle](https://github.com/trello/RxLifecycle)
 - [Leakcanary](https://github.com/square/leakcanary)
 - [PermissionsDispatcher](https://github.com/hotchemi/PermissionsDispatcher)
 
 
 ## Thanks
-- [GoogleMvp](https://github.com/googlesamples/android-architecture/tree/todo-mvp/)
-- [haibuzou](https://github.com/haibuzou/MVPSample/tree/master)
-- [Android_小宝](http://www.jianshu.com/p/14283d8d3a60)
+- [googlesamples/android-architecture](https://github.com/googlesamples/android-architecture/tree/todo-mvp/)
+- [haibuzou](https://github.com/haibuzou/MVPSample)
+- [google官方demo比较分析](http://www.jianshu.com/p/14283d8d3a60)
 
 
-## TODO ##
-解决 MVP 的弊端，使用 [MVVM](https://github.com/KobeBryant824/MVVMSample)
+## 进阶 ##
+[MVVM](https://github.com/KobeBryant824/MVVM-RxJava)
 
 
-## License
-   Apache-2.0
+### 开源许可 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+```
+Copyright 2017 XinHai Chen
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```

@@ -2,8 +2,6 @@ package com.cxh.mvpsample.base;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -15,20 +13,22 @@ import java.util.List;
  * Created by Hai (haigod7@gmail.com) on 2017/4/6 16:34.
  */
 public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
-    protected Context mContext;
-    private LayoutInflater mInflater;
 
+    protected Context mContext;
     protected List<T> mDataList = new ArrayList<>();
 
     public BaseAdapter(Context context) {
         mContext = context;
-        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public BaseAdapter(Context context, List<T> list) {
+        mContext = context;
+        mDataList = list;
     }
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = mInflater.inflate(getLayoutId(), parent, false);
-        return new BaseViewHolder(mContext, itemView);
+        return BaseViewHolder.createViewHolder(mContext, parent, getLayoutId());
     }
 
     @Override
@@ -44,14 +44,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
         } else {
             onBindItemHolder(holder, position, payloads);
         }
-    }
-
-    public abstract int getLayoutId();
-
-    public abstract void onBindItemHolder(BaseViewHolder holder, int position);
-
-    public void onBindItemHolder(BaseViewHolder holder, int position, List<Object> payloads){
-
     }
 
     @Override
@@ -80,8 +72,8 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
         this.mDataList.remove(position);
         notifyItemRemoved(position);
 
-        if(position != (getDataList().size())){ // 如果移除的是最后一个，忽略
-            notifyItemRangeChanged(position,this.mDataList.size()-position);
+        if (position != (getDataList().size())) { // 如果移除的是最后一个，忽略
+            notifyItemRangeChanged(position, this.mDataList.size() - position);
         }
     }
 
@@ -89,4 +81,10 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
         mDataList.clear();
         notifyDataSetChanged();
     }
+
+    protected abstract int getLayoutId();
+
+    protected abstract void onBindItemHolder(BaseViewHolder holder, int position);
+
+    protected void onBindItemHolder(BaseViewHolder holder, int position, List<Object> payloads) {}
 }

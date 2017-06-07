@@ -1,19 +1,15 @@
 package com.cxh.mvpsample.base;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.text.util.Linkify;
 import android.util.SparseArray;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.widget.Checkable;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -26,15 +22,16 @@ import android.widget.TextView;
  * Created by Hai (haigod7@gmail.com) on 2017/4/6 16:34.
  */
 public class BaseViewHolder extends RecyclerView.ViewHolder {
-    private SparseArray<View> mViews;
-    private View mConvertView;
+
     private Context mContext;
+    private View mConvertView;
+    private SparseArray<View> mViews;
 
     public BaseViewHolder(Context context, View itemView) {
         super(itemView);
         mContext = context;
         mConvertView = itemView;
-        mViews = new SparseArray<View>();
+        mViews = new SparseArray<>();
     }
 
     public static BaseViewHolder createViewHolder(Context context, View itemView) {
@@ -43,7 +40,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     }
 
     public static BaseViewHolder createViewHolder(Context context, ViewGroup parent, int layoutId) {
-        View itemView = LayoutInflater.from(context).inflate(layoutId, parent, false);
+        View itemView = View.inflate(context, layoutId, parent);
         BaseViewHolder holder = new BaseViewHolder(context, itemView);
         return holder;
     }
@@ -66,9 +63,6 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     /****以下为辅助方法*****/
 
-    /**
-     * 设置 TextView的值
-     */
     public BaseViewHolder setText(int viewId, String text) {
         TextView tv = getView(viewId);
         tv.setText(text);
@@ -117,17 +111,8 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
-    @SuppressLint("NewApi")
     public BaseViewHolder setAlpha(int viewId, float value) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            getView(viewId).setAlpha(value);
-        } else {
-            // Pre-honeycomb hack to set Alpha value
-            AlphaAnimation alpha = new AlphaAnimation(value, value);
-            alpha.setDuration(0);
-            alpha.setFillAfter(true);
-            getView(viewId).startAnimation(alpha);
-        }
+        getView(viewId).setAlpha(value);
         return this;
     }
 

@@ -1,4 +1,3 @@
-//项目完成时统一把dependencies放到此处，放到此处不能检测更新了，得手动  fc
 ext {
     configuration =     [
             compileSdkVersion   :   25,

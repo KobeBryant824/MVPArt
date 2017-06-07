@@ -12,6 +12,7 @@ import android.view.View;
 import com.cxh.mvpsample.manager.ActivityManager;
 import com.cxh.mvpsample.model.api.entity.Event;
 import com.hss01248.pagestate.PageManager;
+import com.socks.library.KLog;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.zhy.autolayout.AutoFrameLayout;
 import com.zhy.autolayout.AutoLinearLayout;
@@ -39,6 +40,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        KLog.e(System.currentTimeMillis());
         if (getLayoutID() != 0) {
             setContentView(getLayoutID());
         } else {

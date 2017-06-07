@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 
 
-import com.cxh.mvpsample.MApplication;
+import com.cxh.mvpsample.App;
 import com.cxh.mvpsample.R;
 
 import java.io.File;
@@ -24,7 +24,7 @@ import java.util.Properties;
  * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
  */
 public class FileUtils {
-	public static final String ROOT_DIR = MApplication.getContext().getString(R.string.app_name);
+	public static final String ROOT_DIR = App.getContext().getString(R.string.app_name);
 	public static final String DOWNLOAD_DIR = "download";
 	public static final String CACHE_DIR = "cache";
 	public static final String ICON_DIR = "icon";
@@ -74,7 +74,7 @@ public class FileUtils {
 
 	/** 获取应用的cache目录 */
 	public static String getCachePath() {
-		File f = MApplication.getContext().getCacheDir();
+		File f = App.getContext().getCacheDir();
 		if (null == f) {
 			return null;
 		} else {
