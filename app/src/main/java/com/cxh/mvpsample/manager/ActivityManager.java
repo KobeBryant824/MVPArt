@@ -5,23 +5,16 @@ import android.app.Activity;
 import java.util.Stack;
 
 /**
- * Activity 栈管理
- * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/3/6
  */
 public class ActivityManager {
-    private static ActivityManager instance;
-    //activity栈
-    private Stack<Activity> activityStack;
 
-    /**
-     * 单例模式
-     *
-     * @return 单例
-     */
+    private static ActivityManager instance;
+    private Stack<Activity> activityStack; //activity栈
+
     public static ActivityManager getInstance() {
-        if (instance == null) {
-            instance = new ActivityManager();
-        }
+        if (instance == null) instance = new ActivityManager();
         return instance;
     }
 
@@ -31,9 +24,7 @@ public class ActivityManager {
      * @param actvity activity
      */
     public void pushOneActivity(Activity actvity) {
-        if (activityStack == null) {
-            activityStack = new Stack<>();
-        }
+        if (activityStack == null) activityStack = new Stack<>();
         activityStack.add(actvity);
     }
 
@@ -107,10 +98,8 @@ public class ActivityManager {
     public void appExit() {
         try {
             finishAllActivity();
-            //退出JVM(java虚拟机),释放所占内存资源,0表示正常退出(非0的都为异常退出)
-            System.exit(0);
-            //从操作系统中结束掉当前程序的进程
-            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(0); //退出JVM(java虚拟机),释放所占内存资源,0表示正常退出(非0的都为异常退出)
+            android.os.Process.killProcess(android.os.Process.myPid()); //从操作系统中结束掉当前程序的进程
         } catch (Exception e) {
             e.printStackTrace();
         }

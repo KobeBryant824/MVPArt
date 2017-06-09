@@ -21,8 +21,8 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import java.io.File;
 
 /**
- * Glide图片加载
- * Created by Hai (haigod7@gmail.com) on 2017/3/10 10:40.
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/3/6
  */
 public class GlideUtils {
 

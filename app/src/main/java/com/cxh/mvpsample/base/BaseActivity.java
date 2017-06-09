@@ -3,6 +3,7 @@ package com.cxh.mvpsample.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -11,7 +12,6 @@ import android.view.View;
 import com.cxh.mvpsample.manager.ActivityManager;
 import com.cxh.mvpsample.model.api.entity.Event;
 import com.hss01248.pagestate.PageManager;
-import com.socks.library.KLog;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.zhy.autolayout.AutoFrameLayout;
 import com.zhy.autolayout.AutoLinearLayout;
@@ -25,21 +25,22 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Desc:
- * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51 13:56.
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/3/6
  */
 public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActivity {
+
     private static final String LAYOUT_LINEARLAYOUT = "LinearLayout";
     private static final String LAYOUT_FRAMELAYOUT = "FrameLayout";
     private static final String LAYOUT_RELATIVELAYOUT = "RelativeLayout";
-    protected PageManager mPageStateManager;
+
     private Unbinder mUnbinder;
+    protected PageManager mPageStateManager;
     private T mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        KLog.e(System.currentTimeMillis());
         if (getLayoutID() != 0) {
             setContentView(getLayoutID());
         } else {
@@ -49,13 +50,10 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
         mUnbinder = ButterKnife.bind(this);
         ActivityManager.getInstance().pushOneActivity(this);
 
-        if (useEventBus())
-            EventBus.getDefault().register(this);
+        if (useEventBus()) EventBus.getDefault().register(this);
 
         Bundle extras = getIntent().getExtras();
-        if (null != extras) {
-            getBundleExtras(extras);
-        }
+        if (null != extras) getBundleExtras(extras);
 
         PageManager.initInApp(getApplicationContext());
         mPageStateManager = PageManager.init(this, true, this::RetryEvent);
@@ -82,14 +80,19 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (mPresenter != null) mPresenter.subscribe();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
 
-        if (mPresenter != null) mPresenter.unSubscribe();
+        if (useEventBus()) EventBus.getDefault().unregister(this);
 
-        if (EventBus.getDefault().isRegistered(this))
-            EventBus.getDefault().unregister(this);
+        if (mPresenter != null) mPresenter.unSubscribe();
 
         ActivityManager.getInstance().popOneActivity(this);
     }
@@ -102,9 +105,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
 
     protected void pushPageThenKill(Class<?> clazz, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
-        if (null != bundle) {
-            intent.putExtras(bundle);
-        }
+        if (null != bundle) intent.putExtras(bundle);
         startActivity(intent);
         finish();
     }
@@ -116,9 +117,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
 
     protected void pushPageForResult(Class<?> clazz, int requestCode, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
-        if (null != bundle) {
-            intent.putExtras(bundle);
-        }
+        if (null != bundle) intent.putExtras(bundle);
         startActivityForResult(intent, requestCode);
     }
 
@@ -139,7 +138,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     protected void getBundleExtras(Bundle extras) {
     }
 
-    protected abstract int getLayoutID();
+    protected abstract @LayoutRes int getLayoutID();
 
     protected abstract T initPresenter();
 

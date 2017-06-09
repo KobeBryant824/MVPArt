@@ -20,8 +20,8 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * 文件处理
- * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/3/6
  */
 public class FileUtils {
 	public static final String ROOT_DIR = App.getInstance().getString(R.string.app_name);

@@ -4,28 +4,23 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
- * 管理 CompositeDisposable，页面一旦销毁就取消请求
- * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/3/6
  */
 public class RxDisposable {
+
     private static CompositeDisposable sDisposable = new CompositeDisposable();
 
     public static void add(Disposable d) {
-        if (d != null) {
-            sDisposable.add(d);
-        }
+        if (d != null) sDisposable.add(d);
     }
 
     public static void delete(Disposable d) {
-        if (d != null) {
-            sDisposable.delete(d);
-        }
+        if (d != null) sDisposable.delete(d);
     }
 
     public static void remove(Disposable d) {
-        if (d != null) {
-            sDisposable.remove(d);
-        }
+        if (d != null) sDisposable.remove(d);
     }
 
     public static void clear() {

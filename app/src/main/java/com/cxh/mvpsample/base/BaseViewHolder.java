@@ -16,10 +16,9 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-
 /**
- * RecyclerView.ViewHolder
- * Created by Hai (haigod7@gmail.com) on 2017/4/6 16:34.
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/4/6
  */
 public class BaseViewHolder extends RecyclerView.ViewHolder {
 

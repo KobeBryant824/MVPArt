@@ -2,37 +2,31 @@ package com.cxh.mvpsample.model.repository;
 
 import android.util.Log;
 
+import com.cxh.mvpsample.App;
 import com.cxh.mvpsample.listener.OnRequestListener;
 import com.cxh.mvpsample.manager.RxDisposable;
+import com.cxh.mvpsample.manager.RxScheduler;
 import com.cxh.mvpsample.model.api.XXXApi;
-import com.cxh.mvpsample.util.RetrofitProvider;
 
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-
 
 /**
- * 具体页面的数据请求
- * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/3/6
  */
 public class XXXRepository implements IRequestBiz<XXXApi.WelcomeEntity> {
 
     @Override
     public void requestData(final OnRequestListener<XXXApi.WelcomeEntity> listener) {
 
-        XXXApi xxxApi = RetrofitProvider.getInstance().create(XXXApi.class);
+        XXXApi xxxApi =  App.getRetrofit().create(XXXApi.class);
 
         Disposable subscribe = xxxApi.getWelcomeEntity()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(listener::onSuccess, // Java8 方法引用
-                        throwable -> listener.onFailed(),
-                        () -> {
-                });
+                .compose(RxScheduler.normalSchedulersTransformer())
+                .subscribe(listener::onSuccess, throwable -> listener.onFailed(), () -> {});
 
         Disposable subscribe1 = Flowable.interval(1, TimeUnit.SECONDS)
                 .doOnCancel(() -> Log.e("hhh", "Unsubscribing subscription from onCreate()"))

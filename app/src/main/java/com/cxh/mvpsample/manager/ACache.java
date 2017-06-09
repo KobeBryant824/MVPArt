@@ -34,15 +34,17 @@ import java.util.concurrent.atomic.AtomicLong;
 
 
 /**
- *  轻量级的开源缓存框架
- * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/3/6
  */
 public class ACache {
+
 	public static final int TIME_HOUR = 60 * 60;
 	public static final int TIME_DAY = TIME_HOUR * 24;
 	private static final int MAX_SIZE = 1000 * 1000 * 50; // 50 mb
 	private static final int MAX_COUNT = Integer.MAX_VALUE; // 不限制存放数据的数量
-	private static Map<String, ACache> mInstanceMap = new HashMap<String, ACache>();
+
+	private static Map<String, ACache> mInstanceMap = new HashMap<>();
 	private ACacheManager mCache;
 
 	public static ACache get(Context ctx) {

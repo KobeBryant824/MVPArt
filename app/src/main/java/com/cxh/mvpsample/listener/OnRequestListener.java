@@ -1,8 +1,8 @@
 package com.cxh.mvpsample.listener;
 
 /**
- * 数据请求结果回调
- * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/3/6
  */
 public interface OnRequestListener<T> {
 

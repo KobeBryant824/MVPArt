@@ -5,6 +5,10 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/3/6
+ */
 public class IOUtils {
 	
 	public static String input2Str(InputStream in) throws IOException {

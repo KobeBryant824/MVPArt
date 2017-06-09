@@ -2,7 +2,6 @@ package com.cxh.mvpsample.ui.activity;
 
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cxh.mvpsample.R;
 import com.cxh.mvpsample.base.BaseActivity;
@@ -12,21 +11,19 @@ import com.cxh.mvpsample.presenter.XXXPresenter;
 import com.cxh.mvpsample.ui.activity.component.DaggerXXXComponent;
 import com.cxh.mvpsample.ui.activity.moduel.XXXModuel;
 import com.cxh.mvpsample.util.GlideUtils;
+import com.cxh.mvpsample.util.ToastUtils;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 
 
-/**
- * Desc:
- * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51 13:56.
- */
 public class XXXActivity extends BaseActivity<XXXContract.Presenter> implements XXXContract.View {
+
     private static final String ACTION_CODE = "ilovekobebryant";
-    private String path = "http://7xi8d6.com1.z0.glb.clouddn.com/2017-04-18-17882540_190116561497334_440657494176432128_n.jpg";
-    @Inject
-    XXXPresenter mPresenter;
+    private String mPath = "http://7xi8d6.com1.z0.glb.clouddn.com/2017-04-18-17882540_190116561497334_440657494176432128_n.jpg";
+
+    @Inject XXXPresenter mPresenter;
 
     @BindView(R.id.first_tv)
     TextView firstTv;
@@ -46,8 +43,7 @@ public class XXXActivity extends BaseActivity<XXXContract.Presenter> implements 
 
     @Override
     protected void initViewsAndEvents() {
-
-        GlideUtils.loadImage(path, showImage);
+        GlideUtils.loadImage(mPath, showImage);
 
         String action = getIntent().getAction();
         if (action != null && action.equals(ACTION_CODE)) {
@@ -62,24 +58,13 @@ public class XXXActivity extends BaseActivity<XXXContract.Presenter> implements 
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        mPresenter.subscribe();
-    }
-
-    @Override
     public void setData(XXXApi.WelcomeEntity data) {
         firstTv.setText(data.toString());
     }
 
     @Override
     public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public String loadUserId() {
-        return null;
+        ToastUtils.show(message);
     }
 
     @Override

@@ -1,20 +1,23 @@
 package com.cxh.mvpsample;
 
-import android.content.Context;
-
 import javax.inject.Singleton;
 
 import dagger.Component;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
- * Desc:
- * Created by Hai (haigod7@gmail.com) on 2017/6/7 15:43.
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/6/7 15:43
  */
 @Singleton
-@Component(modules = AppModuel.class)
+@Component(modules = AppModule.class)
 public interface AppComponent {
 
     App getApplication();
 
-    Context getContext();
+    Retrofit getRetrofit();
+
+    OkHttpClient getOkHttpClient();
+
 }

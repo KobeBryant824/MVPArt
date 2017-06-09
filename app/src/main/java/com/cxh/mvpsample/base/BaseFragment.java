@@ -13,10 +13,11 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * BaseFragment
- * Created by Hai (haigod7@gmail.com) on 2017/3/16 11:23.
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/3/16
  */
 public abstract class BaseFragment extends RxFragment {
+
     private Unbinder mUnbinder;
 
     @Nullable
@@ -25,6 +26,12 @@ public abstract class BaseFragment extends RxFragment {
         View view = View.inflate(getContext(), getLayoutID(), null);
         mUnbinder = ButterKnife.bind(view);
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mUnbinder.unbind();
     }
 
     public abstract int getLayoutID();

@@ -9,13 +9,13 @@ import com.cxh.mvpsample.model.repository.XXXRepository;
 import javax.inject.Inject;
 
 /**
- * 具体页面的数据处理
- * Created by Hai (haigod7@gmail.com) on 2017/3/6 10:51.
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/3/6
  */
 public class XXXPresenter extends BasePresenter<XXXContract.View> implements XXXContract.Presenter {
+
     private XXXRepository mXXXRepository;
 
-    // 给P层注入V，V又注入P（V 需要 P的数据处理操作，P需要 V的视图更新）
     @Inject
     XXXPresenter(XXXContract.View view) {
         super(view);
@@ -33,7 +33,7 @@ public class XXXPresenter extends BasePresenter<XXXContract.View> implements XXX
         mXXXRepository.requestData(new OnRequestListener<XXXApi.WelcomeEntity>() {
 
             @Override
-            public void onSuccess(final XXXApi.WelcomeEntity data) {
+            public void onSuccess(XXXApi.WelcomeEntity data) {
                 mView.showContent();
                 mView.setData(data);
             }
