@@ -16,10 +16,12 @@
 
 package com.cxh.mvpsample.base;
 
-public interface IPresenter {
+public interface BaseView<T extends BasePresenter> {
 
-    void subscribe();
+    void setPresenter(T presenter);
 
-    void unSubscribe();
+    void showContent();
+
+    void showError();
 
 }

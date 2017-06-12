@@ -1,4 +1,9 @@
-package com.cxh.mvpsample;
+package com.cxh.mvpsample.di.component;
+
+import android.content.Context;
+
+import com.cxh.mvpsample.di.qualifier.ContextLife;
+import com.cxh.mvpsample.di.moduel.AppModule;
 
 import javax.inject.Singleton;
 
@@ -14,7 +19,8 @@ import retrofit2.Retrofit;
 @Component(modules = AppModule.class)
 public interface AppComponent {
 
-    App getApplication();
+    @ContextLife
+    Context getApplication();
 
     Retrofit getRetrofit();
 

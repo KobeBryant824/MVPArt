@@ -1,8 +1,8 @@
 package com.cxh.mvpsample.contract;
 
 
-import com.cxh.mvpsample.base.IPresenter;
-import com.cxh.mvpsample.base.IView;
+import com.cxh.mvpsample.base.BasePresenter;
+import com.cxh.mvpsample.base.BaseView;
 import com.cxh.mvpsample.model.api.XXXApi;
 import com.cxh.mvpsample.presenter.XXXPresenter;
 
@@ -12,15 +12,13 @@ import com.cxh.mvpsample.presenter.XXXPresenter;
  */
 public interface XXXContract {
 
-    interface View extends IView<XXXPresenter> {
+    interface View extends BaseView<XXXPresenter> {
 
         void setData(XXXApi.WelcomeEntity data);
 
-        void showMessage(String message);
-
     }
 
-    interface Presenter extends IPresenter {
+    interface Presenter extends BasePresenter {
 
         void loadData();
     }

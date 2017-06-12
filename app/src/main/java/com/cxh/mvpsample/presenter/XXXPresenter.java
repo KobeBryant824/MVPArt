@@ -1,8 +1,11 @@
 package com.cxh.mvpsample.presenter;
 
-import com.cxh.mvpsample.base.BasePresenter;
+import android.support.annotation.NonNull;
+
+import com.cxh.mvpsample.base.BaseView;
 import com.cxh.mvpsample.contract.XXXContract;
 import com.cxh.mvpsample.listener.OnRequestListener;
+import com.cxh.mvpsample.manager.RxDisposable;
 import com.cxh.mvpsample.model.api.XXXApi;
 import com.cxh.mvpsample.model.repository.XXXRepository;
 
@@ -12,19 +15,24 @@ import javax.inject.Inject;
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/3/6
  */
-public class XXXPresenter extends BasePresenter<XXXContract.View> implements XXXContract.Presenter {
+public class XXXPresenter implements XXXContract.Presenter {
 
     private XXXRepository mXXXRepository;
+    private XXXContract.View mView;
 
     @Inject
-    XXXPresenter(XXXContract.View view) {
-        super(view);
-        view.setPresenter(this);
+    XXXPresenter() {
         mXXXRepository = new XXXRepository();
     }
 
     @Override
-    protected void start() {
+    public void attachView(@NonNull BaseView view) {
+        mView = (XXXContract.View) view;
+        mView.setPresenter(this);
+    }
+
+    @Override
+    public void subscribe() {
         loadData();
     }
 
@@ -45,5 +53,8 @@ public class XXXPresenter extends BasePresenter<XXXContract.View> implements XXX
         });
     }
 
-
+    @Override
+    public void unSubscribe() {
+        RxDisposable.clear();
+    }
 }

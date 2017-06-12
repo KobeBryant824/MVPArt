@@ -9,6 +9,10 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.cxh.mvpsample.App;
+import com.cxh.mvpsample.di.component.ActivityComponent;
+import com.cxh.mvpsample.di.component.DaggerActivityComponent;
+import com.cxh.mvpsample.di.moduel.ActivityModule;
 import com.cxh.mvpsample.manager.ActivityManager;
 import com.cxh.mvpsample.model.api.entity.Event;
 import com.hss01248.pagestate.PageManager;
@@ -28,27 +32,28 @@ import butterknife.Unbinder;
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/3/6
  */
-public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActivity {
+public abstract class BaseActivity<T extends BasePresenter> extends RxAppCompatActivity {
 
     private static final String LAYOUT_LINEARLAYOUT = "LinearLayout";
     private static final String LAYOUT_FRAMELAYOUT = "FrameLayout";
     private static final String LAYOUT_RELATIVELAYOUT = "RelativeLayout";
 
+    protected ActivityComponent mActivityComponent;
+
     private Unbinder mUnbinder;
-    protected PageManager mPageStateManager;
+    public  PageManager mPageStateManager;
     private T mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getLayoutID() != 0) {
-            setContentView(getLayoutID());
-        } else {
-            throw new IllegalArgumentException("You must return a right contentView layout resource Id");
-        }
+        setContentView(getLayoutID());
+        ActivityManager.getInstance().pushOneActivity(this);
+
+        mActivityComponent = DaggerActivityComponent.builder().appComponent(App.getAppComponent()).activityModule(new ActivityModule(this)).build();
+        initDagger();
 
         mUnbinder = ButterKnife.bind(this);
-        ActivityManager.getInstance().pushOneActivity(this);
 
         if (useEventBus()) EventBus.getDefault().register(this);
 
@@ -60,6 +65,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
         mPageStateManager.showLoading();
 
         mPresenter = initPresenter();
+
         initViewsAndEvents();
     }
 
@@ -67,15 +73,13 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     public View onCreateView(String name, Context context, AttributeSet attrs) {
         View view = null;
         // 其他用得少请自行引用 autolayoutwidget 库
-        if (name.equals(LAYOUT_FRAMELAYOUT)) {
-            view = new AutoFrameLayout(context, attrs);
-        }
-        if (name.equals(LAYOUT_LINEARLAYOUT)) {
-            view = new AutoLinearLayout(context, attrs);
-        }
-        if (name.equals(LAYOUT_RELATIVELAYOUT)) {
-            view = new AutoRelativeLayout(context, attrs);
-        }
+
+        if (name.equals(LAYOUT_FRAMELAYOUT)) view = new AutoFrameLayout(context, attrs);
+
+        if (name.equals(LAYOUT_LINEARLAYOUT)) view = new AutoLinearLayout(context, attrs);
+
+        if (name.equals(LAYOUT_RELATIVELAYOUT)) view = new AutoRelativeLayout(context, attrs);
+
         return view == null ? super.onCreateView(name, context, attrs) : view;
     }
 
@@ -83,6 +87,19 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     protected void onResume() {
         super.onResume();
         if (mPresenter != null) mPresenter.subscribe();
+    }
+
+    private void RetryEvent() {
+        mPageStateManager.showLoading();
+        if (mPresenter != null) mPresenter.subscribe();
+    }
+
+    public void showContent() {
+        mPageStateManager.showContent();
+    }
+
+    public void showError() {
+        mPageStateManager.showError();
     }
 
     @Override
@@ -95,6 +112,17 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
         if (mPresenter != null) mPresenter.unSubscribe();
 
         ActivityManager.getInstance().popOneActivity(this);
+    }
+
+    protected void pushPage(Class<?> clazz) {
+        Intent intent = new Intent(this, clazz);
+        startActivity(intent);
+    }
+
+    protected void pushPage(Class<?> clazz, Bundle bundle) {
+        Intent intent = new Intent(this, clazz);
+        if (null != bundle) intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     protected void pushPageThenKill(Class<?> clazz) {
@@ -121,10 +149,8 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
         startActivityForResult(intent, requestCode);
     }
 
-    protected void showSnackbar(View v, String msg) {
-        if (!TextUtils.isEmpty(msg)) {
-            Snackbar.make(v, msg, Snackbar.LENGTH_SHORT).show();
-        }
+    public void showSnackbar(View v, String msg) {
+        if (!TextUtils.isEmpty(msg)) Snackbar.make(v, msg, Snackbar.LENGTH_SHORT).show();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -140,11 +166,10 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
 
     protected abstract @LayoutRes int getLayoutID();
 
+    protected abstract void initDagger();
+
     protected abstract T initPresenter();
 
     protected abstract void initViewsAndEvents();
-
-    protected abstract void RetryEvent();
-
 
 }

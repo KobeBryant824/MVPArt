@@ -1,4 +1,4 @@
-package com.cxh.mvpsample.ui.activity.common;
+package com.cxh.mvpsample.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -10,10 +10,9 @@ import android.widget.Toast;
 
 import com.cxh.mvpsample.R;
 import com.cxh.mvpsample.base.BaseActivity;
-import com.cxh.mvpsample.base.IPresenter;
+import com.cxh.mvpsample.base.BasePresenter;
 import com.cxh.mvpsample.manager.ActivityManager;
 import com.cxh.mvpsample.util.ToastUtils;
-import com.cxh.mvpsample.ui.activity.XXXActivity;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.socks.library.KLog;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -53,30 +52,28 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected IPresenter initPresenter() {
-        return null;
+    protected void initDagger() {
+
     }
 
     @Override
-    public void RetryEvent() {
-
+    protected BasePresenter initPresenter() {
+        return null;
     }
 
     @Override
     protected void initViewsAndEvents() {
 
         Observable.timer(2, TimeUnit.SECONDS)
-                .compose(this.<Long>bindUntilEvent(ActivityEvent.DESTROY))
-                // Replace or Expand lambda , alt + enter
                 .subscribe(aLong -> mPageStateManager.showContent());
 
         RxView.clicks(mvpBtn)
                 .throttleFirst(2000, TimeUnit.MICROSECONDS)
-                .subscribe(o -> startActivity(new Intent(MainActivity.this, XXXActivity.class)));
+                .subscribe(o -> pushPage(XXXActivity.class));
 
         Observable.interval(1, TimeUnit.SECONDS)
                 .doOnDispose(() -> KLog.e("Unsubscribing subscription from onCreate()"))
-                .compose(this.<Long>bindUntilEvent(ActivityEvent.PAUSE))
+                .compose(bindUntilEvent(ActivityEvent.PAUSE))
                 .subscribe(num -> KLog.e("Started in onCreate(), running until onPause(): " + num));
     }
 
@@ -105,7 +102,7 @@ public class MainActivity extends BaseActivity {
         Toast.makeText(this, "再次点击退出" + mAppName, Toast.LENGTH_SHORT).show();
 
         Observable.timer(2, TimeUnit.SECONDS)
-                .compose(this.<Long>bindUntilEvent(ActivityEvent.DESTROY))
+                .compose(bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(aLong -> doubleBackToExitPressedOnce = false);
     }
 

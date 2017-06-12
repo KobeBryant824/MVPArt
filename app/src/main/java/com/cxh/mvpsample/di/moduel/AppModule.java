@@ -1,5 +1,9 @@
-package com.cxh.mvpsample;
+package com.cxh.mvpsample.di.moduel;
 
+import android.app.Application;
+import android.content.Context;
+
+import com.cxh.mvpsample.di.qualifier.ContextLife;
 import com.socks.library.KLog;
 
 import java.util.concurrent.TimeUnit;
@@ -28,24 +32,25 @@ public class AppModule {
     public static final long DEFAULT_WRITE_TIMEOUT_MILLIS = 20 * 1000;
     public static final long DEFAULT_CONNECT_TIMEOUT_MILLIS = 20 * 1000;
 
-    private App mApplication;
+    private Application mApplication;
 
-    public AppModule(App application) {
-        this.mApplication = application;
-    }
-
-    @Singleton
-    @Provides
-    public App provideApplication() {
-        return mApplication;
+    public AppModule(Application application) {
+        mApplication = application;
     }
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(){
+    @ContextLife
+    public Context provideApplication() {
+        return mApplication.getApplicationContext();
+    }
+
+    @Provides
+    @Singleton
+    Retrofit provideRetrofit(OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .baseUrl(BASEURL)
-                .client(provideOkHttpClient())
+                .client(okHttpClient)
                 //增加返回值为String的支持
                 .addConverterFactory(ScalarsConverterFactory.create())
                 //增加返回值为Gson的支持(以实体类返回)
@@ -57,7 +62,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(){
+    OkHttpClient provideOkHttpClient() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(KLog::e);
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY); //包含header、body数据
 

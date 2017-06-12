@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MVPSample</string>
+    <string name="app_name">MVP-RxJava</string>
 
     <!--shortcuts-->
     <string name="shortcut_label_add_package">MainActivity</string>
