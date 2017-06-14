@@ -1,7 +1,6 @@
 package com.cxh.mvpsample.ui.activity;
 
 import android.Manifest;
-import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -88,22 +87,22 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private boolean doubleBackToExitPressedOnce = false;
+    private boolean mDoubleBackToExitPressedOnce = false;
 
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
+        if (mDoubleBackToExitPressedOnce) {
             super.onBackPressed();
             ActivityManager.getInstance().appExit();
             return;
         }
 
-        this.doubleBackToExitPressedOnce = true;
+        mDoubleBackToExitPressedOnce = true;
         Toast.makeText(this, "再次点击退出" + mAppName, Toast.LENGTH_SHORT).show();
 
         Observable.timer(2, TimeUnit.SECONDS)
                 .compose(bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(aLong -> doubleBackToExitPressedOnce = false);
+                .subscribe(aLong -> mDoubleBackToExitPressedOnce = false);
     }
 
     @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)

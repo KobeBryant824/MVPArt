@@ -50,9 +50,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends RxAppCompatA
         setContentView(getLayoutID());
         ActivityManager.getInstance().pushOneActivity(this);
 
-        mActivityComponent = DaggerActivityComponent.builder().appComponent(App.getAppComponent()).activityModule(new ActivityModule(this)).build();
-        initDagger();
-
         mUnbinder = ButterKnife.bind(this);
 
         if (useEventBus()) EventBus.getDefault().register(this);
@@ -63,6 +60,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends RxAppCompatA
         PageManager.initInApp(getApplicationContext());
         mPageStateManager = PageManager.init(this, true, this::RetryEvent);
         mPageStateManager.showLoading();
+
+        mActivityComponent = DaggerActivityComponent.builder().appComponent(App.getAppComponent()).activityModule(new ActivityModule(this)).build();
+        initDagger();
 
         mPresenter = initPresenter();
 

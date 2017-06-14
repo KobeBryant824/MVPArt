@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 
-def cfg = rootProject.ext.configuration // 配置
+def cfg = rootProject.ext.configuration
 def libs = rootProject.ext.libraries
 
 android {

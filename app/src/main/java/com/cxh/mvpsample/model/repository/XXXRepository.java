@@ -25,7 +25,7 @@ public class XXXRepository implements IRequestBiz<XXXApi.WelcomeEntity> {
         XXXApi xxxApi =  App.getRetrofit().create(XXXApi.class);
 
         Disposable subscribe = xxxApi.getWelcomeEntity()
-                .compose(RxScheduler.normalSchedulersTransformer())
+                .compose(RxScheduler.schedulersFlowableTransformer())
                 .subscribe(listener::onSuccess, throwable -> listener.onFailed(), () -> {});
 
         Disposable subscribe1 = Flowable.interval(1, TimeUnit.SECONDS)
