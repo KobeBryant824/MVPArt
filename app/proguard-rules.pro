@@ -27,9 +27,13 @@
 # 忽略警告
 -ignorewarnings
 -dontwarn
+-dontwarn java.lang.invoke.*
+-dontwarn **$$Lambda$*
 
 # 不混淆实体类
--keep class com.cxh.mvpsample.model.api.**{*;}
+-keep class com.cxh.mvpsample.model.api.** { *; }
+#自定义控件不参与混淆
+-keep class com.cxh.mvpsample.ui.widget.** { *; }
 
 # Glide混淆
 #-keepnames class com.mypackage.MyGlideModule
@@ -79,3 +83,4 @@
 -keep class com.github.**{*;}
 
 -keep class retrofit2.converter.fastjson.**{*;}
+

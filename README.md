@@ -30,7 +30,7 @@
 MVP 与 MVC 最大的不同，其实是 Activity 职责的变化，由原来的 C (控制层) 变成了 V (视图层)，不再管控制层的问题，只管如何去显示。控制层的角色就由我们的新人 Presenter 来担当，这种架构就解决了 Activity 过度耦合控制层和视图层的问题。
 
 
-## Libraries
+## Libs
 - [AndroidAutoLayout](https://github.com/hongyangAndroid/AndroidAutoLayout)
 - [PageStateManager](https://github.com/hss01248/PageStateManager)
 - [ButterKnife](https://github.com/JakeWharton/butterknife)
@@ -58,7 +58,7 @@ MVP 与 MVC 最大的不同，其实是 Activity 职责的变化，由原来的 
 [MVVM](https://github.com/KobeBryant824/MVVM-RxJava)
 
 
-### 开源许可 [![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+## License
 ```
 Copyright 2017 XinHai Chen
 
