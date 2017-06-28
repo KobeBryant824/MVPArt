@@ -37,15 +37,15 @@ MVP 与 MVC 最大的不同，其实是 Activity 职责的变化，由原来的 
 - [KLog](https://github.com/ZhaoKaiQiang/KLog)
 - [FastJson](https://github.com/alibaba/fastjson)
 - [EventBus](https://github.com/greenrobot/EventBus)
-- [Glide](https://github.com/bumptech/glide)
 - [LRecyclerView](https://github.com/jdsjlzx/LRecyclerView)
-- [Dagger2](https://github.com/google/dagger)
-- [RxJava2](https://github.com/ReactiveX/RxJava)
+- [Glide](https://github.com/bumptech/glide)
 - [Retrofit](https://github.com/square/retrofit)
-- [RxBinding](https://github.com/JakeWharton/RxBinding)
+- [RxJava2](https://github.com/ReactiveX/RxJava)
 - [RxLifecycle](https://github.com/trello/RxLifecycle)
+- [RxPermissions](https://github.com/tbruyelle/RxPermissions)
+- [RxBinding](https://github.com/JakeWharton/RxBinding)
+- [Dagger2](https://github.com/google/dagger)
 - [Leakcanary](https://github.com/square/leakcanary)
-- [PermissionsDispatcher](https://github.com/hotchemi/PermissionsDispatcher)
 
 
 ## Thanks

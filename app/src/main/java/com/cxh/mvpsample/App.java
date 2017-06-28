@@ -36,6 +36,12 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
     @Override
     public void onCreate() {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
 
         mInstance = this;
 
@@ -47,7 +53,6 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 
 //		Thread.currentThread().setUncaughtExceptionHandler(this); 上线打开
 
-        LeakCanary.install(this);
     }
 
     public static AppComponent getAppComponent() {

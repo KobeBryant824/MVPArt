@@ -26,7 +26,7 @@ public class XXXRepository implements IRequestBiz<XXXApi.WelcomeEntity> {
 
         Disposable subscribe = xxxApi.getWelcomeEntity()
                 .compose(RxScheduler.schedulersFlowableTransformer())
-                .subscribe(listener::onSuccess, throwable -> listener.onFailed(), () -> {});
+                .subscribe(listener::onSuccess, throwable -> listener.onFailed());
 
         Disposable subscribe1 = Flowable.interval(1, TimeUnit.SECONDS)
                 .doOnCancel(() -> Log.e("hhh", "Unsubscribing subscription from onCreate()"))
