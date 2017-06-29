@@ -6,7 +6,7 @@ import android.content.Context;
 import com.cxh.mvpsample.di.qualifier.ContextLife;
 import com.cxh.mvpsample.di.moduel.ActivityModule;
 import com.cxh.mvpsample.di.scope.ActivityScoped;
-import com.cxh.mvpsample.ui.activity.XXXActivity;
+import com.cxh.mvpsample.ui.activity.UserActivity;
 import com.cxh.mvpsample.ui.activity.MainActivity;
 
 import dagger.Component;
@@ -26,6 +26,6 @@ public interface ActivityComponent {
 
     void inject(MainActivity activity);
 
-    void inject(XXXActivity activity);
+    void inject(UserActivity activity);
 
 }

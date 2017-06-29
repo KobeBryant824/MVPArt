@@ -5,7 +5,7 @@ import android.widget.Toast;
 
 import com.cxh.mvpsample.R;
 import com.cxh.mvpsample.base.BaseActivity;
-import com.cxh.mvpsample.base.BasePresenter;
+import com.cxh.mvpsample.base.IPresenter;
 import com.cxh.mvpsample.manager.ActivityManager;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.socks.library.KLog;
@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected BasePresenter initPresenter() {
+    protected IPresenter initPresenter() {
         return null;
     }
 
@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity {
 
         RxView.clicks(mvpBtn)
                 .throttleFirst(2000, TimeUnit.MICROSECONDS)
-                .subscribe(o -> pushPage(XXXActivity.class));
+                .subscribe(o -> pushPage(UserActivity.class));
 
         Observable.interval(1, TimeUnit.SECONDS)
                 .doOnDispose(() -> KLog.e("Unsubscribing subscription from onCreate()"))

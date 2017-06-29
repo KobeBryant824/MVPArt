@@ -16,12 +16,12 @@
 
 package com.cxh.mvpsample.base;
 
-public interface BaseView<T extends BasePresenter> {
+import android.support.annotation.NonNull;
 
-    void setPresenter(T presenter);
+public interface IPresenter<T extends IView> {
 
-    void showContent();
+    void attachView(@NonNull T view);
 
-    void showError();
+    void start();
 
 }

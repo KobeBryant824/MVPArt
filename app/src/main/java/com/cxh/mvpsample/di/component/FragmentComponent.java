@@ -1,7 +1,7 @@
 package com.cxh.mvpsample.di.component;
 
 import com.cxh.mvpsample.di.scope.FragmentScoped;
-import com.cxh.mvpsample.ui.fragment.XXXFragment;
+import com.cxh.mvpsample.ui.fragment.UserFragment;
 
 import dagger.Component;
 
@@ -15,7 +15,7 @@ import dagger.Component;
 @Component(dependencies = ActivityComponent.class)
 public interface FragmentComponent {
 
-    void inject(XXXFragment fragment);
+    void inject(UserFragment fragment);
 
 //    void inject(XXX2Fragment fragment);
 

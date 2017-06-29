@@ -32,7 +32,7 @@ import butterknife.Unbinder;
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/3/6
  */
-public abstract class BaseActivity<T extends BasePresenter> extends RxAppCompatActivity {
+public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActivity {
 
     private static final String LAYOUT_LINEARLAYOUT = "LinearLayout";
     private static final String LAYOUT_FRAMELAYOUT = "FrameLayout";

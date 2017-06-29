@@ -5,10 +5,10 @@ import android.widget.TextView;
 
 import com.cxh.mvpsample.R;
 import com.cxh.mvpsample.base.BaseFragment;
-import com.cxh.mvpsample.contract.XXXContract;
-import com.cxh.mvpsample.model.api.XXXApi;
-import com.cxh.mvpsample.presenter.XXXPresenter;
-import com.cxh.mvpsample.ui.activity.XXXActivity;
+import com.cxh.mvpsample.contract.UserContract;
+import com.cxh.mvpsample.model.api.UserApi;
+import com.cxh.mvpsample.presenter.UserPresenter;
+import com.cxh.mvpsample.ui.activity.UserActivity;
 import com.cxh.mvpsample.util.GlideUtils;
 
 import javax.inject.Inject;
@@ -19,7 +19,7 @@ import butterknife.BindView;
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/6/12
  */
-public class XXXFragment extends BaseFragment implements XXXContract.View{
+public class UserFragment extends BaseFragment implements UserContract.View{
 
     private static final String ACTION_CODE = "ilovekobebryant";
     private String mPath = "http://7xi8d6.com1.z0.glb.clouddn.com/2017-04-18-17882540_190116561497334_440657494176432128_n.jpg";
@@ -29,15 +29,15 @@ public class XXXFragment extends BaseFragment implements XXXContract.View{
     @BindView(R.id.showImage)
     ImageView mShowImage;
 
-    private XXXPresenter mXXXPresenter;
+    private UserPresenter mUserPresenter;
 
     @Inject
-    public XXXFragment() {
+    public UserFragment() {
     }
 
     @Override
     public int getLayoutID() {
-        return R.layout.fragment_xxx;
+        return R.layout.fragment_user;
     }
 
     @Override
@@ -51,33 +51,33 @@ public class XXXFragment extends BaseFragment implements XXXContract.View{
 
         String action = getActivity().getIntent().getAction();
         if (action != null && action.equals(ACTION_CODE)) {
-            ((XXXActivity) getActivity()).showSnackbar(mFirstTv, "带参数的shortcuts");
+            ((UserActivity) getActivity()).showSnackbar(mFirstTv, "带参数的shortcuts");
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mXXXPresenter.start();
+        mUserPresenter.start();
     }
 
     @Override
-    public void setData(XXXApi.WelcomeEntity data) {
+    public void setData(UserApi.WelcomeEntity data) {
         mFirstTv.setText(data.toString());
     }
 
     @Override
-    public void setPresenter(XXXPresenter presenter) {
-        mXXXPresenter = presenter;
+    public void setPresenter(UserPresenter presenter) {
+        mUserPresenter = presenter;
     }
 
     @Override
     public void showContent() {
-        ((XXXActivity) getActivity()).showContent();
+        ((UserActivity) getActivity()).showContent();
     }
 
     @Override
     public void showError() {
-        ((XXXActivity) getActivity()).showError();
+        ((UserActivity) getActivity()).showError();
     }
 }
