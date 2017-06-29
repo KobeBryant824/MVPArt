@@ -15,12 +15,11 @@ public interface XXXContract {
     interface View extends BaseView<XXXPresenter> {
 
         void setData(XXXApi.WelcomeEntity data);
-
     }
 
     interface Presenter extends BasePresenter {
 
-        void loadData();
+//        void checkUser();
     }
 
 }

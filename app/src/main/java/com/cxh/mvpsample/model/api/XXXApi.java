@@ -1,6 +1,6 @@
 package com.cxh.mvpsample.model.api;
 
-import io.reactivex.Flowable;
+import io.reactivex.Observable;
 import retrofit2.http.POST;
 
 /**
@@ -11,14 +11,9 @@ public interface XXXApi {
 
     // BUG  服务器都用request来解析参数
     @POST("version/detail")
-    Flowable<WelcomeEntity> getWelcomeEntity();
+    Observable<WelcomeEntity> welcomeObservalbe();
 
     public class WelcomeEntity {
-
-        /**
-         * code : 1 msg : 请求成功 data : {"time":"2016-12-12","noUpDate":0,"name":"阳光采购","versionId":"1.2","downUrl":"http://210.51.183.101:8081/group2/M00/00/00/ygcg.apk"}
-         */
-
         private int code;
         private String msg;
         private DataBean data;
@@ -57,14 +52,6 @@ public interface XXXApi {
         }
 
         public static class DataBean {
-            /**
-             * time : 2016-12-12
-             * noUpDate : 0
-             * name : 阳光采购
-             * versionId : 1.2
-             * downUrl : http://210.51.183.101:8081/group2/M00/00/00/ygcg.apk
-             */
-
             private String time;
             private int noUpDate;
             private String name;

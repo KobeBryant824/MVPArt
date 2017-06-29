@@ -22,8 +22,6 @@ public interface BasePresenter<T extends BaseView> {
 
     void attachView(@NonNull T view);
 
-    void subscribe();
-
-    void unSubscribe();
+    void start();
 
 }

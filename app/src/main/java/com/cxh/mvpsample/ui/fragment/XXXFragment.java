@@ -58,13 +58,7 @@ public class XXXFragment extends BaseFragment implements XXXContract.View{
     @Override
     public void onResume() {
         super.onResume();
-        mXXXPresenter.subscribe();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mXXXPresenter.unSubscribe();
+        mXXXPresenter.start();
     }
 
     @Override

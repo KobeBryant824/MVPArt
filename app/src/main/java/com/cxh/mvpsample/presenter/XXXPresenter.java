@@ -1,13 +1,14 @@
 package com.cxh.mvpsample.presenter;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import com.cxh.mvpsample.base.BaseView;
 import com.cxh.mvpsample.contract.XXXContract;
 import com.cxh.mvpsample.listener.OnRequestListener;
-import com.cxh.mvpsample.manager.RxDisposable;
 import com.cxh.mvpsample.model.api.XXXApi;
 import com.cxh.mvpsample.model.repository.XXXRepository;
+import com.cxh.mvpsample.ui.activity.XXXActivity;
 
 import javax.inject.Inject;
 
@@ -19,9 +20,11 @@ public class XXXPresenter implements XXXContract.Presenter {
 
     private XXXRepository mXXXRepository;
     private XXXContract.View mView;
+    private XXXActivity mXXXActivity;
 
     @Inject
-    XXXPresenter() {
+    XXXPresenter(Activity activity) {
+        mXXXActivity = (XXXActivity) activity;
         mXXXRepository = new XXXRepository();
     }
 
@@ -32,13 +35,8 @@ public class XXXPresenter implements XXXContract.Presenter {
     }
 
     @Override
-    public void subscribe() {
-        loadData();
-    }
-
-    @Override
-    public void loadData() {
-        mXXXRepository.requestData(new OnRequestListener<XXXApi.WelcomeEntity>() {
+    public void start() {
+        mXXXRepository.requestData(mXXXActivity, new OnRequestListener<XXXApi.WelcomeEntity>() {
 
             @Override
             public void onSuccess(XXXApi.WelcomeEntity data) {
@@ -53,8 +51,4 @@ public class XXXPresenter implements XXXContract.Presenter {
         });
     }
 
-    @Override
-    public void unSubscribe() {
-        RxDisposable.clear();
-    }
 }

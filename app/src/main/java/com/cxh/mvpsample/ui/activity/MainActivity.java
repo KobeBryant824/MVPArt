@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindString;
 import butterknife.BindView;
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * @author Hai (haigod7[at]gmail[dot]com)
@@ -25,7 +26,6 @@ public class MainActivity extends BaseActivity {
 
     @BindString(R.string.app_name)
     String mAppName;
-
     @BindView(R.id.mvp_btn)
     Button mvpBtn;
 
@@ -73,9 +73,9 @@ public class MainActivity extends BaseActivity {
         mDoubleBackToExitPressedOnce = true;
         Toast.makeText(this, "再次点击退出" + mAppName, Toast.LENGTH_SHORT).show();
 
-        Observable.timer(2, TimeUnit.SECONDS)
-                .compose(bindUntilEvent(ActivityEvent.DESTROY))
+          Disposable subscribe = Observable.timer(2, TimeUnit.SECONDS)
                 .subscribe(aLong -> mDoubleBackToExitPressedOnce = false);
+
     }
 
 }

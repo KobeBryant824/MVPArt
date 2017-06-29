@@ -73,7 +73,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends RxAppCompatA
     public View onCreateView(String name, Context context, AttributeSet attrs) {
         View view = null;
         // 其他用得少请自行引用 autolayoutwidget 库
-
         if (name.equals(LAYOUT_FRAMELAYOUT)) view = new AutoFrameLayout(context, attrs);
 
         if (name.equals(LAYOUT_LINEARLAYOUT)) view = new AutoLinearLayout(context, attrs);
@@ -86,12 +85,12 @@ public abstract class BaseActivity<T extends BasePresenter> extends RxAppCompatA
     @Override
     protected void onResume() {
         super.onResume();
-        if (mPresenter != null) mPresenter.subscribe();
+        if (mPresenter != null) mPresenter.start();
     }
 
     private void RetryEvent() {
         mPageStateManager.showLoading();
-        if (mPresenter != null) mPresenter.subscribe();
+        if (mPresenter != null) mPresenter.start();
     }
 
     public void showContent() {
@@ -108,8 +107,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends RxAppCompatA
         mUnbinder.unbind();
 
         if (useEventBus()) EventBus.getDefault().unregister(this);
-
-        if (mPresenter != null) mPresenter.unSubscribe();
 
         ActivityManager.getInstance().popOneActivity(this);
     }

@@ -4,7 +4,7 @@ import android.widget.FrameLayout;
 
 import com.cxh.mvpsample.R;
 import com.cxh.mvpsample.base.BaseActivity;
-import com.cxh.mvpsample.contract.XXXContract;
+import com.cxh.mvpsample.base.BasePresenter;
 import com.cxh.mvpsample.presenter.XXXPresenter;
 import com.cxh.mvpsample.ui.fragment.XXXFragment;
 import com.cxh.mvpsample.util.ActivityUtils;
@@ -17,11 +17,10 @@ import butterknife.BindView;
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/3/6
  */
-public class XXXActivity extends BaseActivity<XXXContract.Presenter> {
+public class XXXActivity extends BaseActivity {
 
     @BindView(R.id.content)
     FrameLayout mContent;
-
     @Inject
     XXXPresenter mPresenter;
     @Inject
@@ -38,11 +37,10 @@ public class XXXActivity extends BaseActivity<XXXContract.Presenter> {
     }
 
     @Override
-    protected XXXContract.Presenter initPresenter() {
+    protected BasePresenter initPresenter() {
         mPresenter.attachView(mXXXFragment);
-        return mPresenter;
+        return null; // 假如Activity有多个Fragment，让各自Fragment控制presenter
     }
-
 
     @Override
     protected void initViewsAndEvents() {

@@ -1,32 +1,38 @@
 package com.cxh.mvpsample.manager;
 
 
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
 import io.reactivex.FlowableTransformer;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-
+/**
+ * 在RxJava的使用过程中我们会频繁的调用subscribeOn()和observeOn(),通过Transformer结合
+ *
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/3/6
+ */
 public final class RxScheduler {
 
     /**
-     * 在RxJava的使用过程中我们会频繁的调用subscribeOn()和observeOn(),通过Transformer结合
-     * Observable.compose()我们可以复用这些代码
-     *
-     * @return ObservableTransformer
+     * @param activity 控制RxJava随Activity的生命周期
+     * @param <T>
+     * @return
      */
-    public static <T> ObservableTransformer<T,T> schedulersObservableTransformer() {
+    public static <T> ObservableTransformer<T, T> schedulersObservableTransformer(RxAppCompatActivity activity) {
 
-        return upstream -> upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        return upstream -> upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .compose(activity.bindToLifecycle());
     }
 
-    /**
-     *
-     * @return FlowableTransformer
-     */
-    public static <T> FlowableTransformer<T,T> schedulersFlowableTransformer() {
 
-        return upstream -> upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    public static <T> FlowableTransformer<T, T> schedulersFlowableTransformer(RxAppCompatActivity activity) {
+
+        return upstream -> upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .compose(activity.bindToLifecycle());
     }
+
 
 }
