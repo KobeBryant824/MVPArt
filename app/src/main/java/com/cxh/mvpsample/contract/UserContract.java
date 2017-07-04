@@ -1,10 +1,10 @@
 package com.cxh.mvpsample.contract;
 
 
+import com.cxh.mvpsample.base.IModel;
 import com.cxh.mvpsample.base.IPresenter;
 import com.cxh.mvpsample.base.IView;
-import com.cxh.mvpsample.base.IModel;
-import com.cxh.mvpsample.model.api.UserApi;
+import com.cxh.mvpsample.model.entity.WelcomeEntity;
 import com.cxh.mvpsample.presenter.UserPresenter;
 
 /**
@@ -15,7 +15,7 @@ public interface UserContract {
 
     interface View extends IView<UserPresenter> {
 
-        void setData(UserApi.WelcomeEntity data);
+        void setData(WelcomeEntity welcomeEntity);
     }
 
     interface Presenter extends IPresenter {
@@ -23,7 +23,7 @@ public interface UserContract {
 //        void checkUser();
     }
 
-    interface Model extends IModel<UserApi.WelcomeEntity> {
+    interface Model extends IModel<WelcomeEntity> {
 
     }
 }

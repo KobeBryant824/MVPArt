@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import com.cxh.mvpsample.base.IView;
-import com.cxh.mvpsample.contract.UserContract;
 import com.cxh.mvpsample.callback.OnRequestListener;
-import com.cxh.mvpsample.model.api.UserApi;
+import com.cxh.mvpsample.contract.UserContract;
+import com.cxh.mvpsample.model.entity.WelcomeEntity;
 import com.cxh.mvpsample.model.repository.UserRepository;
 import com.cxh.mvpsample.ui.activity.UserActivity;
 
@@ -32,16 +32,17 @@ public class UserPresenter implements UserContract.Presenter {
     public void attachView(@NonNull IView view) {
         mView = (UserContract.View) view;
         mView.setPresenter(this);
+        String name;
     }
 
     @Override
     public void start() {
-        mUserRepository.requestData(mUserActivity, new OnRequestListener<UserApi.WelcomeEntity>() {
+        mUserRepository.requestData(mUserActivity, new OnRequestListener<WelcomeEntity>() {
 
             @Override
-            public void onSuccess(UserApi.WelcomeEntity data) {
+            public void onSuccess(WelcomeEntity welcomeEntity) {
                 mView.showContent();
-                mView.setData(data);
+                mView.setData(welcomeEntity);
             }
 
             @Override

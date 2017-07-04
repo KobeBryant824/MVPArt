@@ -39,6 +39,11 @@ public class FileUtils {
 		return getDir(CACHE_DIR);
 	}
 
+	/** 设置缓存目录 */
+	public static String getCacheDir(String cacheDir) {
+		return getDir(cacheDir);
+	}
+
 	/** 获取icon目录 */
 	public static String getIconDir() {
 		return getDir(ICON_DIR);

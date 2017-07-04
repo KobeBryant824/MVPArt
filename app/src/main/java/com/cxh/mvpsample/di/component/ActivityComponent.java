@@ -20,7 +20,7 @@ import dagger.Component;
 public interface ActivityComponent {
 
     @ContextLife("Activity")
-    Context getActivityContext();
+    Context getContext();
 
     Activity getActivity();
 

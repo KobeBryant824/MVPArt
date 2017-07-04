@@ -14,16 +14,11 @@ import com.cxh.mvpsample.di.component.ActivityComponent;
 import com.cxh.mvpsample.di.component.DaggerActivityComponent;
 import com.cxh.mvpsample.di.moduel.ActivityModule;
 import com.cxh.mvpsample.manager.ActivityManager;
-import com.cxh.mvpsample.model.api.entity.Event;
 import com.hss01248.pagestate.PageManager;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.zhy.autolayout.AutoFrameLayout;
 import com.zhy.autolayout.AutoLinearLayout;
 import com.zhy.autolayout.AutoRelativeLayout;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -52,8 +47,6 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
 
         mUnbinder = ButterKnife.bind(this);
 
-        if (useEventBus()) EventBus.getDefault().register(this);
-
         Bundle extras = getIntent().getExtras();
         if (null != extras) getBundleExtras(extras);
 
@@ -66,7 +59,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
 
         mPresenter = initPresenter();
 
-        initViewsAndEvents();
+        initDataAndEvent();
     }
 
     @Override
@@ -105,8 +98,6 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
-
-        if (useEventBus()) EventBus.getDefault().unregister(this);
 
         ActivityManager.getInstance().popOneActivity(this);
     }
@@ -150,14 +141,6 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
         if (!TextUtils.isEmpty(msg)) Snackbar.make(v, msg, Snackbar.LENGTH_SHORT).show();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void MainEvent(Event event) {
-    }
-
-    public boolean useEventBus() {
-        return true;
-    }
-
     protected void getBundleExtras(Bundle extras) {
     }
 
@@ -167,6 +150,6 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
 
     protected abstract T initPresenter();
 
-    protected abstract void initViewsAndEvents();
+    protected abstract void initDataAndEvent();
 
 }

@@ -6,7 +6,7 @@ import android.widget.TextView;
 import com.cxh.mvpsample.R;
 import com.cxh.mvpsample.base.BaseFragment;
 import com.cxh.mvpsample.contract.UserContract;
-import com.cxh.mvpsample.model.api.UserApi;
+import com.cxh.mvpsample.model.entity.WelcomeEntity;
 import com.cxh.mvpsample.presenter.UserPresenter;
 import com.cxh.mvpsample.ui.activity.UserActivity;
 import com.cxh.mvpsample.util.GlideUtils;
@@ -61,10 +61,7 @@ public class UserFragment extends BaseFragment implements UserContract.View{
         mUserPresenter.start();
     }
 
-    @Override
-    public void setData(UserApi.WelcomeEntity data) {
-        mFirstTv.setText(data.toString());
-    }
+
 
     @Override
     public void setPresenter(UserPresenter presenter) {
@@ -79,5 +76,10 @@ public class UserFragment extends BaseFragment implements UserContract.View{
     @Override
     public void showError() {
         ((UserActivity) getActivity()).showError();
+    }
+
+    @Override
+    public void setData(WelcomeEntity welcomeEntity) {
+        mFirstTv.setText(welcomeEntity.getData().toString());
     }
 }

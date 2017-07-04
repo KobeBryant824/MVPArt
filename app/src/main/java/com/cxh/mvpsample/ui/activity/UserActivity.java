@@ -43,7 +43,7 @@ public class UserActivity extends BaseActivity {
     }
 
     @Override
-    protected void initViewsAndEvents() {
+    protected void initDataAndEvent() {
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), mUserFragment, R.id.content);
     }
 

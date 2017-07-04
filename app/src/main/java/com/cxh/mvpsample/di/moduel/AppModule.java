@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.cxh.mvpsample.di.qualifier.ContextLife;
+import com.cxh.mvpsample.model.repository.Repository;
+import com.cxh.mvpsample.util.SDCardUtils;
 import com.socks.library.KLog;
 
 import java.util.concurrent.TimeUnit;
@@ -16,14 +18,14 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.fastjson.FastJsonConverterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static com.cxh.mvpsample.Constants.BASEURL;
 
 /**
  * @author Hai (haigod7[at]gmail[dot]com)
- *         2017/6/7 15:43
+ *         2017/6/7
  */
 @Module
 public class AppModule {
@@ -54,7 +56,7 @@ public class AppModule {
                 //增加返回值为String的支持
                 .addConverterFactory(ScalarsConverterFactory.create())
                 //增加返回值为Gson的支持(以实体类返回)
-                .addConverterFactory(FastJsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 //增加返回值为Oservable<T>的支持
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
@@ -77,4 +79,13 @@ public class AppModule {
                 .build();
     }
 
+    @Provides
+    @Singleton
+    Repository provideRepository(Retrofit retrofit) {
+        if (SDCardUtils.isSDCardEnable()) {
+            return Repository.init(mApplication.getExternalCacheDir(), retrofit);
+        } else {
+            return Repository.init(mApplication.getCacheDir(), retrofit);
+        }
+    }
 }

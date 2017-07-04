@@ -27,7 +27,6 @@ public final class RxScheduler {
                 .compose(activity.bindToLifecycle());
     }
 
-
     public static <T> FlowableTransformer<T, T> schedulersFlowableTransformer(RxAppCompatActivity activity) {
 
         return upstream -> upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())

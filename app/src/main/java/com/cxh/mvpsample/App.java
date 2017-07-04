@@ -6,15 +6,17 @@ import android.text.format.DateFormat;
 import com.cxh.mvpsample.di.component.AppComponent;
 import com.cxh.mvpsample.di.component.DaggerAppComponent;
 import com.cxh.mvpsample.di.moduel.AppModule;
+import com.cxh.mvpsample.model.repository.Repository;
 import com.cxh.mvpsample.util.FileUtils;
 import com.socks.library.KLog;
 import com.squareup.leakcanary.LeakCanary;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.PrintStream;
 import java.lang.reflect.Field;
 
 import butterknife.BindString;
-import retrofit2.Retrofit;
 
 /**
  * @author Hai (haigod7[at]gmail[dot]com)
@@ -47,6 +49,10 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 
         KLog.init(BuildConfig.DEBUG, mAppName);
 
+        EventBus.builder()
+                .throwSubscriberException(BuildConfig.DEBUG)//只有在debug模式下，会抛出错误异常
+                .installDefaultEventBus();
+
         mAppComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .build();
@@ -59,8 +65,8 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
         return mAppComponent;
     }
 
-    public static Retrofit getRetrofit(){
-        return mAppComponent.getRetrofit();
+    public static Repository getRepository(){
+        return mAppComponent.getRepository();
     }
 
     @Override
