@@ -17,18 +17,18 @@ import retrofit2.Retrofit;
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/6/7
  */
-public class Repository {
+public class RxCacheClient {
 
     private final RxCacheProviders mRxCacheProviders;
     private final RestApi mRestApi;
     private static Retrofit mRetrofit;
 
-    public static Repository init(File cacheDir, Retrofit retrofit) {
+    public static RxCacheClient init(File cacheDir, Retrofit retrofit) {
         mRetrofit = retrofit;
-        return new Repository(cacheDir);
+        return new RxCacheClient(cacheDir);
     }
 
-    private Repository(File cacheDir) {
+    private RxCacheClient(File cacheDir) {
         mRxCacheProviders = new RxCache.Builder()
                 .persistence(cacheDir, new GsonSpeaker())
                 .using(RxCacheProviders.class);

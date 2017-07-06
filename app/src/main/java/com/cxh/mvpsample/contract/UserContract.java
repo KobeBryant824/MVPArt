@@ -18,7 +18,7 @@ public interface UserContract {
         void setData(WelcomeEntity welcomeEntity);
     }
 
-    interface Presenter extends IPresenter {
+    interface Presenter extends IPresenter<View> {
 
 //        void checkUser();
     }

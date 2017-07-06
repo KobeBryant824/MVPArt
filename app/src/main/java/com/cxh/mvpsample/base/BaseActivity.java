@@ -59,7 +59,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
 
         mPresenter = initPresenter();
 
-        initDataAndEvent();
+        initViewsAndEvents();
     }
 
     @Override
@@ -150,6 +150,6 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
 
     protected abstract T initPresenter();
 
-    protected abstract void initDataAndEvent();
+    protected abstract void initViewsAndEvents();
 
 }

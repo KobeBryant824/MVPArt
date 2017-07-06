@@ -6,7 +6,7 @@ import android.text.format.DateFormat;
 import com.cxh.mvpsample.di.component.AppComponent;
 import com.cxh.mvpsample.di.component.DaggerAppComponent;
 import com.cxh.mvpsample.di.moduel.AppModule;
-import com.cxh.mvpsample.model.repository.Repository;
+import com.cxh.mvpsample.model.repository.RxCacheClient;
 import com.cxh.mvpsample.util.FileUtils;
 import com.socks.library.KLog;
 import com.squareup.leakcanary.LeakCanary;
@@ -65,8 +65,8 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
         return mAppComponent;
     }
 
-    public static Repository getRepository(){
-        return mAppComponent.getRepository();
+    public static RxCacheClient getRxCacheClient(){
+        return mAppComponent.getRxCacheClient();
     }
 
     @Override

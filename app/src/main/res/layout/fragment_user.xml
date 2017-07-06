@@ -18,7 +18,7 @@
                 android:id="@+id/showImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/first_tv"
+                android:contentDescription="glide展示"
                 android:layout_marginTop="10dp"/>
 
     </LinearLayout>

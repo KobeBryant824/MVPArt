@@ -3,7 +3,6 @@ package com.cxh.mvpsample.presenter;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import com.cxh.mvpsample.base.IView;
 import com.cxh.mvpsample.callback.OnRequestListener;
 import com.cxh.mvpsample.contract.UserContract;
 import com.cxh.mvpsample.model.entity.WelcomeEntity;
@@ -29,10 +28,9 @@ public class UserPresenter implements UserContract.Presenter {
     }
 
     @Override
-    public void attachView(@NonNull IView view) {
-        mView = (UserContract.View) view;
+    public void attachView(@NonNull UserContract.View view) {
+        mView = view;
         mView.setPresenter(this);
-        String name;
     }
 
     @Override

@@ -21,13 +21,13 @@ public final class RxScheduler {
      * @param <T>
      * @return
      */
-    public static <T> ObservableTransformer<T, T> schedulersObservableTransformer(RxAppCompatActivity activity) {
+    public static <T> ObservableTransformer<T, T> applyObservableSchedulers(RxAppCompatActivity activity) {
 
         return upstream -> upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .compose(activity.bindToLifecycle());
     }
 
-    public static <T> FlowableTransformer<T, T> schedulersFlowableTransformer(RxAppCompatActivity activity) {
+    public static <T> FlowableTransformer<T, T> applyFlowableSchedulers(RxAppCompatActivity activity) {
 
         return upstream -> upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .compose(activity.bindToLifecycle());

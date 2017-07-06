@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.cxh.mvpsample.di.qualifier.ContextLife;
-import com.cxh.mvpsample.model.repository.Repository;
+import com.cxh.mvpsample.model.repository.RxCacheClient;
 import com.cxh.mvpsample.util.SDCardUtils;
 import com.socks.library.KLog;
 
@@ -30,9 +30,9 @@ import static com.cxh.mvpsample.Constants.BASEURL;
 @Module
 public class AppModule {
 
-    public static final long DEFAULT_READ_TIMEOUT_MILLIS = 15 * 1000;
-    public static final long DEFAULT_WRITE_TIMEOUT_MILLIS = 20 * 1000;
-    public static final long DEFAULT_CONNECT_TIMEOUT_MILLIS = 20 * 1000;
+    private static final long DEFAULT_READ_TIMEOUT_MILLIS = 15 * 1000;
+    private static final long DEFAULT_WRITE_TIMEOUT_MILLIS = 20 * 1000;
+    private static final long DEFAULT_CONNECT_TIMEOUT_MILLIS = 20 * 1000;
 
     private Application mApplication;
 
@@ -43,7 +43,7 @@ public class AppModule {
     @Provides
     @Singleton
     @ContextLife
-    public Context provideApplication() {
+    Context provideApplication() {
         return mApplication.getApplicationContext();
     }
 
@@ -81,11 +81,11 @@ public class AppModule {
 
     @Provides
     @Singleton
-    Repository provideRepository(Retrofit retrofit) {
+    RxCacheClient provideRepository(Retrofit retrofit) {
         if (SDCardUtils.isSDCardEnable()) {
-            return Repository.init(mApplication.getExternalCacheDir(), retrofit);
+            return RxCacheClient.init(mApplication.getExternalCacheDir(), retrofit);
         } else {
-            return Repository.init(mApplication.getCacheDir(), retrofit);
+            return RxCacheClient.init(mApplication.getCacheDir(), retrofit);
         }
     }
 }

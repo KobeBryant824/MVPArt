@@ -22,7 +22,6 @@ import butterknife.BindView;
 public class UserFragment extends BaseFragment implements UserContract.View{
 
     private static final String ACTION_CODE = "ilovekobebryant";
-    private String mPath = "http://7xi8d6.com1.z0.glb.clouddn.com/2017-04-18-17882540_190116561497334_440657494176432128_n.jpg";
 
     @BindView(R.id.first_tv)
     TextView mFirstTv;
@@ -47,7 +46,8 @@ public class UserFragment extends BaseFragment implements UserContract.View{
 
     @Override
     protected void initViewsAndEvents() {
-        GlideUtils.loadImage(mPath, mShowImage);
+        String path = "http://7xi8d6.com1.z0.glb.clouddn.com/2017-04-18-17882540_190116561497334_440657494176432128_n.jpg";
+        GlideUtils.loadImage(path, mShowImage);
 
         String action = getActivity().getIntent().getAction();
         if (action != null && action.equals(ACTION_CODE)) {
@@ -60,8 +60,6 @@ public class UserFragment extends BaseFragment implements UserContract.View{
         super.onResume();
         mUserPresenter.start();
     }
-
-
 
     @Override
     public void setPresenter(UserPresenter presenter) {

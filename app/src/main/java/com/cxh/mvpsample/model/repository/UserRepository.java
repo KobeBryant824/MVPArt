@@ -16,8 +16,8 @@ public class UserRepository implements UserContract.Model {
     @Override
     public void requestData(RxAppCompatActivity activity, final OnRequestListener<WelcomeEntity> listener) {
 
-        App.getRepository().getUser(false)
-                .compose(RxScheduler.schedulersObservableTransformer(activity))
+        App.getRxCacheClient().getUser(false)
+                .compose(RxScheduler.applyObservableSchedulers(activity))
                 .subscribe(listener::onSuccess, throwable -> listener.onFailed());
 
     }
