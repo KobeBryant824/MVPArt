@@ -6,7 +6,7 @@ android {
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
     defaultConfig {
-        applicationId "com.cxh.mvpsample"
+        applicationId "com.cxh.mvpart"
 
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
@@ -23,11 +23,11 @@ android {
     }
 
     signingConfigs {
-        mvpsample {
-            storeFile file("keystore.jks")
-            storePassword ""
-            keyAlias ""
-            keyPassword ""
+        release {
+            storeFile file("test123.jks")
+            storePassword "test123"
+            keyAlias "test123"
+            keyPassword "test123"
         }
     }
 
@@ -37,7 +37,7 @@ android {
             zipAlignEnabled true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.mvpsample
+            signingConfig signingConfigs.release
         }
     }
 
@@ -55,7 +55,11 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
 
-    compile project(':autolayoutwidget')
+    compile rootProject.ext.dependencies["support-v4"]
+    compile rootProject.ext.dependencies["appcompat-v7"]
+    compile rootProject.ext.dependencies["recyclerview-v7"]
+    compile rootProject.ext.dependencies["cardview-v7"]
+    compile rootProject.ext.dependencies["design"]
 
     compile 'com.jakewharton:butterknife:8.6.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'

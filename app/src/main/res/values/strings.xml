@@ -1,17 +1,10 @@
 <resources>
-    <string name="app_name">MVP-RxJava</string>
+    <string name="app_name">MVPArt</string>
 
-    <!--shortcuts-->
-    <string name="shortcut_label_add_package">MainActivity</string>
-    <string name="shortcut_label_scan_code">SecondActivity</string>
-    <string name="shortcut_label_search">SecondActivityWithAction</string>
-    <!--shortcuts end-->
+    <!--Label-->
+    <string name="label_main">首页</string>
+    <string name="label_user">用户</string>
 
-    <string name="all">All</string>
-    <string name="on_the_way">On the way</string>
-    <string name="delivered">Delivered</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+
     <string name="toast_hint">提示信息</string>
 </resources>

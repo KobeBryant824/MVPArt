@@ -31,7 +31,6 @@ MVP 与 MVC 最大的不同，其实是 Activity 职责的变化，由原来的 
 
 
 ## Libs
-- [AndroidAutoLayout](https://github.com/hongyangAndroid/AndroidAutoLayout)
 - [PageStateManager](https://github.com/hss01248/PageStateManager)
 - [ButterKnife](https://github.com/JakeWharton/butterknife)
 - [KLog](https://github.com/ZhaoKaiQiang/KLog)

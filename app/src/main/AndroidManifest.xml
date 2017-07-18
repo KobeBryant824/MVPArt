@@ -1,40 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.cxh.mvpsample">
+          package="com.cxh.mvpart">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
-            android:name=".App"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+        android:name="com.cxh.mvpart.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
 
-        <!--UI给的设计基准，按需填入-->
-        <meta-data
-                android:name="design_width"
-                android:value="720"/>
-        <meta-data
-                android:name="design_height"
-                android:value="1280"/>
-
-        <activity android:name=".ui.activity.MainActivity" android:screenOrientation="portrait" >
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:label="@string/label_main"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
-            <!-- app shortcuts with android7.1 -->
-            <meta-data
-                    android:name="android.app.shortcuts"
-                    android:resource="@xml/shortcuts"/>
         </activity>
-        <activity android:name=".ui.activity.UserActivity" android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.activity.UserActivity"
+            android:label="@string/label_user"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
