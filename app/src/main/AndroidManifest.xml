@@ -17,7 +17,6 @@
 
         <activity
             android:name=".ui.activity.MainActivity"
-            android:label="@string/label_main"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -30,6 +29,7 @@
             android:name=".ui.activity.UserActivity"
             android:label="@string/label_user"
             android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

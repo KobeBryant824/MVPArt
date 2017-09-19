@@ -1,11 +1,14 @@
 package com.cxh.mvpart.base;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
+import android.transition.Explode;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.cxh.mvpart.App;
 import com.cxh.mvpart.di.component.ActivityComponent;
@@ -33,6 +36,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutID());
+
         ActivityManager.getInstance().pushOneActivity(this);
 
         mUnbinder = ButterKnife.bind(this);

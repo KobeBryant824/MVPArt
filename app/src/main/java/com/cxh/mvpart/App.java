@@ -17,6 +17,7 @@ import java.io.PrintStream;
 import java.lang.reflect.Field;
 
 import butterknife.BindString;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 /**
  * @author Hai (haigod7[at]gmail[dot]com)
@@ -58,7 +59,6 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
                 .build();
 
 //		Thread.currentThread().setUncaughtExceptionHandler(this); 上线打开
-
     }
 
     public static AppComponent getAppComponent() {

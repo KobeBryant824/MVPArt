@@ -1,6 +1,5 @@
 package com.cxh.mvpart.ui.fragment;
 
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cxh.mvpart.R;
@@ -9,7 +8,7 @@ import com.cxh.mvpart.contract.UserContract;
 import com.cxh.mvpart.model.entity.WelcomeEntity;
 import com.cxh.mvpart.presenter.UserPresenter;
 import com.cxh.mvpart.ui.activity.UserActivity;
-import com.cxh.mvpart.util.GlideUtils;
+import com.sunfusheng.glideimageview.GlideImageView;
 
 import javax.inject.Inject;
 
@@ -26,7 +25,7 @@ public class UserFragment extends BaseFragment implements UserContract.View{
     @BindView(R.id.first_tv)
     TextView mFirstTv;
     @BindView(R.id.showImage)
-    ImageView mShowImage;
+    GlideImageView mShowImage;
 
     private UserPresenter mUserPresenter;
 
@@ -47,7 +46,7 @@ public class UserFragment extends BaseFragment implements UserContract.View{
     @Override
     protected void initViewsAndEvents() {
         String path = "http://7xi8d6.com1.z0.glb.clouddn.com/2017-04-18-17882540_190116561497334_440657494176432128_n.jpg";
-        GlideUtils.loadImage(path, mShowImage);
+        mShowImage.loadImage(path, R.color.colorAccent);
 
         String action = getActivity().getIntent().getAction();
         if (action != null && action.equals(ACTION_CODE)) {
