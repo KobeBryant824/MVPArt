@@ -6,8 +6,8 @@ import android.content.Context;
 import com.cxh.mvpart.di.qualifier.ContextLife;
 import com.cxh.mvpart.di.moduel.ActivityModule;
 import com.cxh.mvpart.di.scope.ActivityScoped;
-import com.cxh.mvpart.ui.activity.UserActivity;
-import com.cxh.mvpart.ui.activity.MainActivity;
+import com.cxh.mvpart.ui.user.UserActivity;
+import com.cxh.mvpart.ui.home.MainActivity;
 
 import dagger.Component;
 

@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">MVPArt</string>
 
-    <!--Label-->
-    <string name="label_user">用户</string>
+    <string name="statelayout_loading">加载中..</string>
 
 
     <string name="toast_hint">提示信息</string>
+
+
 </resources>

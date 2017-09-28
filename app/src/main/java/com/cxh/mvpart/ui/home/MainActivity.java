@@ -1,4 +1,4 @@
-package com.cxh.mvpart.ui.activity;
+package com.cxh.mvpart.ui.home;
 
 import android.widget.Button;
 import android.widget.Toast;
@@ -7,16 +7,14 @@ import com.cxh.mvpart.R;
 import com.cxh.mvpart.base.BaseActivity;
 import com.cxh.mvpart.base.IPresenter;
 import com.cxh.mvpart.manager.ActivityManager;
-import com.jakewharton.rxbinding2.view.RxView;
-import com.socks.library.KLog;
-import com.trello.rxlifecycle2.android.ActivityEvent;
+import com.cxh.mvpart.ui.user.UserActivity;
+import com.cxh.mvpart.ui.user.UserFragment;
 
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindString;
 import butterknife.BindView;
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * @author Hai (haigod7[at]gmail[dot]com)
@@ -30,12 +28,17 @@ public class MainActivity extends BaseActivity {
     Button mvpBtn;
 
     @Override
+    protected boolean displayHomeAsUpEnabled() {
+        return false;
+    }
+
+    @Override
     public int getLayoutID() {
         return R.layout.activity_main;
     }
 
     @Override
-    protected void initDagger() {
+    protected void injectDagger() {
 
     }
 
@@ -45,19 +48,15 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    protected void refreshState() {
+
+    }
+
+    @Override
     protected void initViewsAndEvents() {
+        toolbarTitle.setText(R.string.app_name);
 
-        Observable.timer(2, TimeUnit.SECONDS)
-                .subscribe(aLong -> mPageStateManager.showContent());
-
-        RxView.clicks(mvpBtn)
-                .throttleFirst(2000, TimeUnit.MICROSECONDS)
-                .subscribe(o -> pushPage(UserActivity.class));
-
-        Observable.interval(1, TimeUnit.SECONDS)
-                .doOnDispose(() -> KLog.e("Unsubscribing subscription from onCreate()"))
-                .compose(bindUntilEvent(ActivityEvent.PAUSE))
-                .subscribe(num -> KLog.e("Started in onCreate(), running until onPause(): " + num));
+        mvpBtn.setOnClickListener(v -> pushPage(UserActivity.class));
     }
 
     private boolean mDoubleBackToExitPressedOnce = false;
@@ -73,7 +72,7 @@ public class MainActivity extends BaseActivity {
         mDoubleBackToExitPressedOnce = true;
         Toast.makeText(this, "再次点击退出" + mAppName, Toast.LENGTH_SHORT).show();
 
-          Disposable subscribe = Observable.timer(2, TimeUnit.SECONDS)
+        Observable.timer(2, TimeUnit.SECONDS)
                 .subscribe(aLong -> mDoubleBackToExitPressedOnce = false);
 
     }

@@ -1,12 +1,10 @@
-package com.cxh.mvpart.ui.activity;
+package com.cxh.mvpart.ui.user;
 
 import android.widget.FrameLayout;
 
 import com.cxh.mvpart.R;
 import com.cxh.mvpart.base.BaseActivity;
 import com.cxh.mvpart.base.IPresenter;
-import com.cxh.mvpart.presenter.UserPresenter;
-import com.cxh.mvpart.ui.fragment.UserFragment;
 import com.cxh.mvpart.util.ActivityUtils;
 
 import javax.inject.Inject;
@@ -22,9 +20,9 @@ public class UserActivity extends BaseActivity {
     @BindView(R.id.content)
     FrameLayout mContent;
     @Inject
-    UserPresenter mPresenter;
-    @Inject
     UserFragment mUserFragment;
+    @Inject
+    UserPresenter mPresenter;
 
     @Override
     public int getLayoutID() {
@@ -32,14 +30,19 @@ public class UserActivity extends BaseActivity {
     }
 
     @Override
-    protected void initDagger() {
+    protected void injectDagger() {
         mActivityComponent.inject(this);
     }
 
     @Override
     protected IPresenter initPresenter() {
         mPresenter.attachView(mUserFragment);
-        return null; // 假如Activity有多个Fragment，让各自Fragment控制presenter
+        return null; // 假如Activity有多个Fragment，让各自Fragment控制自己的presenter
+    }
+
+    @Override
+    protected void refreshState() {
+
     }
 
     @Override

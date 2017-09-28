@@ -2,9 +2,8 @@ package com.cxh.mvpart.di.component;
 
 import android.content.Context;
 
-import com.cxh.mvpart.di.qualifier.ContextLife;
 import com.cxh.mvpart.di.moduel.AppModule;
-import com.cxh.mvpart.model.repository.RxCacheClient;
+import com.cxh.mvpart.di.qualifier.ContextLife;
 
 import javax.inject.Singleton;
 
@@ -27,5 +26,4 @@ public interface AppComponent {
 
     OkHttpClient getOkHttpClient();
 
-    RxCacheClient getRxCacheClient();
 }
