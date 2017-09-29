@@ -1,5 +1,5 @@
 ## MVP ##
-![screenshot_1](./images/mvp.png)
+![screenshot_1](./img/mvp.png)
 
 
 ## Thanks ##
