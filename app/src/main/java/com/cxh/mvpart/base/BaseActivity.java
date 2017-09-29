@@ -41,7 +41,7 @@ import butterknife.Unbinder;
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/3/6
  */
-public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActivity implements StateLayout.OnViewRefreshListener {
+public abstract class BaseActivity<P extends IPresenter> extends RxAppCompatActivity implements StateLayout.OnViewRefreshListener {
 
     private static final String LAYOUT_LINEARLAYOUT = "LinearLayout";
     private static final String LAYOUT_FRAMELAYOUT = "FrameLayout";
@@ -53,7 +53,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     private static final String LAYOUT_TABLAYOUT = "android.support.design.widget.TabLayout";
 
     protected ActivityComponent mActivityComponent;
-    private T mPresenter;
+    private P mPresenter;
     private Unbinder unbinder;
 
     private StateLayout stateLayout;
@@ -203,36 +203,36 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
         stateLayout.showTimeoutView();
     }
 
-    protected <K extends Class> void pushPage(Class<K> clazz) {
+    protected <C extends Class> void pushPage(Class<C> clazz) {
         Intent intent = new Intent(this, clazz);
         startActivity(intent);
     }
 
-    protected <K extends Class> void pushPage(Class<K> clazz, Bundle bundle) {
+    protected <C extends Class> void pushPage(Class<C> clazz, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
         if (null != bundle) intent.putExtras(bundle);
         startActivity(intent);
     }
 
-    protected <K extends Class> void pushPageThenKill(Class<K> clazz) {
+    protected <C extends Class> void pushPageThenKill(Class<C> clazz) {
         Intent intent = new Intent(this, clazz);
         startActivity(intent);
         finish();
     }
 
-    protected  <K extends Class> void pushPageThenKill(Class<K> clazz, Bundle bundle) {
+    protected  <C extends Class> void pushPageThenKill(Class<C> clazz, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
         if (null != bundle) intent.putExtras(bundle);
         startActivity(intent);
         finish();
     }
 
-    protected <K extends Class> void pushPageForResult(Class<K> clazz, int requestCode) {
+    protected <C extends Class> void pushPageForResult(Class<C> clazz, int requestCode) {
         Intent intent = new Intent(this, clazz);
         startActivityForResult(intent, requestCode);
     }
 
-    protected <K extends Class> void pushPageForResult(Class<K> clazz, int requestCode, Bundle bundle) {
+    protected <C extends Class> void pushPageForResult(Class<C> clazz, int requestCode, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
         if (null != bundle) intent.putExtras(bundle);
         startActivityForResult(intent, requestCode);
@@ -261,7 +261,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
 
     protected abstract void injectDagger();
 
-    protected abstract T initPresenter();
+    protected abstract P initPresenter();
 
     protected abstract void initViewsAndEvents();
 

@@ -4,12 +4,17 @@ import android.app.Application;
 import android.content.Context;
 
 import com.cxh.mvpart.di.qualifier.ContextLife;
+import com.cxh.mvpart.manager.CacheInterceptor;
+import com.cxh.mvpart.util.SDCardUtils;
 import com.socks.library.KLog;
+
+import java.io.File;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -59,8 +64,17 @@ public class AppModule {
 
         return new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
+                .addNetworkInterceptor(new CacheInterceptor())
+                .cache(getCache())
                 .build();
     }
 
-
+    private Cache getCache() {
+        File cacheFile;
+        if (SDCardUtils.isSDCardEnable())
+            cacheFile = new File(mApplication.getExternalCacheDir().toString(), "cache");
+        else cacheFile = new File(mApplication.getCacheDir().toString(), "cache");
+        int cacheSize = 10 * 1024 * 1024;
+        return new Cache(cacheFile, cacheSize);
+    }
 }

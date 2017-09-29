@@ -3,6 +3,7 @@ package com.cxh.mvpart.ui.home;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.cxh.mvpart.App;
 import com.cxh.mvpart.R;
 import com.cxh.mvpart.base.BaseActivity;
 import com.cxh.mvpart.base.IPresenter;
@@ -56,6 +57,7 @@ public class MainActivity extends BaseActivity {
         toolbarTitle.setText(R.string.app_name);
 
         mvpBtn.setOnClickListener(v -> pushPage(UserActivity.class));
+
     }
 
     private boolean mDoubleBackToExitPressedOnce = false;

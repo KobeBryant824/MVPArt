@@ -12,5 +12,4 @@ public interface RestfulApi {
     @GET("repos/KobeBryant824/MVPArt/stargazers")
     Observable<String> getStargazers();
 
-
 }
