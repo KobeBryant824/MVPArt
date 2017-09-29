@@ -17,15 +17,16 @@ import butterknife.BindView;
  */
 public class UserFragment extends BaseFragment implements UserContract.View {
 
-    @BindView(R.id.first_tv)
-    TextView firstTv;
+    @BindView(R.id.startsTextView)
+    TextView startsTextView;
     @BindView(R.id.showImage)
     ImageView showImage;
 
     private UserPresenter mUserPresenter;
 
     @Inject
-    UserFragment() {}
+    UserFragment() {
+    }
 
     @Override
     public int getLayoutID() {
@@ -59,7 +60,7 @@ public class UserFragment extends BaseFragment implements UserContract.View {
     }
 
     @Override
-    public void setData(String jsonObject) {
-        firstTv.setText(jsonObject);
+    public void setData(String data) {
+        startsTextView.setText(data);
     }
 }

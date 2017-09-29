@@ -12,9 +12,6 @@ import com.cxh.mvpart.R;
 import com.zhy.autolayout.utils.AutoUtils;
 import com.zhy.autolayout.utils.DimenUtils;
 
-/**
- * Created by zhy on 16/3/3.
- */
 public class AutoTabLayout extends TabLayout {
     private static final int NO_VALID = -1;
     private int mTextSize;

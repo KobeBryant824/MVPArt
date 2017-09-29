@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import com.cxh.mvpart.App;
-import com.cxh.mvpart.rx.RxObserver;
+import com.cxh.mvpart.rx.RxFragmentObserver;
 import com.cxh.mvpart.rx.RxScheduler;
 import com.cxh.mvpart.rx.function.HttpResultFunc;
 
@@ -24,7 +24,6 @@ public class UserPresenter implements UserContract.Presenter {
         mUserActivity = (UserActivity) activity;
     }
 
-
     @Override
     public void attachView(@NonNull UserFragment view) {
         mView = view;
@@ -37,17 +36,10 @@ public class UserPresenter implements UserContract.Presenter {
                 .getStargazers()
                 .onErrorResumeNext(new HttpResultFunc<>())
                 .compose(RxScheduler.switchSchedulers(mUserActivity))
-                .subscribe(new RxObserver<String>() {
+                .subscribe(new RxFragmentObserver<String, UserFragment>(mView) {
                     @Override
-                    protected void refreshUI(String jsonObject) {
-                        mView.showContentView();
-                        mView.setData(jsonObject);
-                    }
-
-                    @Override
-                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
-                        super.onError(e);
-                        mView.showErrorView();
+                    protected void refreshUI(String data) {
+                        mView.setData(data);
                     }
                 });
     }

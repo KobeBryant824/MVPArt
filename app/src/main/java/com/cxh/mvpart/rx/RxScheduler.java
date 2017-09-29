@@ -9,8 +9,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 在RxJava的使用过程中我们会频繁的调用subscribeOn()和observeOn(),通过Transformer结合
- *
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/7/21
  */

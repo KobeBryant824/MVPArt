@@ -20,7 +20,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import butterknife.BindString;
-import retrofit2.Retrofit;
 
 /**
  * @author Hai (haigod7[at]gmail[dot]com)

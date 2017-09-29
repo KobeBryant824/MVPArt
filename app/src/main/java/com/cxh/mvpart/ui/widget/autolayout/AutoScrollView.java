@@ -9,9 +9,6 @@ import android.widget.ScrollView;
 import com.zhy.autolayout.AutoLayoutInfo;
 import com.zhy.autolayout.utils.AutoLayoutHelper;
 
-/**
- * Created by jess on 16/4/14.
- */
 public class AutoScrollView extends ScrollView {
     private AutoLayoutHelper mHelper = new AutoLayoutHelper(this);
 

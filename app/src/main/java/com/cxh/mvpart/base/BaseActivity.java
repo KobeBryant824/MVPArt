@@ -78,7 +78,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.setContentView(R.layout.activity_base); // 这句很关键，注意是调用父类的方法
+        super.setContentView(R.layout.activity_base); //这句很关键，注意是调用父类的方法
 
         setContentView(getLayoutID());
 
@@ -203,36 +203,36 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
         stateLayout.showTimeoutView();
     }
 
-    protected void pushPage(Class<?> clazz) {
+    protected <K extends Class> void pushPage(Class<K> clazz) {
         Intent intent = new Intent(this, clazz);
         startActivity(intent);
     }
 
-    protected void pushPage(Class<?> clazz, Bundle bundle) {
+    protected <K extends Class> void pushPage(Class<K> clazz, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
         if (null != bundle) intent.putExtras(bundle);
         startActivity(intent);
     }
 
-    protected void pushPageThenKill(Class<?> clazz) {
+    protected <K extends Class> void pushPageThenKill(Class<K> clazz) {
         Intent intent = new Intent(this, clazz);
         startActivity(intent);
         finish();
     }
 
-    protected void pushPageThenKill(Class<?> clazz, Bundle bundle) {
+    protected  <K extends Class> void pushPageThenKill(Class<K> clazz, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
         if (null != bundle) intent.putExtras(bundle);
         startActivity(intent);
         finish();
     }
 
-    protected void pushPageForResult(Class<?> clazz, int requestCode) {
+    protected <K extends Class> void pushPageForResult(Class<K> clazz, int requestCode) {
         Intent intent = new Intent(this, clazz);
         startActivityForResult(intent, requestCode);
     }
 
-    protected void pushPageForResult(Class<?> clazz, int requestCode, Bundle bundle) {
+    protected <K extends Class> void pushPageForResult(Class<K> clazz, int requestCode, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
         if (null != bundle) intent.putExtras(bundle);
         startActivityForResult(intent, requestCode);
@@ -263,8 +263,8 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
 
     protected abstract T initPresenter();
 
-    protected abstract void refreshState();
-
     protected abstract void initViewsAndEvents();
+
+    protected abstract void refreshState();
 
 }

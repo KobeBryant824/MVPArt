@@ -24,7 +24,7 @@ import butterknife.Unbinder;
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/7/21
  */
-public abstract class BaseFragment extends RxFragment implements StateLayout.OnViewRefreshListener {
+public abstract class BaseFragment extends RxFragment implements  StateLayout.OnViewRefreshListener {
 
     private Unbinder unbinder;
     private StateLayout mStateLayout;
@@ -66,16 +66,16 @@ public abstract class BaseFragment extends RxFragment implements StateLayout.OnV
         return (BaseActivity) getActivity();
     }
 
+    public void showLoginView() {
+        mStateLayout.showLoginView();
+    }
+
     public void showContentView() {
         mStateLayout.showContentView();
     }
 
     public void showErrorView() {
         mStateLayout.showErrorView();
-    }
-
-    public void showLoginView() {
-        mStateLayout.showLoginView();
     }
 
     public void showTimeoutView() {

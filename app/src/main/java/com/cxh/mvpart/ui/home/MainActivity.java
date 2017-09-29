@@ -8,7 +8,6 @@ import com.cxh.mvpart.base.BaseActivity;
 import com.cxh.mvpart.base.IPresenter;
 import com.cxh.mvpart.manager.ActivityManager;
 import com.cxh.mvpart.ui.user.UserActivity;
-import com.cxh.mvpart.ui.user.UserFragment;
 
 import java.util.concurrent.TimeUnit;
 

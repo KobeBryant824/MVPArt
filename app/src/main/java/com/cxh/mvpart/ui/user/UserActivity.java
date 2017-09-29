@@ -37,7 +37,7 @@ public class UserActivity extends BaseActivity {
     @Override
     protected IPresenter initPresenter() {
         mPresenter.attachView(mUserFragment);
-        return null; // 假如Activity有多个Fragment，让各自Fragment控制自己的presenter
+        return null; //假如Activity有多个Fragment，让各自Fragment控制自己的presenter
     }
 
     @Override

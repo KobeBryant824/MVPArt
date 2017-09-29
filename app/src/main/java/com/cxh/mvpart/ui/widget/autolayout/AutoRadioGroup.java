@@ -8,9 +8,6 @@ import android.widget.RadioGroup;
 import com.zhy.autolayout.AutoLayoutInfo;
 import com.zhy.autolayout.utils.AutoLayoutHelper;
 
-/**
- * Created by hupei on 2016/2/29 9:59.
- */
 public class AutoRadioGroup extends RadioGroup {
     private AutoLayoutHelper mHelper = new AutoLayoutHelper(this);
 

@@ -2,6 +2,7 @@ package com.cxh.mvpart.rx;
 
 
 import com.cxh.mvpart.Constant;
+import com.cxh.mvpart.base.BaseFragment;
 import com.cxh.mvpart.rx.exception.ApiException;
 import com.cxh.mvpart.rx.exception.ERROR;
 import com.cxh.mvpart.util.ToastUtils;
@@ -14,7 +15,16 @@ import io.reactivex.disposables.Disposable;
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/8/31
  */
-public abstract class RxObserver<T> implements Observer<T> {
+public abstract class RxFragmentObserver<T, K extends BaseFragment> implements Observer<T> {
+    private K k;
+
+    public RxFragmentObserver() {
+
+    }
+
+    protected RxFragmentObserver(K k) {
+        this.k = k;
+    }
 
     @Override
     public void onSubscribe(@NonNull Disposable d) {
@@ -23,11 +33,16 @@ public abstract class RxObserver<T> implements Observer<T> {
 
     @Override
     public void onNext(@NonNull T t) {
+        if (null != k)
+            k.showContentView();
         refreshUI(t);
     }
 
     @Override
     public void onError(@NonNull Throwable e) {
+        if (null != k)
+            k.showErrorView();
+
         if (e instanceof ApiException) {
             onError((ApiException) e);
         } else {
