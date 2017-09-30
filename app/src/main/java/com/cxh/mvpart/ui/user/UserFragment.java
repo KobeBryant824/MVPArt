@@ -34,10 +34,6 @@ public class UserFragment extends BaseFragment implements UserContract.View {
     }
 
     @Override
-    protected void injectDagger() {
-    }
-
-    @Override
     protected void initViewsAndEvents() {
         String path = "http://7xi8d6.com1.z0.glb.clouddn.com/2017-04-18-17882540_190116561497334_440657494176432128_n.jpg";
         GlideUtils.loadImage(path, showImage);

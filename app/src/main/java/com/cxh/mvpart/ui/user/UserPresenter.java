@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 
 import com.cxh.mvpart.App;
+import com.cxh.mvpart.di.component.DaggerActivityComponent;
+import com.cxh.mvpart.di.moduel.ActivityModule;
 import com.cxh.mvpart.rx.RxFragmentObserver;
 import com.cxh.mvpart.rx.RxScheduler;
 import com.cxh.mvpart.rx.function.HttpResultFunc;
@@ -22,10 +24,18 @@ public class UserPresenter implements UserContract.Presenter {
     @Inject
     UserPresenter(Activity activity) {
         mUserActivity = (UserActivity) activity;
+
+//        DaggerActivityComponent.builder()
+//                .appComponent(App.getAppComponent())
+//                .activityModule(new ActivityModule(activity))
+//                .build()
+//                .presenterComponent()
+//                .inject(this);
+
     }
 
     @Override
-    public void attachView(@NonNull UserFragment view) {
+    public void attachView(UserFragment view) {
         mView = view;
         mView.setPresenter(this);
     }

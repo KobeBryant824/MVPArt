@@ -10,6 +10,7 @@ import com.cxh.mvpart.ui.user.UserActivity;
 import com.cxh.mvpart.ui.home.MainActivity;
 
 import dagger.Component;
+import dagger.Subcomponent;
 
 /**
  * @author Hai (haigod7[at]gmail[dot]com)
@@ -27,5 +28,7 @@ public interface ActivityComponent {
     void inject(MainActivity activity);
 
     void inject(UserActivity activity);
+
+    PresenterComponent presenterComponent();//也负责Fragment的Component管理
 
 }

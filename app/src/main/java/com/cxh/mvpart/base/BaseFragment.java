@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cxh.mvpart.R;
-import com.cxh.mvpart.di.component.DaggerFragmentComponent;
-import com.cxh.mvpart.di.component.FragmentComponent;
 import com.fingdo.statelayout.StateLayout;
 import com.socks.library.KLog;
 import com.trello.rxlifecycle2.components.support.RxFragment;
@@ -28,7 +26,6 @@ public abstract class BaseFragment extends RxFragment implements  StateLayout.On
 
     private Unbinder unbinder;
     private StateLayout mStateLayout;
-    protected FragmentComponent mFragmentComponent;
 
     @Nullable
     @Override
@@ -42,11 +39,6 @@ public abstract class BaseFragment extends RxFragment implements  StateLayout.On
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (isUseEventBus()) EventBus.getDefault().register(this);
-
-        mFragmentComponent = DaggerFragmentComponent.builder()
-                .activityComponent(getBaseActivity().mActivityComponent)
-                .build();
-        injectDagger();
 
         setupStateLayout(view);
 
@@ -115,8 +107,6 @@ public abstract class BaseFragment extends RxFragment implements  StateLayout.On
     }
 
     protected abstract int getLayoutID();
-
-    protected abstract void injectDagger();
 
     protected abstract void initViewsAndEvents();
 

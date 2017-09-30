@@ -16,11 +16,9 @@
 
 package com.cxh.mvpart.base;
 
-import android.support.annotation.NonNull;
-
 public interface IPresenter<T extends IView> {
 
-    void attachView(@NonNull T view);
+    void attachView(T view);//P 需要 V
 
     void start();
 

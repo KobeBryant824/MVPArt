@@ -18,6 +18,6 @@ package com.cxh.mvpart.base;
 
 public interface IView<T extends IPresenter> {
 
-    void setPresenter(T presenter);
+    void setPresenter(T presenter); //主要是Fragment需要P
 
 }
