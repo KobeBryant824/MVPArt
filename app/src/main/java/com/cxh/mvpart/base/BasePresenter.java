@@ -16,10 +16,18 @@
 
 package com.cxh.mvpart.base;
 
-public interface IPresenter<T extends IView> {
+public interface BasePresenter<T extends BaseView> {
 
-    void attachView(T view);//P 需要 V
+    /**
+     * Binds presenter with a view when resumed. The Presenter will perform initialization here.
+     *
+     * @param view the view associated with this presenter
+     */
+    void takeView(T view);
 
-    void start();
+    /**
+     * Drops the reference to the view when destroyed
+     */
+    void dropView();
 
 }

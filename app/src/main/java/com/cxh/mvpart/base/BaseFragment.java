@@ -1,8 +1,10 @@
 package com.cxh.mvpart.base;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +17,37 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.AndroidSupportInjection;
+import dagger.android.support.HasSupportFragmentInjector;
 
 /**
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/7/21
  */
-public abstract class BaseFragment extends RxFragment implements  StateLayout.OnViewRefreshListener {
+public abstract class BaseFragment extends RxFragment implements StateLayout.OnViewRefreshListener, HasSupportFragmentInjector {
 
     private Unbinder unbinder;
     private StateLayout mStateLayout;
+
+    @Inject
+    DispatchingAndroidInjector<Fragment> childFragmentInjector;
+
+    @Override
+    public void onAttach(Context context) {
+        if (isInject()) AndroidSupportInjection.inject(this);
+        super.onAttach(context);
+    }
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return childFragmentInjector;
+    }
 
     @Nullable
     @Override
@@ -95,6 +117,10 @@ public abstract class BaseFragment extends RxFragment implements  StateLayout.On
         if (isUnbind()) unbinder.unbind();
 
         if (isUseEventBus()) EventBus.getDefault().unregister(this);
+    }
+
+    protected boolean isInject() {
+        return true;
     }
 
     public boolean isUnbind() {

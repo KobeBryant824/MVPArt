@@ -5,9 +5,9 @@ import android.widget.Toast;
 
 import com.cxh.mvpart.R;
 import com.cxh.mvpart.base.BaseActivity;
-import com.cxh.mvpart.base.IPresenter;
 import com.cxh.mvpart.manager.ActivityManager;
 import com.cxh.mvpart.ui.user.UserActivity;
+import com.socks.library.KLog;
 
 import java.util.concurrent.TimeUnit;
 
@@ -27,6 +27,11 @@ public class MainActivity extends BaseActivity {
     Button mvpBtn;
 
     @Override
+    protected boolean isInject() {
+        return false;
+    }
+
+    @Override
     protected boolean displayHomeAsUpEnabled() {
         return false;
     }
@@ -34,16 +39,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public int getLayoutID() {
         return R.layout.activity_main;
-    }
-
-    @Override
-    protected void injectDagger() {
-
-    }
-
-    @Override
-    protected IPresenter initPresenter() {
-        return null;
     }
 
     @Override
@@ -68,7 +63,6 @@ public class MainActivity extends BaseActivity {
             ActivityManager.getInstance().appExit();
             return;
         }
-
         mDoubleBackToExitPressedOnce = true;
         Toast.makeText(this, "再次点击退出" + mAppName, Toast.LENGTH_SHORT).show();
 

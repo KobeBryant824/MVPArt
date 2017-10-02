@@ -1,11 +1,6 @@
 package com.cxh.mvpart.ui.user;
 
-import android.app.Activity;
-import android.support.annotation.NonNull;
-
-import com.cxh.mvpart.App;
-import com.cxh.mvpart.di.component.DaggerActivityComponent;
-import com.cxh.mvpart.di.moduel.ActivityModule;
+import com.cxh.mvpart.RestfulApi;
 import com.cxh.mvpart.rx.RxFragmentObserver;
 import com.cxh.mvpart.rx.RxScheduler;
 import com.cxh.mvpart.rx.function.HttpResultFunc;
@@ -19,39 +14,38 @@ import javax.inject.Inject;
 public class UserPresenter implements UserContract.Presenter {
 
     private UserActivity mUserActivity;
-    private UserFragment mView;
+    private UserContract.View mUserFragment;
+    private RestfulApi mRestfulApi;
 
     @Inject
-    UserPresenter(Activity activity) {
-        mUserActivity = (UserActivity) activity;
-
-//        DaggerActivityComponent.builder()
-//                .appComponent(App.getAppComponent())
-//                .activityModule(new ActivityModule(activity))
-//                .build()
-//                .presenterComponent()
-//                .inject(this);
-
+    UserPresenter(UserActivity activity, RestfulApi restfulApi) {
+        mUserActivity = activity;
+        mRestfulApi = restfulApi;
     }
 
     @Override
-    public void attachView(UserFragment view) {
-        mView = view;
-        mView.setPresenter(this);
+    public void takeView(UserContract.View view) {
+        mUserFragment = view;
+
+        loadData();
     }
 
     @Override
-    public void start() {
-        App.RestfulApi()
+    public void dropView() {
+        mUserFragment = null;
+    }
+
+    private void loadData() {
+        mRestfulApi
                 .getStargazers()
                 .onErrorResumeNext(new HttpResultFunc<>())
                 .compose(RxScheduler.switchSchedulers(mUserActivity))
-                .subscribe(new RxFragmentObserver<String, UserFragment>(mView) {
+                .subscribe(new RxFragmentObserver<String, UserFragment>() {
                     @Override
                     protected void refreshUI(String data) {
-                        mView.setData(data);
+                        mUserActivity.showContentView();
+                        mUserFragment.setData(data);
                     }
                 });
     }
-
 }

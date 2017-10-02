@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -13,11 +14,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.cxh.mvpart.App;
 import com.cxh.mvpart.R;
-import com.cxh.mvpart.di.component.ActivityComponent;
-import com.cxh.mvpart.di.component.DaggerActivityComponent;
-import com.cxh.mvpart.di.moduel.ActivityModule;
 import com.cxh.mvpart.manager.ActivityManager;
 import com.cxh.mvpart.ui.widget.autolayout.AutoCardView;
 import com.cxh.mvpart.ui.widget.autolayout.AutoRadioGroup;
@@ -34,14 +31,23 @@ import com.zhy.autolayout.AutoRelativeLayout;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasFragmentInjector;
+import dagger.android.support.HasSupportFragmentInjector;
+import dagger.internal.Beta;
 
 /**
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/3/6
  */
-public abstract class BaseActivity<P extends IPresenter> extends RxAppCompatActivity implements StateLayout.OnViewRefreshListener {
+@Beta
+public abstract class BaseActivity extends RxAppCompatActivity implements StateLayout.OnViewRefreshListener, HasFragmentInjector, HasSupportFragmentInjector {
 
     private static final String LAYOUT_LINEARLAYOUT = "LinearLayout";
     private static final String LAYOUT_FRAMELAYOUT = "FrameLayout";
@@ -52,13 +58,26 @@ public abstract class BaseActivity<P extends IPresenter> extends RxAppCompatActi
     private static final String LAYOUT_TOOLBAR = "android.support.v7.widget.Toolbar";
     private static final String LAYOUT_TABLAYOUT = "android.support.design.widget.TabLayout";
 
-    protected ActivityComponent mActivityComponent;
-    private P mPresenter;
     private Unbinder unbinder;
 
     private StateLayout stateLayout;
     public Toolbar toolbar;
     public TextView toolbarTitle;
+
+    @Inject
+    DispatchingAndroidInjector<Fragment> supportFragmentInjector;
+    @Inject
+    DispatchingAndroidInjector<android.app.Fragment> frameworkFragmentInjector;
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return supportFragmentInjector;
+    }
+
+    @Override
+    public AndroidInjector<android.app.Fragment> fragmentInjector() {
+        return frameworkFragmentInjector;
+    }
 
     @Override
     public void setContentView(int layoutId) {
@@ -77,6 +96,8 @@ public abstract class BaseActivity<P extends IPresenter> extends RxAppCompatActi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (isInject())  AndroidInjection.inject(this);
+
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_base); //这句很关键，注意是调用父类的方法
 
@@ -90,14 +111,6 @@ public abstract class BaseActivity<P extends IPresenter> extends RxAppCompatActi
         if (null != extras) getBundleExtras(extras);
 
         if (isUseEventBus()) EventBus.getDefault().register(this);
-
-        mActivityComponent = DaggerActivityComponent.builder()
-                .appComponent(App.getAppComponent())
-                .activityModule(new ActivityModule(this))
-                .build();
-        injectDagger();
-
-        mPresenter = initPresenter();
 
         setupStateLayout();
 
@@ -150,12 +163,6 @@ public abstract class BaseActivity<P extends IPresenter> extends RxAppCompatActi
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (mPresenter != null) mPresenter.start();
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
@@ -203,36 +210,36 @@ public abstract class BaseActivity<P extends IPresenter> extends RxAppCompatActi
         stateLayout.showTimeoutView();
     }
 
-    protected <C extends Class> void pushPage(Class<C> clazz) {
+    protected void pushPage(Class<?> clazz) {
         Intent intent = new Intent(this, clazz);
         startActivity(intent);
     }
 
-    protected <C extends Class> void pushPage(Class<C> clazz, Bundle bundle) {
+    protected void pushPage(Class<?> clazz, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
         if (null != bundle) intent.putExtras(bundle);
         startActivity(intent);
     }
 
-    protected <C extends Class> void pushPageThenKill(Class<C> clazz) {
+    protected void pushPageThenKill(Class<?> clazz) {
         Intent intent = new Intent(this, clazz);
         startActivity(intent);
         finish();
     }
 
-    protected  <C extends Class> void pushPageThenKill(Class<C> clazz, Bundle bundle) {
+    protected void pushPageThenKill(Class<?> clazz, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
         if (null != bundle) intent.putExtras(bundle);
         startActivity(intent);
         finish();
     }
 
-    protected <C extends Class> void pushPageForResult(Class<C> clazz, int requestCode) {
+    protected void pushPageForResult(Class<?> clazz, int requestCode) {
         Intent intent = new Intent(this, clazz);
         startActivityForResult(intent, requestCode);
     }
 
-    protected <C extends Class> void pushPageForResult(Class<C> clazz, int requestCode, Bundle bundle) {
+    protected void pushPageForResult(Class<?> clazz, int requestCode, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
         if (null != bundle) intent.putExtras(bundle);
         startActivityForResult(intent, requestCode);
@@ -245,7 +252,15 @@ public abstract class BaseActivity<P extends IPresenter> extends RxAppCompatActi
     protected void getBundleExtras(Bundle extras) {
     }
 
+    protected boolean isInject() {
+        return true;
+    }
+
     protected boolean isUseDefaultToolbar() {
+        return true;
+    }
+
+    protected boolean displayHomeAsUpEnabled() {
         return true;
     }
 
@@ -253,15 +268,7 @@ public abstract class BaseActivity<P extends IPresenter> extends RxAppCompatActi
         return false;
     }
 
-    protected boolean displayHomeAsUpEnabled() {
-        return true;
-    }
-
     protected abstract int getLayoutID();
-
-    protected abstract void injectDagger();
-
-    protected abstract P initPresenter();
 
     protected abstract void initViewsAndEvents();
 

@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.cxh.mvpart.R;
 import com.cxh.mvpart.base.BaseFragment;
+import com.cxh.mvpart.di.ActivityScoped;
 import com.cxh.mvpart.util.GlideUtils;
 
 import javax.inject.Inject;
@@ -15,6 +16,7 @@ import butterknife.BindView;
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/6/12
  */
+@ActivityScoped
 public class UserFragment extends BaseFragment implements UserContract.View {
 
     @BindView(R.id.startsTextView)
@@ -22,7 +24,8 @@ public class UserFragment extends BaseFragment implements UserContract.View {
     @BindView(R.id.showImage)
     ImageView showImage;
 
-    private UserPresenter mUserPresenter;
+    @Inject
+    UserPresenter mUserPresenter;
 
     @Inject
     UserFragment() {
@@ -41,22 +44,23 @@ public class UserFragment extends BaseFragment implements UserContract.View {
 
     @Override
     protected void refreshState() {
-        mUserPresenter.start();
+        mUserPresenter.takeView(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mUserPresenter.start();
+        mUserPresenter.takeView(this);
     }
 
     @Override
-    public void setPresenter(UserPresenter presenter) {
-        mUserPresenter = presenter;
+    public void onPause() {
+        mUserPresenter.dropView();
+        super.onPause();
     }
 
     @Override
-    public void setData(String data) {
-        startsTextView.setText(data);
+    public void setData(Object data) {
+        startsTextView.setText((String) data);
     }
 }

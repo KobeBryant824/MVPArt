@@ -1,4 +1,4 @@
-package com.cxh.mvpart.di.scope;
+package com.cxh.mvpart.di;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

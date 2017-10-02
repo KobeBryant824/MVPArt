@@ -1,13 +1,10 @@
 package com.cxh.mvpart;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.text.format.DateFormat;
 
-import com.cxh.mvpart.di.component.AppComponent;
-import com.cxh.mvpart.di.component.DaggerAppComponent;
-import com.cxh.mvpart.di.moduel.AppModule;
+import com.cxh.mvpart.di.DaggerAppComponent;
 import com.cxh.mvpart.util.FileUtils;
 import com.socks.library.KLog;
 import com.squareup.leakcanary.LeakCanary;
@@ -20,19 +17,19 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import butterknife.BindString;
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
 
 /**
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/3/6
  */
-public class App extends Application implements Thread.UncaughtExceptionHandler {
+public class App extends DaggerApplication implements Thread.UncaughtExceptionHandler {
 
     @BindString(R.string.app_name)
     String mAppName;
 
     private static App mInstance;
-    private static AppComponent mAppComponent;
-    private static RestfulApi sRestfulApi;
 
     public static App getInstance() {
         return mInstance;
@@ -61,19 +58,11 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 
         if (!Constant.BUILD) Thread.currentThread().setUncaughtExceptionHandler(this);
 
-        mAppComponent = DaggerAppComponent.builder()
-                .appModule(new AppModule(this))
-                .build();
-
     }
 
-    public static AppComponent getAppComponent() {
-        return mAppComponent;
-    }
-
-    public static RestfulApi RestfulApi() {
-        if (null == sRestfulApi) sRestfulApi = mAppComponent.getRetrofit().create(RestfulApi.class);
-        return sRestfulApi;
+    @Override
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        return DaggerAppComponent.builder().create(this);
     }
 
     @Override
