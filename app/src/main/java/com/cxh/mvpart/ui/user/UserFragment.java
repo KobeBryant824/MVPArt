@@ -38,7 +38,7 @@ public class UserFragment extends BaseFragment implements UserContract.View {
 
     @Override
     protected void initViewsAndEvents() {
-        String path = "http://7xi8d6.com1.z0.glb.clouddn.com/2017-04-18-17882540_190116561497334_440657494176432128_n.jpg";
+        String path = "https://avatars0.githubusercontent.com/u/13111493?v=4&s=460";
         GlideUtils.loadImage(path, showImage);
     }
 

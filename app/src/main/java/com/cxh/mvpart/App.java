@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
 
 import butterknife.BindString;
 import dagger.android.AndroidInjector;
-import dagger.android.DaggerApplication;
+import dagger.android.support.DaggerApplication;
 
 /**
  * @author Hai (haigod7[at]gmail[dot]com)
