@@ -21,7 +21,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
 
 /**
- * @author Hai (haigod7[at]gmail[dot]com)
+ * @author A-Hai (haigod7[at]gmail[dot]com)
  *         2017/3/6
  */
 public class App extends DaggerApplication implements Thread.UncaughtExceptionHandler {
@@ -47,7 +47,7 @@ public class App extends DaggerApplication implements Thread.UncaughtExceptionHa
 
         mInstance = this;
 
-        KLog.init(Constant.BUILD, "mtcispdoctor");
+        KLog.init(Constant.BUILD, getString(R.string.app_name));
 
         if (!checkDeviceHasNavigationBar(this))
             AutoLayoutConifg.getInstance().useDeviceSize();//拿设备的物理高度(状态栏+导航栏)进行百分比化

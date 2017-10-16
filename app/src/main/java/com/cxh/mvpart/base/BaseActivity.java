@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.cxh.mvpart.R;
 import com.cxh.mvpart.manager.ActivityManager;
 import com.cxh.mvpart.ui.widget.autolayout.AutoCardView;
+import com.cxh.mvpart.ui.widget.autolayout.AutoConstraintLayout;
 import com.cxh.mvpart.ui.widget.autolayout.AutoRadioGroup;
 import com.cxh.mvpart.ui.widget.autolayout.AutoScrollView;
 import com.cxh.mvpart.ui.widget.autolayout.AutoTabLayout;
@@ -40,14 +41,13 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasFragmentInjector;
 import dagger.android.support.HasSupportFragmentInjector;
-import dagger.internal.Beta;
 
 /**
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/3/6
  */
-@Beta
-public abstract class BaseActivity extends RxAppCompatActivity implements StateLayout.OnViewRefreshListener, HasFragmentInjector, HasSupportFragmentInjector {
+public abstract class BaseActivity extends RxAppCompatActivity implements StateLayout.OnViewRefreshListener,
+        HasFragmentInjector, HasSupportFragmentInjector {
 
     private static final String LAYOUT_LINEARLAYOUT = "LinearLayout";
     private static final String LAYOUT_FRAMELAYOUT = "FrameLayout";
@@ -57,6 +57,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements StateL
     private static final String LAYOUT_CARDVIEW = "android.support.v7.widget.CardView";
     private static final String LAYOUT_TOOLBAR = "android.support.v7.widget.Toolbar";
     private static final String LAYOUT_TABLAYOUT = "android.support.design.widget.TabLayout";
+    private static final String LAYOUT_CONSTRAINTLAYOUT = "android.support.constraint.ConstraintLayout";
 
     private Unbinder unbinder;
 
@@ -135,6 +136,8 @@ public abstract class BaseActivity extends RxAppCompatActivity implements StateL
         if (name.equals(LAYOUT_SCROLLVIEW)) view = new AutoScrollView(context, attrs);
 
         if (name.equals(LAYOUT_TABLAYOUT)) view = new AutoTabLayout(context, attrs);
+
+        if (name.equals(LAYOUT_CONSTRAINTLAYOUT)) view = new AutoConstraintLayout(context, attrs);
 
         if (view != null) return view;
 
