@@ -1,5 +1,6 @@
 package com.cxh.mvpart.ui.home;
 
+import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -7,12 +8,12 @@ import com.cxh.mvpart.R;
 import com.cxh.mvpart.base.BaseActivity;
 import com.cxh.mvpart.manager.ActivityManager;
 import com.cxh.mvpart.ui.user.UserActivity;
-import com.socks.library.KLog;
 
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindString;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.reactivex.Observable;
 
 /**
@@ -71,4 +72,10 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -88,7 +89,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements StateL
     @Override
     public void setContentView(View view) {
         LinearLayout rootLayout = findViewById(R.id.rootLayout);
-        LinearLayout toolbarLayout = findViewById(R.id.toolbarLayout);
+        FrameLayout toolbarLayout = findViewById(R.id.toolbarLayout);
         if (isUseDefaultToolbar()) setupToolbar();
         else toolbarLayout.setVisibility(View.GONE);
 
