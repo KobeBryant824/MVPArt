@@ -1,6 +1,5 @@
 package com.cxh.mvpart.ui.home;
 
-import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -13,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindString;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.Observable;
 
 /**
@@ -72,10 +70,4 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }
