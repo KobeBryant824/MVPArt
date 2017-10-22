@@ -7,6 +7,7 @@ import com.cxh.mvpart.R;
 import com.cxh.mvpart.base.BaseActivity;
 import com.cxh.mvpart.manager.ActivityManager;
 import com.cxh.mvpart.ui.user.UserActivity;
+import com.cxh.mvpart.ui.widget.CustomPopupWindow;
 
 import java.util.concurrent.TimeUnit;
 

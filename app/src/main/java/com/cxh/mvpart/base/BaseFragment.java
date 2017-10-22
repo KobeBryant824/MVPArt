@@ -33,7 +33,7 @@ import dagger.android.support.HasSupportFragmentInjector;
 public abstract class BaseFragment extends RxFragment implements StateLayout.OnViewRefreshListener, HasSupportFragmentInjector {
 
     private Unbinder unbinder;
-    private StateLayout mStateLayout;
+    private StateLayout stateLayout;
 
     @Inject
     DispatchingAndroidInjector<Fragment> childFragmentInjector;
@@ -68,12 +68,12 @@ public abstract class BaseFragment extends RxFragment implements StateLayout.OnV
     }
 
     private void setupStateLayout(View view) {
-        mStateLayout = view.findViewById(R.id.stateLayout);
-        if (mStateLayout == null) return;
-        mStateLayout.setUseAnimation(false);
-        mStateLayout.setTipText(5, getString(R.string.statelayout_loading));
-        mStateLayout.setRefreshListener(this);
-        mStateLayout.showLoadingView();
+        stateLayout = view.findViewById(R.id.stateLayout);
+        if (stateLayout == null) return;
+        stateLayout.setUseAnimation(false);
+        stateLayout.setTipText(5, getString(R.string.statelayout_loading));
+        stateLayout.setRefreshListener(this);
+        stateLayout.showLoadingView();
     }
 
     public BaseActivity getBaseActivity() {
@@ -81,24 +81,24 @@ public abstract class BaseFragment extends RxFragment implements StateLayout.OnV
     }
 
     public void showLoginView() {
-        mStateLayout.showLoginView();
+        stateLayout.showLoginView();
     }
 
     public void showContentView() {
-        mStateLayout.showContentView();
+        stateLayout.showContentView();
     }
 
     public void showErrorView() {
-        mStateLayout.showErrorView();
+        stateLayout.showErrorView();
     }
 
     public void showTimeoutView() {
-        mStateLayout.showTimeoutView();
+        stateLayout.showTimeoutView();
     }
 
     @Override
     public void refreshClick() {
-        mStateLayout.showLoadingView();
+        stateLayout.showLoadingView();
         refreshState();
     }
 
@@ -108,15 +108,14 @@ public abstract class BaseFragment extends RxFragment implements StateLayout.OnV
 
     @Subscribe
     public void onEvent(String event) {
-        KLog.e();
+        KLog.e(event);
     }
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         if (isUnbind()) unbinder.unbind();
-
         if (isUseEventBus()) EventBus.getDefault().unregister(this);
+        super.onDestroyView();
     }
 
     protected boolean isInject() {

@@ -1,6 +1,5 @@
 package com.cxh.mvpart.rx;
 
-
 import com.cxh.mvpart.Constant;
 import com.cxh.mvpart.base.BaseFragment;
 import com.cxh.mvpart.rx.exception.ApiException;
@@ -19,7 +18,6 @@ public abstract class RxFragmentObserver<T, K extends BaseFragment> implements O
     private K k;
 
     public RxFragmentObserver() {
-
     }
 
     protected RxFragmentObserver(K k) {

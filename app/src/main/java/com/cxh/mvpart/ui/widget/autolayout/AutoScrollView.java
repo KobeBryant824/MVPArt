@@ -31,23 +31,15 @@ public class AutoScrollView extends ScrollView {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
-
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-    }
-
-
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new AutoScrollView.LayoutParams(getContext(), attrs);
     }
 
-
     public static class LayoutParams extends ScrollView.LayoutParams implements AutoLayoutHelper.AutoLayoutParams {
         private AutoLayoutInfo mAutoLayoutInfo;
 
-        public LayoutParams(Context c, AttributeSet attrs) {
+        LayoutParams(Context c, AttributeSet attrs) {
             super(c, attrs);
             mAutoLayoutInfo = AutoLayoutHelper.getAutoLayoutInfo(c, attrs);
         }
@@ -57,11 +49,9 @@ public class AutoScrollView extends ScrollView {
             return mAutoLayoutInfo;
         }
 
-
         public LayoutParams(int width, int height) {
             super(width, height);
         }
-
 
         public LayoutParams(ViewGroup.LayoutParams source) {
             super(source);

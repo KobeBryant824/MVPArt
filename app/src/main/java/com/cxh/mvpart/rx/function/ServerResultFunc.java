@@ -1,7 +1,5 @@
 package com.cxh.mvpart.rx.function;
 
-
-
 import com.cxh.mvpart.base.Result;
 import com.cxh.mvpart.rx.exception.ServerException;
 

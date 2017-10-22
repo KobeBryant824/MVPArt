@@ -9,7 +9,10 @@ import android.view.View;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.PopupWindow;
 
-
+/**
+ * @author Hai (haigod7[at]gmail[dot]com)
+ *         2017/3/6
+ */
 public class CustomPopupWindow extends PopupWindow {
     private View mContentView;
     private View mParentView;
@@ -21,19 +24,15 @@ public class CustomPopupWindow extends PopupWindow {
     private boolean isWrap;
 
     private CustomPopupWindow(Builder builder) {
-        this.mContentView = builder.contentView;
-        this.mParentView = builder.parentView;
-        this.mListener = builder.listener;
-        this.isOutsideTouch = builder.isOutsideTouch;
-        this.isFocus = builder.isFocus;
-        this.mBackgroundDrawable = builder.backgroundDrawable;
-        this.mAnimationStyle = builder.animationStyle;
-        this.isWrap = builder.isWrap;
+        mContentView = builder.contentView;
+        mParentView = builder.parentView;
+        mListener = builder.listener;
+        isOutsideTouch = builder.isOutsideTouch;
+        isFocus = builder.isFocus;
+        mBackgroundDrawable = builder.backgroundDrawable;
+        mAnimationStyle = builder.animationStyle;
+        isWrap = builder.isWrap;
         initLayout();
-    }
-
-    public static Builder builder() {
-        return new Builder();
     }
 
     private void initLayout() {
@@ -46,6 +45,10 @@ public class CustomPopupWindow extends PopupWindow {
         if (mAnimationStyle != -1)//如果设置了动画则使用动画
             setAnimationStyle(mAnimationStyle);
         setContentView(mContentView);
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     /**
@@ -65,8 +68,7 @@ public class CustomPopupWindow extends PopupWindow {
      * @return
      */
     public static View inflateView(ContextThemeWrapper context, int layoutId) {
-        return LayoutInflater.from(context)
-                .inflate(layoutId, null);
+        return LayoutInflater.from(context).inflate(layoutId, null);
     }
 
     public void show() {//默认显示到中间
@@ -87,9 +89,6 @@ public class CustomPopupWindow extends PopupWindow {
         private int animationStyle = -1;
         private boolean isWrap;
 
-        private Builder() {
-        }
-
         public Builder contentView(View contentView) {
             this.contentView = contentView;
             return this;
@@ -104,7 +103,6 @@ public class CustomPopupWindow extends PopupWindow {
             this.isWrap = isWrap;
             return this;
         }
-
 
         public Builder customListener(CustomPopupWindowListener listener) {
             this.listener = listener;
@@ -142,7 +140,7 @@ public class CustomPopupWindow extends PopupWindow {
     }
 
     public interface CustomPopupWindowListener {
-        public void initPopupView(View contentView);
+        void initPopupView(View contentView);
     }
 
 }

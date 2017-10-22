@@ -61,7 +61,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements StateL
     private static final String LAYOUT_CONSTRAINTLAYOUT = "android.support.constraint.ConstraintLayout";
 
     private Unbinder unbinder;
-
     private StateLayout stateLayout;
     public Toolbar toolbar;
     public TextView toolbarTitle;
@@ -168,10 +167,9 @@ public abstract class BaseActivity extends RxAppCompatActivity implements StateL
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        unbinder.unbind();
-
         if (isUseEventBus()) EventBus.getDefault().unregister(this);
+        unbinder.unbind();
+        super.onDestroy();
 
         ActivityManager.getInstance().popOneActivity(this);
     }
@@ -195,7 +193,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements StateL
 
     @Subscribe
     public void onEvent(String event) {
-        KLog.e();
+        KLog.e(event);
     }
 
     public void showLoadingView() {

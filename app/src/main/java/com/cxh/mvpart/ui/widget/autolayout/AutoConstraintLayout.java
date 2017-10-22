@@ -16,7 +16,6 @@ public class AutoConstraintLayout extends ConstraintLayout {
 
     private AutoLayoutHelper mHelper = new AutoLayoutHelper(this);
 
-
     public AutoConstraintLayout(Context context) {
         super(context);
     }
@@ -37,11 +36,6 @@ public class AutoConstraintLayout extends ConstraintLayout {
     }
 
     @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-    }
-
-    @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new LayoutParams(getContext(), attrs);
     }
@@ -49,7 +43,7 @@ public class AutoConstraintLayout extends ConstraintLayout {
     public static class LayoutParams extends ConstraintLayout.LayoutParams implements AutoLayoutHelper.AutoLayoutParams {
         private AutoLayoutInfo mAutoLayoutInfo;
 
-        public LayoutParams(Context c, AttributeSet attrs) {
+        LayoutParams(Context c, AttributeSet attrs) {
             super(c, attrs);
             mAutoLayoutInfo = AutoLayoutHelper.getAutoLayoutInfo(c, attrs);
         }
@@ -59,11 +53,9 @@ public class AutoConstraintLayout extends ConstraintLayout {
             return mAutoLayoutInfo;
         }
 
-
         public LayoutParams(int width, int height) {
             super(width, height);
         }
-
 
         public LayoutParams(ViewGroup.LayoutParams source) {
             super(source);

@@ -90,7 +90,12 @@ public class App extends DaggerApplication implements Thread.UncaughtExceptionHa
         android.os.Process.killProcess(android.os.Process.myPid());
     }
 
-    //获取是否存在NavigationBar
+    /**
+     * 获取是否存在NavigationBar
+     *
+     * @param context
+     * @return
+     */
     public static boolean checkDeviceHasNavigationBar(Context context) {
         boolean hasNavigationBar = false;
         Resources rs = context.getResources();

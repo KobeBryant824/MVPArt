@@ -1,6 +1,5 @@
 package com.cxh.mvpart.rx;
 
-
 import com.cxh.mvpart.Constant;
 import com.cxh.mvpart.base.BaseActivity;
 import com.cxh.mvpart.rx.exception.ApiException;

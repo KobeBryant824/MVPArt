@@ -30,10 +30,8 @@ public class AutoTabLayout extends TabLayout {
 
         initTextSizeBaseWidth(context, attrs);
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TabLayout,
-                defStyleAttr, R.style.Widget_Design_TabLayout);
-        int tabTextAppearance = a.getResourceId(R.styleable.TabLayout_tabTextAppearance,
-                R.style.TextAppearance_Design_Tab);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TabLayout, defStyleAttr, R.style.Widget_Design_TabLayout);
+        int tabTextAppearance = a.getResourceId(R.styleable.TabLayout_tabTextAppearance, R.style.TextAppearance_Design_Tab);
 
         mTextSize = loadTextSizeFromTextAppearance(tabTextAppearance);
         a.recycle();
@@ -46,8 +44,7 @@ public class AutoTabLayout extends TabLayout {
     }
 
     private int loadTextSizeFromTextAppearance(int textAppearanceResId) {
-        TypedArray a = getContext().obtainStyledAttributes(textAppearanceResId,
-                R.styleable.TextAppearance);
+        TypedArray a = getContext().obtainStyledAttributes(textAppearanceResId, R.styleable.TextAppearance);
 
         try {
             if (!DimenUtils.isPxVal(a.peekValue(R.styleable.TextAppearance_android_textSize)))
@@ -77,17 +74,15 @@ public class AutoTabLayout extends TabLayout {
         ViewGroup tabContainer = (ViewGroup) tabGroup.getChildAt(tab.getPosition());
         TextView textView = (TextView) tabContainer.getChildAt(1);
 
-
         if (AutoUtils.autoed(textView)) {
             return;
         }
-        int autoTextSize = 0;
+        int autoTextSize;
         if (mTextSizeBaseWidth) {
             autoTextSize = AutoUtils.getPercentWidthSize(mTextSize);
         } else {
             autoTextSize = AutoUtils.getPercentHeightSize(mTextSize);
         }
-
 
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, autoTextSize);
     }

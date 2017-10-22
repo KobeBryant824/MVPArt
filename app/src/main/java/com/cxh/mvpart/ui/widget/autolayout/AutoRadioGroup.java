@@ -19,17 +19,11 @@ public class AutoRadioGroup extends RadioGroup {
         super(context, attrs);
     }
 
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         if (!isInEditMode())
             mHelper.adjustChildren();
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
     }
 
     @Override
@@ -40,7 +34,7 @@ public class AutoRadioGroup extends RadioGroup {
     public static class LayoutParams extends RadioGroup.LayoutParams implements AutoLayoutHelper.AutoLayoutParams {
         private AutoLayoutInfo mAutoLayoutInfo;
 
-        public LayoutParams(Context c, AttributeSet attrs) {
+        LayoutParams(Context c, AttributeSet attrs) {
             super(c, attrs);
             mAutoLayoutInfo = AutoLayoutHelper.getAutoLayoutInfo(c, attrs);
         }
@@ -49,7 +43,6 @@ public class AutoRadioGroup extends RadioGroup {
         public AutoLayoutInfo getAutoLayoutInfo() {
             return mAutoLayoutInfo;
         }
-
 
         public LayoutParams(int width, int height) {
             super(width, height);

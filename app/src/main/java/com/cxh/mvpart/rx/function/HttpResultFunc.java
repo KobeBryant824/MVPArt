@@ -1,6 +1,5 @@
 package com.cxh.mvpart.rx.function;
 
-
 import com.cxh.mvpart.rx.exception.ExceptionEngine;
 
 import io.reactivex.Observable;

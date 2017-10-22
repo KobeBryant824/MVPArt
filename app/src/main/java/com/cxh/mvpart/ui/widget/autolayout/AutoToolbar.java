@@ -31,23 +31,15 @@ public class AutoToolbar extends Toolbar {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
-
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-    }
-
-
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new AutoToolbar.LayoutParams(getContext(), attrs);
     }
 
-
     public static class LayoutParams extends Toolbar.LayoutParams implements AutoLayoutHelper.AutoLayoutParams {
         private AutoLayoutInfo mAutoLayoutInfo;
 
-        public LayoutParams(Context c, AttributeSet attrs) {
+        LayoutParams(Context c, AttributeSet attrs) {
             super(c, attrs);
             mAutoLayoutInfo = AutoLayoutHelper.getAutoLayoutInfo(c, attrs);
         }
@@ -56,7 +48,6 @@ public class AutoToolbar extends Toolbar {
         public AutoLayoutInfo getAutoLayoutInfo() {
             return mAutoLayoutInfo;
         }
-
 
         public LayoutParams(int width, int height) {
             super(width, height);

@@ -37,7 +37,7 @@ abstract class AppModule {
 
     @Provides
     @Singleton
-    static RestfulApi provideRestfulApi(Retrofit retrofit){
+    static RestfulApi provideRestfulApi(Retrofit retrofit) {
         return retrofit.create(RestfulApi.class);
     }
 
@@ -70,8 +70,10 @@ abstract class AppModule {
         File cacheFile;
         if (SDCardUtils.isSDCardEnable())
             cacheFile = new File(application.getExternalCacheDir().toString(), "cache");
-        else cacheFile = new File(application.getCacheDir().toString(), "cache");
+        else
+            cacheFile = new File(application.getCacheDir().toString(), "cache");
         int cacheSize = 10 * 1024 * 1024;
+
         return new Cache(cacheFile, cacheSize);
     }
 

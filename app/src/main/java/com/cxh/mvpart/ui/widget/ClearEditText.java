@@ -2,6 +2,7 @@ package com.cxh.mvpart.ui.widget;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,14 +16,11 @@ import android.view.animation.TranslateAnimation;
 import com.cxh.mvpart.R;
 
 /**
- * 带有清除的EditText
  * @author Hai (haigod7[at]gmail[dot]com)
  *         2017/3/6
  */
 public class ClearEditText extends AppCompatEditText implements View.OnFocusChangeListener, TextWatcher {
-    /**
-     * 删除按钮的引用
-     */
+
     private Drawable mClearDrawable;
     private boolean hasFoucs;
 
@@ -44,17 +42,12 @@ public class ClearEditText extends AppCompatEditText implements View.OnFocusChan
         // 获取EditText的DrawableRight,假如没有设置我们就使用默认的图片,2是获得右边的图片  顺序是左上右下（0,1,2,3,）
         mClearDrawable = getCompoundDrawables()[2];
         if (mClearDrawable == null) {
-            // throw new
-            // NullPointerException("You can add drawableRight attribute in XML");
-            mClearDrawable = getResources().getDrawable(R.drawable.ic_cancel);
+            mClearDrawable =  ContextCompat.getDrawable(getContext(), R.drawable.ic_cancel);
         }
 
         mClearDrawable.setBounds(0, 0, mClearDrawable.getIntrinsicWidth(), mClearDrawable.getIntrinsicHeight());
-        // 默认设置隐藏图标
-        setClearIconVisible(false);
-        // 设置焦点改变的监听
+        setClearIconVisible(false); // 默认设置隐藏图标
         setOnFocusChangeListener(this);
-        // 设置输入框里面内容发生改变的监听
         addTextChangedListener(this);
     }
 
