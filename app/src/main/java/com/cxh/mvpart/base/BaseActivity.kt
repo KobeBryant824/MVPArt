@@ -128,9 +128,7 @@ abstract class BaseActivity : RxAppCompatActivity(), AnkoLogger, StateLayout.OnV
 
     override fun onDestroy() {
         if (isUseEventBus()) EventBus.getDefault().unregister(this)
-
         super.onDestroy()
-
         ActivityManager.popOneActivity(this)
     }
 
