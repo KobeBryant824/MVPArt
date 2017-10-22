@@ -18,16 +18,14 @@ public class IOUtils {
 	public static String input2Str(InputStream in, String encoding) throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		byte[] bys = new byte[1024];
-		int len = 0;
+		int len ;
 		while ((len = in.read(bys))!= -1) {
 			out.write(bys, 0, len);
 		}
 		byte[] bytes = out.toByteArray();
-		String str = new String(bytes, encoding);
-		return str;
+		return new String(bytes, encoding);
 	}
 	
-	/** 关闭流 */
 	public static boolean close(Closeable io) {
 		if (io != null) {
 			try {

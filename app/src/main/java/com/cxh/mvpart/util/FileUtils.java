@@ -4,7 +4,6 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Base64;
 
-
 import com.cxh.mvpart.App;
 import com.cxh.mvpart.R;
 
@@ -24,27 +23,19 @@ import java.util.Properties;
  *         2017/3/6
  */
 public class FileUtils {
-	public static final String ROOT_DIR = App.getInstance().getString(R.string.app_name);
+	public static final String ROOT_DIR = App.Companion.getInstance().getString(R.string.app_name);
 	public static final String DOWNLOAD_DIR = "download";
 	public static final String CACHE_DIR = "cache";
 	public static final String ICON_DIR = "icon";
 
-	/** 获取下载目录 */
 	public static String getDownloadDir() {
 		return getDir(DOWNLOAD_DIR);
 	}
 
-	/** 获取缓存目录 */
 	public static String getCacheDir() {
 		return getDir(CACHE_DIR);
 	}
 
-	/** 设置缓存目录 */
-	public static String getCacheDir(String cacheDir) {
-		return getDir(cacheDir);
-	}
-
-	/** 获取icon目录 */
 	public static String getIconDir() {
 		return getDir(ICON_DIR);
 	}
@@ -52,7 +43,7 @@ public class FileUtils {
 	/** 获取应用目录，当SD卡存在时，获取SD卡上的目录，当SD卡不存在时，获取应用的cache目录 */
 	public static String getDir(String name) {
 		StringBuilder sb = new StringBuilder();
-		if (SDCardUtils.isSDCardEnable()) {
+		if (SDCardUtils.INSTANCE.isSDCardEnable()) {
 			sb.append(getExternalStoragePath());
 		} else {
 			sb.append(getCachePath());
@@ -79,7 +70,7 @@ public class FileUtils {
 
 	/** 获取应用的cache目录 */
 	public static String getCachePath() {
-		File f = App.getInstance().getCacheDir();
+		File f = App.Companion.getInstance().getCacheDir();
 		if (null == f) {
 			return null;
 		} else {
